@@ -28,11 +28,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/styles/style.css",
               "src/styles/animate.css",
               "src/styles/bootstrap.min.css",
-              "src/styles/font-awesome.css"
+              "src/styles/font-awesome.css",
+              "src/styles/style.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "src/scripts/jquery-3.1.1.min.js",

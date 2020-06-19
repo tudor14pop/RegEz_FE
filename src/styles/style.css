@@ -891,6 +891,11 @@ h5 {
 .navbar {
   border: 0;
 }
+
+navigation {
+  background-color: #2f4050;
+}
+
 .navbar-default {
   background-color: transparent;
   border-color: #2f4050;
@@ -1019,7 +1024,7 @@ h5 {
 ul.nav-second-level {
   background: #293846;
 }
-.nav > li.active {
+.nav > li > a.active {
   border-left: 4px solid #19aa8d;
   background: #293846;
 }
@@ -1172,11 +1177,8 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   color: #1cc09f;
 }
 .logo-element {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 25px;
   color: white;
-  display: none;
   padding: 18px 0;
 }
 .navbar-static-side {

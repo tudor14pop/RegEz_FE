@@ -1,0 +1,43 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="logo-element">
+                    RegEz
+                </div>
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="block m-t-xs font-bold">
+                            {{authenticationService.loginUserValue.user.firstName + ' ' + authenticationService.loginUserValue.user.lastName}}</span>
+                        <span class="text-muted text-xs block">{{authenticationService.loginUserValue.user.accountType}}
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li>
+                            <a class="dropdown-item" href="profile.html">Profile</a>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li>
+                            <a (click)="authenticationService.logout()">Logout</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a [routerLink]="['/dashboard']" routerLinkActive="active">
+                    <i class="fa fa-th-large"></i>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="['/task-manager']" routerLinkActive="active">
+                    <i class="fa fa-tasks"></i>
+                    <span class="nav-label">Task Manager</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
