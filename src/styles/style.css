@@ -2769,7 +2769,7 @@ div.dt-button-info {
   font-size: 0.9rem;
 }
 select.form-control:not([size]):not([multiple]) {
-  height: 2.05rem;
+  height: 2.5rem;
 }
 .input-sm,
 .form-control-sm {
@@ -2783,6 +2783,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 .form-control,
 .single-line {
+  height: 30px;
   background-color: #FFFFFF;
   background-image: none;
   border: 1px solid #e5e6e7;
@@ -4919,11 +4920,9 @@ code {
   background-color: #ffffff;
   border-color: #e7eaec;
   border-image: none;
-  border-style: solid solid none;
-  border-width: 1px;
   color: inherit;
   margin-bottom: 0;
-  padding: 15px 90px 8px 15px;
+  padding: 15px 10px 8px 15px;
   min-height: 48px;
   position: relative;
   clear: both;
