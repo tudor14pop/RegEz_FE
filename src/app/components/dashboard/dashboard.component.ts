@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewStudyDialogComponent } from './new-study-dialog/new-study-dialog.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,7 @@ import { NewStudyDialogComponent } from './new-study-dialog/new-study-dialog.com
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
+  clicked = [].fill(false);
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
@@ -21,4 +22,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
+  showPopup(i) {
+    this.clicked[i] = !this.clicked[i];
+  }
 }

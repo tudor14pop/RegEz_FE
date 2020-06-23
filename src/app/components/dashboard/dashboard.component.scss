@@ -7,3 +7,37 @@
     width: 3rem;
     bottom: 2rem;
 }
+.wide {
+    width: 350px;
+}
+
+
+tr {
+    &>td:first-child {
+        font-weight: 600;
+        white-space:pre;
+
+        p {
+            font-size: smaller;
+            font-weight: 400;
+        }
+    }
+}
+
+.popup-container {
+    user-select: none;
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+
+    &>span {
+        cursor: pointer;
+
+        &:hover {
+            background: #888888;
+        }
+    }
+}

@@ -15,6 +15,7 @@ import { TaskManagerComponent } from './components/task-manager/task-manager.com
 import { NewStudyDialogComponent } from './components/dashboard/new-study-dialog/new-study-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopupMenuComponent } from './components/dashboard/popup-menu/popup-menu.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         NavigationComponent,
         TopNavbarComponent,
         TaskManagerComponent,
-        NewStudyDialogComponent
+        NewStudyDialogComponent,
+        PopupMenuComponent
     ],
     imports: [
         BrowserModule,
