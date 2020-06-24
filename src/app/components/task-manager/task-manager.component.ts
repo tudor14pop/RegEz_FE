@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-task-manager',
-  template: `
-    <p>
-      task-manager task-manager works!
-    </p>
-  `,
-  styles: []
+  templateUrl: './task-manager.component.html',
+  styleUrls: ['./task-manager.component.scss']
 })
 export class TaskManagerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
+
+  getColor() {
+    return Math.round(Math.random() * 2);
+ }
 
 }

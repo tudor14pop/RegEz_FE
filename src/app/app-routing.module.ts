@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {LoginComponent} from './components/login.component';
-import {AuthGuardService} from "./services/auth/AuthGuardService";
-import {BasicLayoutComponent} from "./components/common/layout/basicLayout.component";
-import {TaskManagerComponent} from "./components/task-manager/task-manager.component";
+import {AuthGuardService} from './services/auth/AuthGuardService';
+import {BasicLayoutComponent} from './components/common/layout/basicLayout.component';
+import {TaskManagerComponent} from './components/task-manager/task-manager.component';
 
 
 const routes: Routes = [

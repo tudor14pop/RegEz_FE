@@ -41,3 +41,14 @@ tr {
         }
     }
 }
+.iconify { width: 26px; height: 26px; }
+
+
+.overview-container {
+    cursor: pointer;
+    user-select: none;
+    
+    .overview-panel {
+        padding: 0;
+    }
+}
