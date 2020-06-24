@@ -4669,7 +4669,7 @@ body.body-small .footer.fixed {
 }
 .page-heading {
   border-top: 0;
-  padding: 0 10px 20px 10px;
+  padding: 0 0 20px 10px;
 }
 .panel-heading h1,
 .panel-heading h2 {
@@ -4902,6 +4902,7 @@ code {
   margin-bottom: 25px;
   margin-top: 0;
   padding: 0;
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
 }
 .ibox.collapsed .ibox-content {
   display: none;

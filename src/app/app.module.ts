@@ -5,13 +5,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
-import {BasicLayoutComponent} from "./components/common/layout/basicLayout.component";
-import {FooterComponent} from "./components/common/footer/footer.component";
-import {NavigationComponent} from "./components/common/navigation/navigation.component";
-import {TopNavbarComponent} from "./components/common/topnavbar/topnavbar.component";
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {BasicLayoutComponent} from './components/common/layout/basicLayout.component';
+import {FooterComponent} from './components/common/footer/footer.component';
+import {NavigationComponent} from './components/common/navigation/navigation.component';
+import {TopNavbarComponent} from './components/common/topnavbar/topnavbar.component';
 import { TaskManagerComponent } from './components/task-manager/task-manager.component';
+import { NewStudyDialogComponent } from './components/dashboard/new-study-dialog/new-study-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -22,16 +25,20 @@ import { TaskManagerComponent } from './components/task-manager/task-manager.com
         DashboardComponent,
         NavigationComponent,
         TopNavbarComponent,
-        TaskManagerComponent
+        TaskManagerComponent,
+        NewStudyDialogComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [NewStudyDialogComponent]
 })
 export class AppModule {
 }

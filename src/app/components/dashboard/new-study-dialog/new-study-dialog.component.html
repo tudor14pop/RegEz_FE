@@ -1,0 +1,69 @@
+    <div class="middle-box text-center animated fadeInDown">
+        <div>
+            <h4>Create New Study</h4>
+            <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="create(newStudyForm)">
+                <div class="form-group">
+                    <select type="text" class="form-control"  required=""
+                           formControlName="sponsorName">
+                            <option value="" disabled selected>Sponsor Name</option>
+                            <option value="Sponsor1">Sponsor 1</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Protocol #" required=""
+                           formControlName="protocol">
+                </div>
+                <div class="form-group">
+                    <select type="text" class="form-control"  required="" formControlName="croName">
+                        <option value="" disabled selected>CRO Name</option>
+                        <option value="CRO1">CRO 1</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <input type="text" class="form-control" placeholder="Nickname" required=""
+                            formControlName="nickName">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <input type="text" class="form-control" placeholder="IND #" required=""
+                            formControlName="indNumber">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select type="text" class="form-control"  required="" formControlName="pInvestigator">
+                        <option value="" disabled selected>Pricipal Investigator</option>
+                        <option value="pInvestigator1">Principal Investigator 1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select type="text" class="form-control"  required="" formControlName="sInvestigator">
+                        <option value="" disabled selected>Sub Investigator</option>
+                        <option value="sInvestigator1">Sub Investigator 1</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <input type="text" class="form-control" placeholder="Site" required=""
+                            formControlName="site">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <input type="text" class="form-control" placeholder="Site #" required=""
+                            formControlName="siteNumber">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select type="text" class="form-control"  required="" formControlName="leadCRC">
+                        <option value="" disabled selected>Lead CRC</option>
+                        <option value="leadCRC1">Lead CRC 1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select type="text" class="form-control"  required="" formControlName="backupCRC">
+                        <option value="" disabled selected>Backup CRC</option>
+                        <option value="backupCRC1">Backup CRC 1</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>  
+            </form>
+        </div>
+    </div>
