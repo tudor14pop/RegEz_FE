@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ESignDialogComponent } from './e-sign-dialog/e-sign-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,7 +10,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class TaskManagerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
   }
@@ -17,4 +19,13 @@ export class TaskManagerComponent implements OnInit {
     return Math.round(Math.random() * 2);
  }
 
+ openEsignDialog(index) {
+   const dialogRef = this.dialog.open(ESignDialogComponent , {
+     height: '50rem',
+     width: '30rem',
+     data: {
+      index
+    }
+   });
+ }
 }

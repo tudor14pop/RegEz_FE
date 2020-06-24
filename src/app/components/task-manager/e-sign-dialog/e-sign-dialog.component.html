@@ -1,0 +1,18 @@
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4>eSignature File Name #{{data.index + 1}}</h4>
+        <h5>The Reason of eSignature</h5>
+        <div class="d-flex flex-column mb-5 mt-5">
+            <div *ngFor="let item of [1,2,3,4]; let i = index" >
+                <div>
+                    <h5 class="font-weight-bold float-left">Amber Chavez</h5>
+                    <h5 class="float-left w-25">1{{i+4}}:00 am</h5>
+                </div>
+                <div class="signed-container">
+                    <h5 class="float-left">Has signed StudyFile{{i+1}}</h5>
+                </div>
+            </div>
+        </div>
+            <button type="submit" class="btn btn-w-m btn-info block full-width">Send Reminder</button>  
+    </div>
+</div>
