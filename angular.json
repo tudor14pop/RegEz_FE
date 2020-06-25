@@ -32,12 +32,16 @@
               "src/styles/bootstrap.min.css",
               "src/styles/font-awesome.css",
               "src/styles/style.css",
+              "src/styles/jstree/style.min.css",
               "src/styles.scss"
             ],
             "scripts": [
               "src/scripts/jquery-3.1.1.min.js",
               "src/scripts/popper.min.js",
-              "src/scripts/bootstrap.js"
+              "src/scripts/bootstrap.js",
+              "src/scripts/jstree.min.js",
+              "src/scripts/pdf.js",
+              "src/scripts/pace.min.js"
             ]
           },
           "configurations": {

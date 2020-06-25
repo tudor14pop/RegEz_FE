@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ESignDialogComponent } from './components/task-manager/e-sign-dialog/e-sign-dialog.component';
 import { InternalDialogComponent } from './components/task-manager/internal-dialog/internal-dialog.component';
 import { ExternalDialogComponent } from './components/task-manager/external-dialog/external-dialog.component';
+import { MasterFilesComponent } from './components/master-files/master-files.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { ExternalDialogComponent } from './components/task-manager/external-dial
         ESignDialogComponent,
         InternalDialogComponent,
         ExternalDialogComponent,
+        MasterFilesComponent,
     ],
     imports: [
         BrowserModule,
