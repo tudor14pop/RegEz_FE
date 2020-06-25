@@ -18,23 +18,11 @@ export class ESignDialogComponent implements OnInit {
 
   ngOnInit() {
     this.esignForm = this.formBuilder.group({
-      sponsorName: '',
-      protocol: '',
-      croName: '',
-      nickName: '',
-      indNumber: '',
-      pInvestigator: '',
-      sInvestigator: '',
-      site: '',
-      siteNumber: '',
-      leadCRC: '',
-      backupCRC: '',
     });
   }
 
 
-  create(form) {
+  sendReminder() {
     this.matDialog.closeAll();
-    console.log(form.value);
   }
 }

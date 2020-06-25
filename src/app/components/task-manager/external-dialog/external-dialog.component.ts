@@ -1,20 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-internal-dialog',
-  templateUrl: './internal-dialog.component.html',
-  styleUrls: ['./internal-dialog.component.scss']
+  selector: 'app-external-dialog',
+  templateUrl: './external-dialog.component.html',
+  styleUrls: ['./external-dialog.component.scss']
 })
-export class InternalDialogComponent implements OnInit {
-  internalForm: FormGroup;
+export class ExternalDialogComponent implements OnInit {
+  externalForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
               private matDialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    this.internalForm = this.formBuilder.group({
+    this.externalForm = this.formBuilder.group({
       reminder: ''
     });
   }

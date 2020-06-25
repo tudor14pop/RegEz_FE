@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ESignDialogComponent } from './e-sign-dialog/e-sign-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { InternalDialogComponent } from './internal-dialog/internal-dialog.component';
+import { ExternalDialogComponent } from './external-dialog/external-dialog.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,11 +23,34 @@ export class TaskManagerComponent implements OnInit {
 
  openEsignDialog(index) {
    const dialogRef = this.dialog.open(ESignDialogComponent , {
-     height: '50rem',
+     height: '40rem',
      width: '30rem',
+     panelClass: 'custom-dialog-container',
      data: {
       index
     }
    });
  }
+
+ openInternalDialog(index) {
+  const dialogRef = this.dialog.open(InternalDialogComponent , {
+    height: '50rem',
+    width: '40rem',
+    panelClass: 'custom-dialog-container',
+    data: {
+     index
+   }
+  });
+}
+
+openExternalDialog(index) {
+  const dialogRef = this.dialog.open(ExternalDialogComponent , {
+    height: '50rem',
+    width: '40rem',
+    panelClass: 'custom-dialog-container',
+    data: {
+     index
+   }
+  });
+}
 }

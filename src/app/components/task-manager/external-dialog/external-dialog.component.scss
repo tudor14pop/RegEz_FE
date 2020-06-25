@@ -1,7 +1,7 @@
 @import '../../../../styles/colors.scss';
 
 
-.internal-left-container , .internal-right-container {
+.external-left-container , .external-right-container {
     background-color: $navy;
     border-radius: 50px;
     width: 50%;
@@ -9,7 +9,7 @@
     padding-left: 1rem;
 }
 
-.internal-right-container {
+.external-right-container {
     float: right;
     background-color: $muted;
     padding-right: 1rem;

@@ -17,6 +17,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ESignDialogComponent } from './components/task-manager/e-sign-dialog/e-sign-dialog.component';
 import { InternalDialogComponent } from './components/task-manager/internal-dialog/internal-dialog.component';
+import { ExternalDialogComponent } from './components/task-manager/external-dialog/external-dialog.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { InternalDialogComponent } from './components/task-manager/internal-dial
         NewStudyDialogComponent,
         ESignDialogComponent,
         InternalDialogComponent,
+        ExternalDialogComponent,
     ],
     imports: [
         BrowserModule,
