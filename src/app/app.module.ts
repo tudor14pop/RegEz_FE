@@ -15,6 +15,9 @@ import { TaskManagerComponent } from './components/task-manager/task-manager.com
 import { NewStudyDialogComponent } from './components/dashboard/new-study-dialog/new-study-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ESignDialogComponent } from './components/task-manager/e-sign-dialog/e-sign-dialog.component';
+import { InternalDialogComponent } from './components/task-manager/internal-dialog/internal-dialog.component';
+import { ExternalDialogComponent } from './components/task-manager/external-dialog/external-dialog.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         TopNavbarComponent,
         TaskManagerComponent,
         NewStudyDialogComponent,
+        ESignDialogComponent,
+        InternalDialogComponent,
+        ExternalDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -38,7 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [NewStudyDialogComponent]
+    entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent]
 })
 export class AppModule {
 }

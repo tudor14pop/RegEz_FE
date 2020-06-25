@@ -20,6 +20,9 @@
     background-color: $warning;
 }
 
+.esign-row, .internal-row, .external-row {
+    cursor: pointer;
+}
 
 tr {
     &>td:nth-child(2) {

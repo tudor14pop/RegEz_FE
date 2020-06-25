@@ -1,0 +1,16 @@
+@import '../../../../styles/colors.scss';
+
+
+.external-left-container , .external-right-container {
+    background-color: $navy;
+    border-radius: 50px;
+    width: 50%;
+    float: left;
+    padding-left: 1rem;
+}
+
+.external-right-container {
+    float: right;
+    background-color: $muted;
+    padding-right: 1rem;
+}

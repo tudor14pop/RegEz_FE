@@ -1,0 +1,10 @@
+@import '../../../../styles/colors.scss';
+
+
+.signed-container {
+    background-color: $navy;
+    width: -webkit-fill-available;
+    border-radius: 50px;
+    float: left;
+    padding-left: 1rem;
+}

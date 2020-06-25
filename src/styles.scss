@@ -5,3 +5,7 @@ body {
   font-size: 0.9vw;
   min-height:100%;
 }
+
+.custom-dialog-container .mat-dialog-container {
+  overflow-x: hidden;
+}
