@@ -7,10 +7,14 @@ declare var $: any;
   styleUrls: ['./master-files.component.scss']
 })
 export class MasterFilesComponent implements OnInit {
-
+  numbers;
   constructor() { }
 
   ngOnInit(): void {
+    this.numbers = Array(50).fill(0).map((x,i)=>i);
+    $('.footable').footable();
+    $('.footable2').footable();
+
     $('#jstree1').jstree({
       core : {
           check_callback : true

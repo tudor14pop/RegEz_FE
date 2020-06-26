@@ -33,6 +33,7 @@
               "src/styles/font-awesome.css",
               "src/styles/style.css",
               "src/styles/jstree/style.min.css",
+              "src/styles/footable.core.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -41,7 +42,10 @@
               "src/scripts/bootstrap.js",
               "src/scripts/jstree.min.js",
               "src/scripts/pdf.js",
-              "src/scripts/pace.min.js"
+              "src/scripts/pace.min.js",
+              "src/scripts/footable.all.min.js",
+              "src/scripts/jquery.metisMenu.js",
+              "src/scripts/jquery.slimscroll.min.js"
             ]
           },
           "configurations": {

@@ -18,7 +18,7 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: '', component: BasicLayoutComponent, canActivate: [AuthGuardService],
+        path: '', component: BasicLayoutComponent,
         children: [
             {path: 'dashboard', component: DashboardComponent},
             {path: 'task-manager', component: TaskManagerComponent},
