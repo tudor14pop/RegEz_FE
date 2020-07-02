@@ -1,10 +1,3 @@
-export interface LoginUser {
-    user: User
-    token?: string
-    ip: string
-    securityCode: string
-}
-
 export interface User {
     id?: string
     firstName?: string
@@ -21,5 +14,4 @@ export interface User {
     receiveSms?: boolean
     accountType?: string
     role?: string
-    token?: string
 }

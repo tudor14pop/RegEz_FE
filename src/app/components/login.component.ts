@@ -26,8 +26,6 @@ import {AuthenticationResponse, AuthenticationService} from '../services/auth/Au
                                    formControlName="securityCode">
                         </div>
                         <button type="submit" class="btn btn-w-m btn-info block full-width">Login</button>
-                        <div [ngClass]="[loginResponse.hasError ? 'd-block alert alert-danger mt-2' : 'd-none']">
-                            {{loginResponse.message}}</div>
 
                         <a href="#"><small>Forgot password?</small></a>
                     </form>
@@ -43,7 +41,6 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginResponse: AuthenticationResponse = {
     showSecurityCodeField: false,
-    hasError: false,
     loginUser: null,
     message: ''
   };
