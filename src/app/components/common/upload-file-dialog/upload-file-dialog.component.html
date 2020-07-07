@@ -1,0 +1,25 @@
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4>Upload New File</h4>
+        <div class="mt-5 d-flex justify-content-between">
+        <button (click)="fileInput.click();$event.preventDefault()" class="btn w-25">Select File</button>
+        <div class="w-75 float-left">valami</div>
+        </div>
+        <form class="m-t" role="form" enctype="multipart/form-data" [formGroup]="newFileForm" (ngSubmit)="upload(newFileForm)">
+         <div formControlName="file">
+             <input #fileInput type="file" name="file" id="file" hidden>
+         </div>
+         <div class="form-group">
+            <input type="text" class="form-control" placeholder="File Name" required=""
+                   formControlName="fileName">
+        </div>
+
+         <div class="form-group">
+            <textarea class="form-control" placeholder="Description" required=""
+                   formControlName="description"></textarea>
+        </div>
+        
+         <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+        </form>
+    </div>
+</div>

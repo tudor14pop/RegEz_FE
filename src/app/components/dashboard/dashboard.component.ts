@@ -15,13 +15,6 @@ export class DashboardComponent implements OnInit {
 
     constructor(public dialog: MatDialog,
                 private router: Router) {}
-      
-  openDialog() {
-    const dialogRef = this.dialog.open(NewStudyDialogComponent , {
-      height: '50rem',
-      width: '30rem'
-    });
-  }
 
     openNewStudyDialog() {
         const dialogRef = this.dialog.open(NewStudyDialogComponent, {
