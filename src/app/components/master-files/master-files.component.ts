@@ -14,7 +14,8 @@ pdfDoc = null;
 pageNum = 1;
 pageRendering = false;
 pageNumPending = null;
-scale = 1.5;
+totalPageNumber = null;
+scale = 1;
 zoomRange = 0.25;
 canvas = null;
 ctx = null;
@@ -58,8 +59,12 @@ ctx = null;
     pdfjs.workerSrc = pdfjsWorker;
 
     pdfjs.getDocument(this.url).then((pdfDoc_) => {
+        if (this.pdfDoc) {
+            this.pdfDoc.destroy();
+        }
         this.pdfDoc = pdfDoc_;
         const documentPagesNumber = this.pdfDoc.numPages;
+        this.totalPageNumber = documentPagesNumber;
         document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
         const selfRef = this;
         $('#page_num').on('change', function() {
@@ -87,13 +92,17 @@ renderPage(num, scale) {
               viewport
           };
 
-          const renderTask =page.render(renderContext);
+          const renderTask = page.render(renderContext);
+          if (this.ctx) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.beginPath();
+        }
           renderTask.promise.then(() => {
-                const pageRendering = false;
+                this.pageRendering = false;
                 if (this.pageNumPending !== null) {
                     // New page rendering is pending
                     this.renderPage(this.pageNumPending, scale);
-                    const pageNumPending = null;
+                    this.pageNumPending = null;
                 }
             },
             (error) => {
@@ -116,7 +125,7 @@ onPrevPage() {
           return;
       }
       this.pageNum--;
-      const scale = this.pdfDoc.scale;
+      const scale = this.scale;
       this.queueRenderPage(this.pageNum, scale);
   }
 // document.getElementById('prev').addEventListener('click', onPrevPage);
@@ -126,7 +135,7 @@ onNextPage() {
           return;
       }
       this.pageNum++;
-      const scale = this.pdfDoc.scale;
+      const scale = this.scale;
       this.queueRenderPage(this.pageNum, scale);
   }
 // document.getElementById('next').addEventListener('click', onNextPage);
