@@ -42,7 +42,6 @@ import { StudyComponent } from './components/dashboard/study/study.component';
         MasterFilesComponent,
         InfoPopupComponent,
         StudyComponent
-        InfoPopupComponent
     ],
     imports: [
         BrowserModule,
