@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewStudyDialogComponent } from './new-study-dialog/new-study-dialog.component';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,6 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class DashboardComponent implements OnInit {
   clicked = [].fill(false);
-  constructor(public dialog: MatDialog) {}
 
   openDialog() {
     const dialogRef = this.dialog.open(NewStudyDialogComponent , {
@@ -18,6 +17,9 @@ export class DashboardComponent implements OnInit {
       width: '30rem'
     });
   }
+    constructor(public dialog: MatDialog,
+                private router: Router) {
+    }
 
   ngOnInit() {
   }

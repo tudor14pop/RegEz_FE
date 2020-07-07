@@ -19,6 +19,10 @@ import { ESignDialogComponent } from './components/task-manager/e-sign-dialog/e-
 import { InternalDialogComponent } from './components/task-manager/internal-dialog/internal-dialog.component';
 import { ExternalDialogComponent } from './components/task-manager/external-dialog/external-dialog.component';
 import { MasterFilesComponent } from './components/master-files/master-files.component';
+import {HttpRequestInterceptor} from "./services/http-request.interceptor";
+import {AppLoadService} from "./services/AppLoadService";
+import {InfoPopupComponent} from "./components/common/info-popup.component";
+import { StudyComponent } from './components/dashboard/study/study.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +39,8 @@ import { MasterFilesComponent } from './components/master-files/master-files.com
         InternalDialogComponent,
         ExternalDialogComponent,
         MasterFilesComponent,
+        InfoPopupComponent,
+        StudyComponent
     ],
     imports: [
         BrowserModule,
