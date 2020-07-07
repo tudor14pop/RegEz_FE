@@ -15,6 +15,7 @@ import {RetrieveStudiesResponse} from "../../models/study/RetrieveStudiesRespons
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
     clicked = [].fill(false);
     initDashboardDto: InitDashboardDto;
     studyFilterForm: FormGroup;

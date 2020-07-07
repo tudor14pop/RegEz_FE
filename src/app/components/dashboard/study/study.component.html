@@ -1,1 +1,210 @@
-<p>study works!</p>
+<div class="wrapper wrapper-content animated fadeIn"  >
+    <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
+        <h2 class="text-muted">Study Name</h2>
+        <div class="icon-container bg-primary float-right"> 
+           <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
+        </div>
+    </div>
+    <div class="row wrapper border-bottom  page-heading container-fluid">
+        <div class="row w-100">
+            <div class="col-lg-4">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="ibox-title border-bottom mb-3">
+                            <button class="btn btn-muted border mr-3" (click)="openFileDialog()"><i class="fa fa-file mr-2"></i>Upload New File</button>
+                            <button class="btn btn-muted border"><i class="fa fa-folder mr-2"></i>New Folder</button>
+                        </div>
+                        <div id="jstree1">
+                            <ul>
+                                <li class="jstree-open">Admin theme
+                                    <ul>
+                                        <li>css
+                                            <ul>
+                                                <li data-jstree='"type":"css"}'>animate.css</li>
+                                                <li data-jstree='"type":"css"}'>bootstrap.css</li>
+                                                <li data-jstree='"type":"css"}'>style.css</li>
+                                            </ul>
+                                        </li>
+                                        <li>email-templates
+                                            <ul>
+                                                <li data-jstree='"type":"html"}'>action.html</li>
+                                                <li data-jstree='"type":"html"}'>alert.html</li>
+                                                <li data-jstree='"type":"html"}'>billing.html</li>
+                                            </ul>
+                                        </li>
+                                        <li>fonts
+                                            <ul>
+                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.eot</li>
+                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.svg</li>
+                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.ttf</li>
+                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.woff</li>
+                                            </ul>
+                                        </li>
+                                        <li class="jstree-open">img
+                                            <ul>
+                                                <li data-jstree='"type":"img"}'>profile_small.jpg</li>
+                                                <li data-jstree='"type":"img"}'>angular_logo.png</li>
+                                                <li class="text-navy" data-jstree='"type":"img"}'>html_logo.png</li>
+                                                <li class="text-navy" data-jstree='"type":"img"}'>mvc_logo.png</li>
+                                            </ul>
+                                        </li>
+                                        <li class="jstree-open">js
+                                            <ul>
+                                                <li data-jstree='"type":"js"}'>inspinia.js</li>
+                                                <li data-jstree='"type":"js"}'>bootstrap.js</li>
+                                                <li data-jstree='"type":"js"}'>jquery-2.1.1.js</li>
+                                                <li data-jstree='"type":"js"}'>jquery-ui.custom.min.js</li>
+                                                <li  class="text-navy" data-jstree='"type":"js"}'>jquery-ui-1.10.4.min.js</li>
+                                            </ul>
+                                        </li>
+                                        <li data-jstree='"type":"html"}'> affix.html</li>
+                                        <li data-jstree='"type":"html"}'> dashboard.html</li>
+                                        <li data-jstree='"type":"html"}'> buttons.html</li>
+                                        <li data-jstree='"type":"html"}'> calendar.html</li>
+                                        <li data-jstree='"type":"html"}'> contacts.html</li>
+                                        <li data-jstree='"type":"html"}'> css_animation.html</li>
+                                        <li  class="text-navy" data-jstree='"type":"html"}'> flot_chart.html</li>
+                                        <li  class="text-navy" data-jstree='"type":"html"}'> google_maps.html</li>
+                                        <li data-jstree='"type":"html"}'> icons.html</li>
+                                        <li data-jstree='"type":"html"}'> invoice.html</li>
+                                        <li data-jstree='"type":"html"}'> login.html</li>
+                                        <li data-jstree='"type":"html"}'> mailbox.html</li>
+                                        <li data-jstree='"type":"html"}'> profile.html</li>
+                                        <li  class="text-navy" data-jstree='"type":"html"}'> register.html</li>
+                                        <li data-jstree='"type":"html"}'> timeline.html</li>
+                                        <li data-jstree='"type":"html"}'> video.html</li>
+                                        <li data-jstree='"type":"html"}'> widgets.html</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li><a class="nav-link active" data-toggle="tab" href="#tab-1"> Preview</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#tab-2">View Tasks</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#tab-3">eSignatures</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#tab-4">Previous versions</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <button class="btn btn-muted border mb-4"><i class="fa fa-upload mr-2"></i>Upload  Document</button>
+
+                                <div class="ibox">
+                                    <div class="ibox-content">
+                                        <div class="ibox-title border-bottom mb-3">
+                                            <div class="float-right">
+                                                <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-download"></i></button>
+                                                <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-print"></i></button>
+                                                <button class="btn btn-lg btn-muted border"><i class="fa fa-1x fa-cog"></i></button>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="text-center pdf-toolbar mt-3">
+                                            <div class="btn-group">
+                                                <button id="prev" (click)="onPrevPage()" class="btn btn-white">
+                                                    <i class="fa fa-long-arrow-left"></i> <span class="d-none d-sm-inline">Previous</span>
+                                                </button>
+                                                <button id="next" (click)="onNextPage()" class="btn btn-white">
+                                                    <i class="fa fa-long-arrow-right"></i> <span class="d-none d-sm-inline">Next</span>
+                                                </button>
+                                                <button id="zoomin" (click)="onZoomIn()" class="btn btn-white">
+                                                    <i class="fa fa-search-minus"></i> <span class="d-none d-sm-inline">Zoom In</span>
+                                                </button>
+                                                <button id="zoomout" (click)="onZoomOut()" class="btn btn-white">
+                                                    <i class="fa fa-search-plus"></i> <span class="d-none d-sm-inline">Zoom Out</span>
+                                                </button>
+                                                <button id="zoomfit" (click)="onZoomFit()" class="btn btn-white"> 100%</button>
+                                                <span class="btn btn-white hidden-xs">Page: </span>
+                                                <div class="input-group">
+                                                    <input type="text" [(value)]="pageNum" (change)="renderPage(pageNum, scale)" class="form-control" id="page_num">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-white" id="page_count"></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center m-t-md">
+                                            <canvas id="the-canvas" class="pdfcanvas border-left-right border-top-bottom b-r-md"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+                                <button class="btn btn-muted border mb-5 mr-3"><i class="fa fa-link mr-2"></i>Link to Studies</button>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr >
+                                              <th scope="col" >Study</th>
+                                              <th scope="col">Alias Name</th>
+                                              <th scope="col">Auto Update</th>
+                                              <th scope="col">Unlink</th>
+                                            </tr>
+                                          </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of numbers; let i = index">
+                                                <td>Sanofi XYZ12341 
+                                                    <p>XY Research - Orlando FL - Linda Harper MD - #143</p>
+                                                </td>
+                                                <td>Alias Name #1</td>
+                                                <td>On</td>
+                                                <td><i class="fa fa-lg fa-unlink"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="tab-4" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="ibox ">
+                                    <div class="ibox-content">
+                                        <input type="text" class="form-control form-control-sm m-b-xs" id="filter"
+                                               placeholder="Search in table">
+            
+                                        <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                                            <thead>
+                                            <tr>
+                                                <th>Rendering engine</th>
+                                                <th>Browser</th>
+                                                <th data-hide="phone,tablet">Platform(s)</th>
+                                                <th data-hide="phone,tablet">Engine version</th>
+                                                <th data-hide="phone,tablet">CSS grade</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="gradeU" *ngFor="let item of numbers">
+                                                <td>Other browsers</td>
+                                                <td>All others</td>
+                                                <td>-</td>
+                                                <td class="center">-</td>
+                                                <td class="center">U</td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <ul class="pagination float-right"></ul>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

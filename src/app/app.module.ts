@@ -23,6 +23,7 @@ import {HttpRequestInterceptor} from './services/http-request.interceptor';
 import {AppLoadService} from './services/AppLoadService';
 import {InfoPopupComponent} from './components/common/info-popup.component';
 import { StudyComponent } from './components/dashboard/study/study.component';
+import { UploadFileDialogComponent } from './components/common/upload-file-dialog/upload-file-dialog.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { StudyComponent } from './components/dashboard/study/study.component';
         ExternalDialogComponent,
         MasterFilesComponent,
         InfoPopupComponent,
-        StudyComponent
+        StudyComponent,
+        UploadFileDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -65,7 +67,7 @@ import { StudyComponent } from './components/dashboard/study/study.component';
         },
     ],
     bootstrap: [AppComponent],
-    entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent]
+    entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent, UploadFileDialogComponent]
 })
 export class AppModule {
 }
