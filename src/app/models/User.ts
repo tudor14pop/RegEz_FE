@@ -1,11 +1,6 @@
-export interface LoginUser {
-    user: User
-    token?: string
-    ip: string
-    securityCode: string
-}
+import {GeneralResponse} from "./GeneralResponse";
 
-export interface User {
+export interface User extends GeneralResponse {
     id?: string
     firstName?: string
     lastName?: string
@@ -21,5 +16,4 @@ export interface User {
     receiveSms?: boolean
     accountType?: string
     role?: string
-    token?: string
 }

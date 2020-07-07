@@ -1,69 +1,90 @@
-    <div class="middle-box text-center animated fadeInDown">
-        <div>
-            <h4>Create New Study</h4>
-            <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="create(newStudyForm)">
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4>Create New Study</h4>
+        <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="create(newStudyForm)">
+            <div formGroupName="sponsor">
                 <div class="form-group">
-                    <select type="text" class="form-control"  required=""
-                           formControlName="sponsorName">
-                            <option value="" disabled selected>Sponsor Name</option>
-                            <option value="Sponsor1">Sponsor 1</option>
-                        </select>
+                    <select type="text" class="form-control" required=""
+                            formControlName="id">
+                        <option value="" disabled selected>Sponsor Name</option>
+                        <option *ngFor="let sponsor of initStudy?.sponsors"
+                                [value]="sponsor.id">{{sponsor.name}}</option>
+                    </select>
                 </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Protocol #" required=""
+                       formControlName="protocolName">
+            </div>
+            <div formGroupName="cro">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Protocol #" required=""
-                           formControlName="protocol">
-                </div>
-                <div class="form-group">
-                    <select type="text" class="form-control"  required="" formControlName="croName">
+                    <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>CRO Name</option>
-                        <option value="CRO1">CRO 1</option>
+                        <option *ngFor="let cro of initStudy?.cros" [value]="cro.id">{{cro.name}}</option>
                     </select>
                 </div>
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                        <input type="text" class="form-control" placeholder="Nickname" required=""
-                            formControlName="nickName">
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <input type="text" class="form-control" placeholder="IND #" required=""
-                            formControlName="indNumber">
-                    </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <input type="text" class="form-control" placeholder="Nickname" required=""
+                           formControlName="nickname">
                 </div>
+                <div class="form-group col-lg-6">
+                    <input type="text" class="form-control" placeholder="IND #" required=""
+                           formControlName="indNumber">
+                </div>
+            </div>
+            <div formGroupName="principalInvestigator">
                 <div class="form-group">
-                    <select type="text" class="form-control"  required="" formControlName="pInvestigator">
+                    <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Pricipal Investigator</option>
-                        <option value="pInvestigator1">Principal Investigator 1</option>
+                        <option *ngFor="let user of initStudy?.users"
+                                [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
+            </div>
+            <div formGroupName="subInvestigator">
                 <div class="form-group">
-                    <select type="text" class="form-control"  required="" formControlName="sInvestigator">
+                    <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Sub Investigator</option>
-                        <option value="sInvestigator1">Sub Investigator 1</option>
+                        <option *ngFor="let user of initStudy?.users"
+                                [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
-                <div class="row">
-                    <div class="form-group col-lg-6">
-                        <input type="text" class="form-control" placeholder="Site" required=""
-                            formControlName="site">
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <input type="text" class="form-control" placeholder="Site #" required=""
-                            formControlName="siteNumber">
+            </div>
+            <div class="row">
+                <div formGroupName="site" class="col-lg-8">
+                    <div class="form-group">
+                        <select type="text" class="form-control" required="" formControlName="id">
+                            <option value="" disabled selected>Site</option>
+                            <option *ngFor="let site of initStudy?.sites" [value]="site.id">{{site.name}}</option>
+                        </select>
                     </div>
                 </div>
+                <div class="form-group col-lg-4">
+                    <input type="text" class="form-control" placeholder="Site #" required=""
+                           formControlName="siteNumber">
+                </div>
+            </div>
+            <div formGroupName="leadCrc">
                 <div class="form-group">
-                    <select type="text" class="form-control"  required="" formControlName="leadCRC">
+                    <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Lead CRC</option>
-                        <option value="leadCRC1">Lead CRC 1</option>
+                        <option *ngFor="let user of initStudy?.users"
+                                [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
+            </div>
+            <div formGroupName="backupCrc">
                 <div class="form-group">
-                    <select type="text" class="form-control"  required="" formControlName="backupCRC">
+                    <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Backup CRC</option>
-                        <option value="backupCRC1">Backup CRC 1</option>
+                        <option *ngFor="let user of initStudy?.users"
+                                [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>  
-            </form>
-        </div>
+            </div>
+            <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+        </form>
     </div>
+</div>
