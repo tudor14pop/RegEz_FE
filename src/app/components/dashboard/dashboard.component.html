@@ -1,8 +1,8 @@
-<div class="wrapper wrapper-content animated fadeIn"  >
+<div class="wrapper wrapper-content animated fadeIn">
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
         <h2 class="text-muted"> Dashboard</h2>
-        <div class="icon-container bg-primary float-right"> 
-           <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
+        <div class="icon-container bg-primary float-right">
+            <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
     </div>
     <div class="row wrapper border-bottom  page-heading container-fluid">
@@ -12,73 +12,91 @@
                     <div class="ibox-content">
                         <div class="ibox-title">
                             <h5>Study Regulatory Binders</h5>
-                            <div class="float-right"><button class="btn btn-primary mb-3" (click)="openNewStudyDialog()">New Study</button></div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <select type="text" id="product_name" name="product_name" value=""
-                                        placeholder="Company" class="form-control">
-                                        <option value="1">CNS Healthcare</option>
-                                        <option value="2">XY Research</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <select type="text" id="product_name" name="product_name" value=""
-                                        placeholder="Project Name" class="form-control">
-                                        <option value="1">Research Site</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <select type="text" id="product_name" name="product_name" value=""
-                                        placeholder="Project Name" class="form-control">
-                                        <option value="1">Investigator</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="text" id="quantity" name="quantity" value="" placeholder="Search"
-                                        class="form-control">
-                                </div>
+                            <div class="float-right">
+                                <button class="btn btn-primary mb-3" (click)="openNewStudyDialog()">New Study</button>
                             </div>
                         </div>
+                        <form class="row mt-3" role="form" [formGroup]="studyFilterForm"
+                              (ngSubmit)="filter(studyFilterForm)">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select type="text" class="form-control" formControlName="companyId">
+                                        <option value="" disabled selected>Company</option>
+                                        <option value="" selected> </option>
+                                        <option *ngFor="let company of initDashboardDto?.companies"
+                                                [value]="company.id">{{company.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select type="text" class="form-control" formControlName="siteId">
+                                        <option value="" disabled selected>Site</option>
+                                        <option value="" selected> </option>
+                                        <option *ngFor="let site of initDashboardDto?.sites"
+                                                [value]="site.id">{{site.name}}</option>
+                                        <option value="1">Site 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select type="text" class="form-control" formControlName="investigatorId">
+                                        <option value="" disabled>Investigator</option>
+                                        <option value="" selected> </option>
+                                        <option *ngFor="let user of initDashboardDto?.users"
+                                                [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 row">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Search" class="form-control"
+                                               formControlName="keywords">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary block">Go</button>
+                                </div>
+                            </div>
+                        </form>
 
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
-                                    <tr >
-                                      <th scope="col" class="wide">Name</th>
-                                      <th scope="col">Tasks</th>
-                                      <th scope="col">Last Modified</th>
-                                      <th scope="col">Action</th>
-                                    </tr>
-                                  </thead>
+                                <tr>
+                                    <th scope="col" class="wide">Name</th>
+                                    <th scope="col">Tasks</th>
+                                    <th scope="col">Last Modified</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of [1,2,3,4,5,6,7]; let i = index">
-                                        <td><div [routerLink]="['/study']">4D Pharma BHT-II-0001</div> 
-                                            <p>CNS Healthcare - Orlando FL - Linda Harper MD - #143</p>
-                                        </td>
-                                        <td>3</td>
-                                        <td>Jul 16, 2015</td>
-                                        <td >
-                                            <a (click)="showPopup(i)">
-                                                <i class="fa fa-ellipsis-h fa-lg text-navy"></i>
-                                                <div *ngIf="clicked[i]">
-                                                    <div class="popup-container bg-white animated fadeIn"   >
-                                                        <span class="mb-1 ml-3"><i class="fa fa-edit mr-3"></i>Rename</span>
-                                                        <span class="mb-1 ml-3"><i class="fa fa-user mr-3"></i> User Roles</span>
-                                                        <span class="mb-1 ml-3"><i class="fa fa-download mr-3"></i>Download</span>
-                                                        <span class="mb-1 ml-3"><i class="fa fa-check mr-3"></i>Close Study</span>
-                                                    </div>
+                                <tr *ngFor="let study of studies; let i = index">
+                                    <td>{{study.nickname}}
+                                        <p>{{study.site.company.name}}
+                                            - {{study.site.company.address1}}
+                                            - {{study.principalInvestigator.firstName}} {{study.principalInvestigator.lastName}}
+                                            - {{study.indNumber}}</p>
+                                    </td>
+                                    <td>3</td>
+                                    <td>Jul 16, 2015</td>
+                                    <td>
+                                        <a (click)="showPopup(i)">
+                                            <i class="fa fa-ellipsis-h fa-lg text-navy"></i>
+                                            <div *ngIf="clicked[i]">
+                                                <div class="popup-container bg-white animated fadeIn">
+                                                    <span class="mb-1 ml-3"><i class="fa fa-edit mr-3"></i>Rename</span>
+                                                    <span class="mb-1 ml-3"><i
+                                                            class="fa fa-user mr-3"></i> User Roles</span>
+                                                    <span class="mb-1 ml-3"><i class="fa fa-download mr-3"></i>Download</span>
+                                                    <span class="mb-1 ml-3"><i class="fa fa-check mr-3"></i>Close Study</span>
                                                 </div>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -97,44 +115,46 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                      <div class="col-sm-4 border-right overview-container">
-                          <h5>My Tasks</h5>
-                          <div class="row mt-4">
-                            <div class="col-sm-2 mr-2"><i class="fa fa-tasks fa-2x"></i></div>
-                            <div class="d-flex flex-column col-sm-4 overview-panel">
-                                <div class="col-sm-2 text-muted">PENDING</div>
-                                <div class="col-sm-2 font-weight-bold">43</div>
-                                <div class="col-sm-2 text-warning">OVERDUE</div>
-                                <div class="col-sm-2 text-warning font-weight-bold">5</div>
+                        <div class="col-sm-4 border-right overview-container">
+                            <h5>My Tasks</h5>
+                            <div class="row mt-4">
+                                <div class="col-sm-2 mr-2"><i class="fa fa-tasks fa-2x"></i></div>
+                                <div class="d-flex flex-column col-sm-4 overview-panel">
+                                    <div class="col-sm-2 text-muted">PENDING</div>
+                                    <div class="col-sm-2 font-weight-bold">43</div>
+                                    <div class="col-sm-2 text-warning">OVERDUE</div>
+                                    <div class="col-sm-2 text-warning font-weight-bold">5</div>
+                                </div>
                             </div>
-                        </div>
 
-                      </div>
-                      <div class="col-sm-4 border-right overview-container">
-                        <h5>e-Signature</h5>
-                        <div class="row mt-4">
-                            <div class="col-sm-2 mr-2"><span class="iconify" data-icon="fa-solid:file-signature" data-inline="false"></span></div>
-                            <div class="d-flex flex-column col-sm-4 overview-panel">
-                                <div class="col-sm-2 text-muted">PENDING</div>
-                                <div class="col-sm-2 font-weight-bold">17</div>
-                                <div class="col-sm-2 text-warning">OVERDUE</div>
-                                <div class="col-sm-2 text-warning font-weight-bold">3</div>
+                        </div>
+                        <div class="col-sm-4 border-right overview-container">
+                            <h5>e-Signature</h5>
+                            <div class="row mt-4">
+                                <div class="col-sm-2 mr-2"><span class="iconify" data-icon="fa-solid:file-signature"
+                                                                 data-inline="false"></span></div>
+                                <div class="d-flex flex-column col-sm-4 overview-panel">
+                                    <div class="col-sm-2 text-muted">PENDING</div>
+                                    <div class="col-sm-2 font-weight-bold">17</div>
+                                    <div class="col-sm-2 text-warning">OVERDUE</div>
+                                    <div class="col-sm-2 text-warning font-weight-bold">3</div>
+                                </div>
                             </div>
                         </div>
-                     </div>
-                    <div class="col-sm-4 overview-container">
-                        <h5>Expiring Doc.</h5>
-                        <div class="row mt-4">
-                            <div class="col-sm-2 mr-2"><span class="iconify" data-icon="fa-regular:calendar-times" data-inline="false"></span></div>
-                            <div class="d-flex flex-column col-sm-4 overview-panel">
-                                <div class="col-sm-2 text-muted">DAYS</div>
-                                <div class="col-sm-2 font-weight-bold">26</div>
-                                <div class="col-sm-2 text-danger">EXPIRED</div>
-                                <div class="col-sm-2 text-danger font-weight-bold">3</div>
+                        <div class="col-sm-4 overview-container">
+                            <h5>Expiring Doc.</h5>
+                            <div class="row mt-4">
+                                <div class="col-sm-2 mr-2"><span class="iconify" data-icon="fa-regular:calendar-times"
+                                                                 data-inline="false"></span></div>
+                                <div class="d-flex flex-column col-sm-4 overview-panel">
+                                    <div class="col-sm-2 text-muted">DAYS</div>
+                                    <div class="col-sm-2 font-weight-bold">26</div>
+                                    <div class="col-sm-2 text-danger">EXPIRED</div>
+                                    <div class="col-sm-2 text-danger font-weight-bold">3</div>
+                                </div>
                             </div>
+
                         </div>
-                        
-                    </div>
                     </div>
                     <div class="ibox-content inspinia-timeline">
                         <div class="timeline-item">
@@ -142,7 +162,7 @@
                                 <div class="col-4 date">
                                     <i class="fa fa-file"></i>
                                     7:00 am
-                                    <br />
+                                    <br/>
                                     <small class="text-navy">3 hour ago</small>
                                 </div>
                                 <div class="col content">
@@ -157,7 +177,7 @@
                                 <div class="col-4 date">
                                     <i class="fa fa-coffee"></i>
                                     8:00 am
-                                    <br />
+                                    <br/>
                                 </div>
                                 <div class="col content">
                                     <p class="m-b-xs"><strong>Coffee Break</strong></p>
@@ -174,7 +194,7 @@
                                 <div class="col-4 date">
                                     <i class="fa fa-phone"></i>
                                     11:00 am
-                                    <br />
+                                    <br/>
                                     <small class="text-navy">21 hour ago</small>
                                 </div>
                                 <div class="col content">

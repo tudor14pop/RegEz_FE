@@ -2,7 +2,7 @@ import {GeneralResponse} from "./GeneralResponse"
 
 export interface Company extends GeneralResponse{
     id: string
-    companyName: string
+    name: string
     address1: string
     address2: string
     city: string
