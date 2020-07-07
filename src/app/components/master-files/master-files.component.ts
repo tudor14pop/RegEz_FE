@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {getDocument} from '../../../scripts/pdf.js';
 declare var $: any;
 
 
@@ -22,7 +21,7 @@ ctx = null;
 
   constructor() { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
     this.ctx = this.canvas.getContext('2d');
     this.numbers = Array(50).fill(0).map((x, i) => i);
@@ -53,8 +52,12 @@ ctx = null;
               icon: 'fa fa-file-text-o'
           }
       }
-  });
-    getDocument(this.url).then((pdfDoc_) => {
+});
+    const pdfjs = await import('../../../scripts/pdf.js');
+    const pdfjsWorker = await import('../../../scripts/pdf.worker.js');
+    pdfjs.workerSrc = pdfjsWorker;
+
+    pdfjs.getDocument(this.url).then((pdfDoc_) => {
         this.pdfDoc = pdfDoc_;
         const documentPagesNumber = this.pdfDoc.numPages;
         document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
