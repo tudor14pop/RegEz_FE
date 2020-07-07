@@ -105,19 +105,19 @@
                                         </div>
                                         <div class="text-center pdf-toolbar mt-3">
                                             <div class="btn-group">
-                                                <button id="prev" class="btn btn-white">
+                                                <button id="prev" (click)="onPrevPage()" class="btn btn-white">
                                                     <i class="fa fa-long-arrow-left"></i> <span class="d-none d-sm-inline">Previous</span>
                                                 </button>
-                                                <button id="next" class="btn btn-white">
+                                                <button id="next" (click)="onNextPage()" class="btn btn-white">
                                                     <i class="fa fa-long-arrow-right"></i> <span class="d-none d-sm-inline">Next</span>
                                                 </button>
-                                                <button id="zoomin" class="btn btn-white">
+                                                <button id="zoomin" (click)="onZoomIn()" class="btn btn-white">
                                                     <i class="fa fa-search-minus"></i> <span class="d-none d-sm-inline">Zoom In</span>
                                                 </button>
-                                                <button id="zoomout" class="btn btn-white">
+                                                <button id="zoomout" (click)="onZoomOut()" class="btn btn-white">
                                                     <i class="fa fa-search-plus"></i> <span class="d-none d-sm-inline">Zoom Out</span>
                                                 </button>
-                                                <button id="zoomfit" class="btn btn-white"> 100%</button>
+                                                <button id="zoomfit" (click)="onZoomFit()" class="btn btn-white"> 100%</button>
                                                 <span class="btn btn-white hidden-xs">Page: </span>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="page_num">

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {getDocument} from '../../../scripts/pdf.js';
 declare var $: any;
+
 
 @Component({
   selector: 'app-master-files',
@@ -7,14 +9,25 @@ declare var $: any;
   styleUrls: ['./master-files.component.scss']
 })
 export class MasterFilesComponent implements OnInit {
-  numbers;
+numbers;
+url = '../../assets/example.pdf';
+pdfDoc = null;
+pageNum = 1;
+pageRendering = false;
+pageNumPending = null;
+scale = 1.5;
+zoomRange = 0.25;
+canvas = null;
+ctx = null;
+
   constructor() { }
 
   ngOnInit(): void {
-    this.numbers = Array(50).fill(0).map((x,i)=>i);
+    this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
+    this.ctx = this.canvas.getContext('2d');
+    this.numbers = Array(50).fill(0).map((x, i) => i);
     $('.footable').footable();
     $('.footable2').footable();
-
     $('#jstree1').jstree({
       core : {
           check_callback : true
@@ -41,151 +54,108 @@ export class MasterFilesComponent implements OnInit {
           }
       }
   });
+    getDocument(this.url).then((pdfDoc_) => {
+        this.pdfDoc = pdfDoc_;
+        const documentPagesNumber = this.pdfDoc.numPages;
+        document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
+        const selfRef = this;
+        $('#page_num').on('change', function() {
+            const pageNumber = Number($(this).val());
+            if (pageNumber > 0 && pageNumber <= documentPagesNumber) {
+                selfRef.queueRenderPage(pageNumber, this.scale);
+            }
+        });
+        this.renderPage(this.pageNum, this.scale);
+
+    });
   }
 
-  //TODO: rewrite these functions into our components
+  // TODO: rewrite these functions into our components
 
-// let url = './pdf/example.pdf';
-//   let pdfDoc = null,
-//           pageNum = 1,
-//           pageRendering = false,
-//           pageNumPending = null,
-//           scale = 1.5,
-//           zoomRange = 0.25,
-//           canvas = document.getElementById('the-canvas'),
-//           ctx = canvas.getContext('2d');
+renderPage(num, scale) {
+      this.pageRendering = true;
+      this.pdfDoc.getPage(num).then((page) => {
+          const viewport = page.getViewport(scale);
+          this.canvas.height = viewport.height;
+          this.canvas.width = viewport.width;
 
-//   /**
-//    * Get page info from document, resize canvas accordingly, and render page.
-//    * @param num Page number.
-//    */
-// function renderPage(num, scale) {
-//       pageRendering = true;
-//       // Using promise to fetch the page
-//       pdfDoc.getPage(num).then(function(page) {
-//           let viewport = page.getViewport(scale);
-//           canvas.height = viewport.height;
-//           canvas.width = viewport.width;
+          const renderContext = {
+              canvasContext: this.ctx,
+              viewport
+          };
 
-//           // Render PDF page into canvas context
-//           let renderContext = {
-//               canvasContext: ctx,
-//               viewport: viewport
-//           };
-//           let renderTask = page.render(renderContext);
+          const renderTask =page.render(renderContext);
+          renderTask.promise.then(() => {
+                const pageRendering = false;
+                if (this.pageNumPending !== null) {
+                    // New page rendering is pending
+                    this.renderPage(this.pageNumPending, scale);
+                    const pageNumPending = null;
+                }
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      });
+  }
 
-//           // Wait for rendering to finish
-//           renderTask.promise.then(function () {
-//               pageRendering = false;
-//               if (pageNumPending !== null) {
-//                   // New page rendering is pending
-//                   renderPage(pageNumPending);
-//                   pageNumPending = null;
-//               }
-//           });
-//       });
+queueRenderPage(num, scale) {
+      if (this.pageRendering) {
+          this.pageNumPending = num;
+      } else {
+          this.renderPage(num, scale);
+      }
+  }
 
-//       // Update page counters
-//       document.getElementById('page_num').value = num;
-//   }
-
-//   /**
-//    * If another page rendering in progress, waits until the rendering is
-//    * finised. Otherwise, executes rendering immediately.
-//    */
-// function queueRenderPage(num) {
-//       if (pageRendering) {
-//           pageNumPending = num;
-//       } else {
-//           renderPage(num,scale);
-//       }
-//   }
-
-//   /**
-//    * Displays previous page.
-//    */
-// function onPrevPage() {
-//       if (pageNum <= 1) {
-//           return;
-//       }
-//       pageNum--;
-//       let scale = pdfDoc.scale;
-//       queueRenderPage(pageNum, scale);
-//   }
+onPrevPage() {
+      if (this.pageNum <= 1) {
+          return;
+      }
+      this.pageNum--;
+      const scale = this.pdfDoc.scale;
+      this.queueRenderPage(this.pageNum, scale);
+  }
 // document.getElementById('prev').addEventListener('click', onPrevPage);
 
-//   /**
-//    * Displays next page.
-//    */
-// function onNextPage() {
-//       if (pageNum >= pdfDoc.numPages) {
-//           return;
-//       }
-//       pageNum++;
-//       let scale = pdfDoc.scale;
-//       queueRenderPage(pageNum, scale);
-//   }
+onNextPage() {
+      if (this.pageNum >= this.pdfDoc.numPages) {
+          return;
+      }
+      this.pageNum++;
+      const scale = this.pdfDoc.scale;
+      this.queueRenderPage(this.pageNum, scale);
+  }
 // document.getElementById('next').addEventListener('click', onNextPage);
 
-//   /**
-//    * Zoom in page.
-//    */
-// function onZoomIn() {
-//       if (scale >= pdfDoc.scale) {
-//           return;
-//       }
-//       scale += zoomRange;
-//       let num = pageNum;
-//       renderPage(num, scale)
-//   }
+ onZoomIn() {
+      if (this.scale >= this.pdfDoc.scale) {
+          return;
+      }
+      this.scale += this.zoomRange;
+      const num = this.pageNum;
+      this.renderPage(num, this.scale);
+  }
 // document.getElementById('zoomin').addEventListener('click', onZoomIn);
 
-//   /**
-//    * Zoom out page.
-//    */
-// function onZoomOut() {
-//       if (scale >= pdfDoc.scale) {
-//           return;
-//       }
-//       scale -= zoomRange;
-//       let num = pageNum;
-//       queueRenderPage(num, scale);
-//   }
+onZoomOut() {
+      if (this.scale >= this.pdfDoc.scale) {
+          return;
+      }
+      this.scale -= this.zoomRange;
+      const num = this.pageNum;
+      this.queueRenderPage(num, this.scale);
+  }
 // document.getElementById('zoomout').addEventListener('click', onZoomOut);
 
-//   /**
-//    * Zoom fit page.
-//    */
-// function onZoomFit() {
-//       if (scale >= pdfDoc.scale) {
-//           return;
-//       }
-//       scale = 1;
-//       let num = pageNum;
-//       queueRenderPage(num, scale);
-//   }
+onZoomFit() {
+      if (this.scale >= this.pdfDoc.scale) {
+          return;
+      }
+      this.scale = 1;
+      const num = this.pageNum;
+      this.queueRenderPage(num, this.scale);
+  }
 // document.getElementById('zoomfit').addEventListener('click', onZoomFit);
-
-
-//   /**
-//    * Asynchronously downloads PDF.
-//    */
-// PDFJS.getDocument(url).then(function (pdfDoc_) {
-//       pdfDoc = pdfDoc_;
-//       let documentPagesNumber = pdfDoc.numPages;
-//       document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
-
-//       $('#page_num').on('change', function() {
-//           let pageNumber = Number($(this).val());
-
-//           if(pageNumber > 0 && pageNumber <= documentPagesNumber) {
-//               queueRenderPage(pageNumber, scale);
-//           }
-
-//       });
-
-//       // Initial/first page rendering
-//       renderPage(pageNum, scale);
-//   });
 
 }
