@@ -7,7 +7,7 @@
                     <select type="text" class="form-control" required=""
                             formControlName="id">
                         <option value="" disabled selected>Sponsor Name</option>
-                        <option *ngFor="let sponsor of initStudy?.sponsors"
+                        <option *ngFor="let sponsor of initDashboardDto?.sponsors"
                                 [value]="sponsor.id">{{sponsor.name}}</option>
                     </select>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>CRO Name</option>
-                        <option *ngFor="let cro of initStudy?.cros" [value]="cro.id">{{cro.name}}</option>
+                        <option *ngFor="let cro of initDashboardDto?.cros" [value]="cro.id">{{cro.name}}</option>
                     </select>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Pricipal Investigator</option>
-                        <option *ngFor="let user of initStudy?.users"
+                        <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Sub Investigator</option>
-                        <option *ngFor="let user of initStudy?.users"
+                        <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <select type="text" class="form-control" required="" formControlName="id">
                             <option value="" disabled selected>Site</option>
-                            <option *ngFor="let site of initStudy?.sites" [value]="site.id">{{site.name}}</option>
+                            <option *ngFor="let site of initDashboardDto?.sites" [value]="site.id">{{site.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="form-group">
                     <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Lead CRC</option>
-                        <option *ngFor="let user of initStudy?.users"
+                        <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <select type="text" class="form-control" required="" formControlName="id">
                         <option value="" disabled selected>Backup CRC</option>
-                        <option *ngFor="let user of initStudy?.users"
+                        <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
