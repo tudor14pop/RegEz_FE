@@ -1,15 +1,5 @@
 @import '../../../styles/colors.scss';
 
-.icon-container {
-    position: relative;
-    height: 3rem;
-    line-height: 3.3rem;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;  
-    width: 3rem;
-    bottom: 2rem;
-}
-
 .narrow-success {
     width: 10px;
     background-color: $info;
