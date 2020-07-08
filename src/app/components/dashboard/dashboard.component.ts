@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
             data: this.initDashboardDto
         });
         const sub = dialogRef.componentInstance.studySuccessfullyCreated.subscribe(() => {
-            this.initStudies(this.studyFilterForm.value.investigatorId, this.studyFilterForm.value.siteId, this.studyFilterForm.value.companyId)
+            this.initStudies(this.studyFilterForm.value.investigatorId, this.studyFilterForm.value.siteId, this.studyFilterForm.value.companyId, this.studyFilterForm.value.keywords)
         });
     }
 
@@ -58,11 +58,11 @@ export class DashboardComponent implements OnInit {
                 this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
             }
         );
-        this.initStudies("", "", "");
+        this.initStudies("", "", "", "");
     }
 
-    private initStudies(investigatorId, siteId, companyId) {
-        let params = new HttpParams().set("investigatorId", investigatorId).set("siteId", siteId).set("companyId", companyId);
+    private initStudies(investigatorId, siteId, companyId, keywords) {
+        let params = new HttpParams().set("investigatorId", investigatorId).set("siteId", siteId).set("companyId", companyId).set("keywords", keywords);
         this.http.get<RetrieveStudiesResponse>(environment.serverUrl + '/study/all', {params}).subscribe(
             res => {
                 if (res.errorMessage) {
@@ -89,6 +89,6 @@ export class DashboardComponent implements OnInit {
 
     filter(studyFilterForm: FormGroup) {
         console.log(studyFilterForm.value);
-        this.initStudies(studyFilterForm.value.investigatorId, studyFilterForm.value.siteId, studyFilterForm.value.companyId)
+        this.initStudies(studyFilterForm.value.investigatorId, studyFilterForm.value.siteId, studyFilterForm.value.companyId, studyFilterForm.value.keywords)
     }
 }

@@ -10,29 +10,29 @@
             <div class="col-lg-8">
                 <div class="ibox">
                     <div class="ibox-content">
-                        <div class="ibox-title">
-                            <h5>Study Regulatory Binders</h5>
-                            <div class="float-right">
-                                <button class="btn btn-primary mb-3" (click)="openNewStudyDialog()">New Study</button>
+                        <div class="row no-gutters border-bottom pb-2">
+                            <h5 class="col-9">Study Regulatory Binders</h5>
+                            <div class="col-3">
+                                <button class="btn btn-primary w-100" (click)="openNewStudyDialog()">New Study</button>
                             </div>
                         </div>
-                        <form class="row mt-3" role="form" [formGroup]="studyFilterForm"
+                        <form class="row no-gutters pt-3" role="form" [formGroup]="studyFilterForm"
                               (ngSubmit)="filter(studyFilterForm)">
                             <div class="col-sm-3">
-                                <div class="form-group">
+                                <div class="form-group mr-1">
                                     <select type="text" class="form-control" formControlName="companyId">
                                         <option value="" disabled selected>Company</option>
-                                        <option value="" selected> </option>
+                                        <option value="" selected></option>
                                         <option *ngFor="let company of initDashboardDto?.companies"
                                                 [value]="company.id">{{company.name}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-group">
+                                <div class="form-group mr-1">
                                     <select type="text" class="form-control" formControlName="siteId">
                                         <option value="" disabled selected>Site</option>
-                                        <option value="" selected> </option>
+                                        <option value="" selected></option>
                                         <option *ngFor="let site of initDashboardDto?.sites"
                                                 [value]="site.id">{{site.name}}</option>
                                         <option value="1">Site 1</option>
@@ -40,25 +40,23 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-group">
+                                <div class="form-group mr-1">
                                     <select type="text" class="form-control" formControlName="investigatorId">
                                         <option value="" disabled>Investigator</option>
-                                        <option value="" selected> </option>
+                                        <option value="" selected></option>
                                         <option *ngFor="let user of initDashboardDto?.users"
                                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-3 row">
-                                <div class="col-8">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Search" class="form-control"
-                                               formControlName="keywords">
-                                    </div>
+                            <div class="col-sm-2">
+                                <div class="form-group mr-1">
+                                    <input type="text" placeholder="Keywords" class="form-control"
+                                           formControlName="keywords">
                                 </div>
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary block">Go</button>
-                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="submit" class="btn btn-primary w-100">Go</button>
                             </div>
                         </form>
 
@@ -81,7 +79,7 @@
                                             - {{study.indNumber}}</p>
                                     </td>
                                     <td>3</td>
-                                    <td>Jul 16, 2015</td>
+                                    <td>{{study.createdOn | date:"MMM dd, yyyy"}}</td>
                                     <td>
                                         <a (click)="showPopup(i)">
                                             <i class="fa fa-ellipsis-h fa-lg text-navy"></i>
