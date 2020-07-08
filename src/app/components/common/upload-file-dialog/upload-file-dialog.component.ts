@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import '../../../../scripts/daterangepicker.js';
+import { FileService } from 'src/app/services/file.service.js';
+declare var $: any;
 
 @Component({
   selector: 'app-upload-file-dialog',
@@ -9,23 +12,45 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class UploadFileDialogComponent implements OnInit {
   newFileForm: FormGroup;
-  constructor( private formBuilder: FormBuilder,
-               public matDialog: MatDialog,) { }
+  fileToUpload = null;
+  fileName = '';
+  constructor(public matDialog: MatDialog,
+              private fileService: FileService) { }
 
   ngOnInit(): void {
-    this.newFileForm = this.formBuilder.group({
-    file: File,
-    fileName: '',
-    valiPeriod: null,
-    deteFrom: '',
-    dateTo: '',
-    description: '',
-    folderLocation: '',
-    versionalble: null
+    this.newFileForm =  new FormGroup({
+    uploadedFile: new FormControl(''),
+    fileName: new FormControl(''),
+    validPeriod: new FormControl(''),
+    dateFrom: new FormControl(''),
+    dateTo: new FormControl(''),
+    description: new FormControl(''),
+    folderLocation: new FormControl(''),
+    versionable: new FormControl(''),
     });
   }
+
+  changeFileName(event) {
+    this.fileToUpload = event.target.files.item(0);
+    this.fileName = event.target.value.replace(/^.*\\/, '');
+  }
+
   upload(form){
     this.matDialog.closeAll();
-    console.log(form.value);
+    const data = {
+      file: this.fileToUpload,
+      fileUploadRequest: {
+        description: form.value.description,
+        expirationDate: form.value.dateTo,
+        name: form.value.fileName,
+        type: form.value.validPeriod ? 'VERSIONED' : 'UNVERSIONED',
+        validFrom: form.value.dateFrom ? form.value.dateFrom : Date(),
+      }
+    };
+    this.fileService.uploadFile(data).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
   }
 }

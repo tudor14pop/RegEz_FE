@@ -20,3 +20,9 @@ body {
 .custom-dialog-container .mat-dialog-container {
   overflow-x: hidden;
 }
+
+.mat-datepicker-toggle {
+  position: relative;
+  float: right;
+  bottom: 2.6rem;
+}

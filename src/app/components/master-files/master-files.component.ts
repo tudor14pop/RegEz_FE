@@ -78,8 +78,6 @@ ctx = null;
     });
   }
 
-  // TODO: rewrite these functions into our components
-
 renderPage(num, scale) {
       this.pageRendering = true;
       this.pdfDoc.getPage(num).then((page) => {
@@ -128,7 +126,6 @@ onPrevPage() {
       const scale = this.scale;
       this.queueRenderPage(this.pageNum, scale);
   }
-// document.getElementById('prev').addEventListener('click', onPrevPage);
 
 onNextPage() {
       if (this.pageNum >= this.pdfDoc.numPages) {
@@ -138,7 +135,6 @@ onNextPage() {
       const scale = this.scale;
       this.queueRenderPage(this.pageNum, scale);
   }
-// document.getElementById('next').addEventListener('click', onNextPage);
 
  onZoomIn() {
       if (this.scale >= this.pdfDoc.scale) {
@@ -148,7 +144,6 @@ onNextPage() {
       const num = this.pageNum;
       this.renderPage(num, this.scale);
   }
-// document.getElementById('zoomin').addEventListener('click', onZoomIn);
 
 onZoomOut() {
       if (this.scale >= this.pdfDoc.scale) {
@@ -158,7 +153,6 @@ onZoomOut() {
       const num = this.pageNum;
       this.queueRenderPage(num, this.scale);
   }
-// document.getElementById('zoomout').addEventListener('click', onZoomOut);
 
 onZoomFit() {
       if (this.scale >= this.pdfDoc.scale) {
@@ -168,6 +162,5 @@ onZoomFit() {
       const num = this.pageNum;
       this.queueRenderPage(num, this.scale);
   }
-// document.getElementById('zoomfit').addEventListener('click', onZoomFit);
 
 }

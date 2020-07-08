@@ -23,7 +23,10 @@ import {HttpRequestInterceptor} from './services/http-request.interceptor';
 import {AppLoadService} from './services/AppLoadService';
 import {InfoPopupComponent} from './components/common/info-popup.component';
 import { StudyComponent } from './components/dashboard/study/study.component';
-import { UploadFileDialogComponent } from './components/common/upload-file-dialog/upload-file-dialog.component';
+import { UploadFileDialogComponent } from '../app/components/common/upload-file-dialog/upload-file-dialog.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -47,11 +50,14 @@ import { UploadFileDialogComponent } from './components/common/upload-file-dialo
     ],
     imports: [
         BrowserModule,
+        MatFormFieldModule,
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
         MatDialogModule,
         BrowserAnimationsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     providers: [
         {
