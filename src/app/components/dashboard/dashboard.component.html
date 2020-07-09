@@ -22,7 +22,6 @@
                                 <div class="form-group mr-1">
                                     <select type="text" class="form-control" formControlName="companyId">
                                         <option value="" disabled selected>Company</option>
-                                        <option value="" selected></option>
                                         <option *ngFor="let company of initDashboardDto?.companies"
                                                 [value]="company.id">{{company.name}}</option>
                                     </select>
@@ -32,7 +31,6 @@
                                 <div class="form-group mr-1">
                                     <select type="text" class="form-control" formControlName="siteId">
                                         <option value="" disabled selected>Site</option>
-                                        <option value="" selected></option>
                                         <option *ngFor="let site of initDashboardDto?.sites"
                                                 [value]="site.id">{{site.name}}</option>
                                         <option value="1">Site 1</option>
@@ -43,7 +41,6 @@
                                 <div class="form-group mr-1">
                                     <select type="text" class="form-control" formControlName="investigatorId">
                                         <option value="" disabled>Investigator</option>
-                                        <option value="" selected></option>
                                         <option *ngFor="let user of initDashboardDto?.users"
                                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                                     </select>
@@ -72,7 +69,7 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let study of studies; let i = index">
-                                    <td>{{study.nickname}}
+                                    <td [routerLink]="['/study', study.id]" style="cursor: pointer">{{study.nickname}}
                                         <p>{{study.site.company.name}}
                                             - {{study.site.company.address1}}
                                             - {{study.principalInvestigator.firstName}} {{study.principalInvestigator.lastName}}
@@ -85,7 +82,8 @@
                                             <i class="fa fa-ellipsis-h fa-lg text-navy"></i>
                                             <div *ngIf="clicked[i]">
                                                 <div class="popup-container bg-white animated fadeIn">
-                                                    <span class="mb-1 ml-3"><i class="fa fa-edit mr-3"></i>Rename</span>
+                                                        <span class="mb-1 ml-3"><i
+                                                                class="fa fa-edit mr-3"></i>Rename</span>
                                                     <span class="mb-1 ml-3"><i
                                                             class="fa fa-user mr-3"></i> User Roles</span>
                                                     <span class="mb-1 ml-3"><i class="fa fa-download mr-3"></i>Download</span>

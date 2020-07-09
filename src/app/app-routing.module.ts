@@ -24,7 +24,7 @@ const routes: Routes = [
             {path: 'dashboard', component: DashboardComponent},
             {path: 'task-manager', component: TaskManagerComponent},
             {path: 'master-files', component: MasterFilesComponent},
-            {path: 'study', component: StudyComponent},
+            {path: 'study/:id', component: StudyComponent},
         ]
     },
 
