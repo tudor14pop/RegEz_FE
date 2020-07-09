@@ -1,0 +1,22 @@
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4>Create New Folder</h4>
+        <form class="m-t" role="form" [formGroup]="newFolderForm" (ngSubmit)="upload(newFolderForm)">
+
+         <div class="form-group w-100">
+            <input type="text" class="form-control" placeholder="Folder Name..." required=""
+                   formControlName="folderName">
+        </div>
+        
+        <div class="form-group">
+            <select type="text" class="form-control" required=""
+                    formControlName="folderLocation">
+                <option value="" disabled selected>Select Folder Location</option>
+                <option *ngFor="let folder of [1,2,3,4]"
+                        [value]="folder">Folder No.{{folder}}</option>
+            </select>
+        </div>
+         <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+        </form>
+    </div>
+</div>

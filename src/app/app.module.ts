@@ -27,6 +27,7 @@ import { UploadFileDialogComponent } from '../app/components/common/upload-file-
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NewFolderDialogComponent } from './components/common/new-folder-dialog/new-folder-dialog.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MasterFilesComponent,
         InfoPopupComponent,
         StudyComponent,
-        UploadFileDialogComponent
+        UploadFileDialogComponent,
+        NewFolderDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -73,7 +75,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         },
     ],
     bootstrap: [AppComponent],
-    entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent, UploadFileDialogComponent]
+    entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
+                      UploadFileDialogComponent, NewFolderDialogComponent]
 })
 export class AppModule {
 }

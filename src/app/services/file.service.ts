@@ -12,7 +12,7 @@ export class FileService {
   constructor(private http: HttpClient) { }
 
   uploadFile(data): Observable<GeneralResponse> {
-    return this.http.post<GeneralResponse>(environment.serverUrl + '/file', data);
+    return this.http.post<GeneralResponse>(environment.serverUrl + '/file-management/new-file', data);
   }
 
   downloadFile() {

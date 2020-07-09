@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadFileDialogComponent } from '../../common/upload-file-dialog/upload-file-dialog.component.js';
 import { MatDialog } from '@angular/material/dialog';
+import { NewFolderDialogComponent } from '../../common/new-folder-dialog/new-folder-dialog.component.js';
 declare var $: any;
 
 
@@ -84,8 +85,14 @@ export class StudyComponent implements OnInit {
             height: '50rem',
             width: '30rem'
         });
-        }
+    }
 
+    openFolderDialog() {
+        const dialogRef = this.dialog.open(NewFolderDialogComponent , {
+            height: '50rem',
+            width: '30rem'
+        });
+    }
   renderPage(num, scale) {
         this.pageRendering = true;
         this.pdfDoc.getPage(num).then((page) => {
