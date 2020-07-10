@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UploadFileDialogComponent } from '../../common/upload-file-dialog/upload-file-dialog.component.js';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from '../../common/new-folder-dialog/new-folder-dialog.component.js';
+import { ActivatedRoute } from '@angular/router';
+import { FileService } from 'src/app/services/file.service.js';
 declare var $: any;
 
 
@@ -22,9 +24,18 @@ export class StudyComponent implements OnInit {
   zoomRange = 0.25;
   canvas = null;
   ctx = null;
-    constructor(private dialog: MatDialog) { }
+  studyID = '';
+    constructor(private dialog: MatDialog,
+                private route: ActivatedRoute,
+                private fileService: FileService) { }
 
     async ngOnInit(): Promise<void> {
+      this.route.params.subscribe(params => { this.studyID = params.id; });
+      this.fileService.retrieveFolderStructure(this.studyID).subscribe(res => {
+          console.log(res);
+      }, err => {
+          console.log(err);
+      });
       this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
       this.ctx = this.canvas.getContext('2d');
       this.numbers = Array(50).fill(0).map((x, i) => i);
@@ -83,14 +94,20 @@ export class StudyComponent implements OnInit {
     openFileDialog() {
         const dialogRef = this.dialog.open(UploadFileDialogComponent , {
             height: '50rem',
-            width: '30rem'
+            width: '30rem',
+            data: {
+                studyID: this.studyID
+            }
         });
     }
 
     openFolderDialog() {
         const dialogRef = this.dialog.open(NewFolderDialogComponent , {
             height: '50rem',
-            width: '30rem'
+            width: '30rem',
+            data: {
+                studyID: this.studyID
+            }
         });
     }
   renderPage(num, scale) {

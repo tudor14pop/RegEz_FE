@@ -68,7 +68,7 @@ export class AuthenticationService {
                 }
             },
             err => {
-                this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+                this.showError(err.error.message);
             }
         );
         return this.authenticationResponse;

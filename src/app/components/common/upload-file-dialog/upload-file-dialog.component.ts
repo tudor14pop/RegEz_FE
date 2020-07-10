@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import '../../../../scripts/daterangepicker.js';
 import { FileService } from 'src/app/services/file.service.js';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -13,11 +14,14 @@ declare var $: any;
 export class UploadFileDialogComponent implements OnInit {
   newFileForm: FormGroup;
   fileToUpload = null;
+  fileID = '';
   fileName = '';
   constructor(public matDialog: MatDialog,
-              private fileService: FileService) { }
+              private fileService: FileService,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+
     this.newFileForm =  new FormGroup({
     uploadedFile: new FormControl(''),
     fileName: new FormControl(''),
@@ -39,14 +43,17 @@ export class UploadFileDialogComponent implements OnInit {
     this.matDialog.closeAll();
     const data = {
       file: this.fileToUpload,
-      fileUploadRequest: {
+      request: {
         description: form.value.description,
-        expirationDate: form.value.dateTo,
-        name: form.value.fileName,
-        type: form.value.validPeriod ? 'VERSIONED' : 'UNVERSIONED',
-        validFrom: form.value.dateFrom ? form.value.dateFrom : Date(),
+        validityTo: form.value.dateTo,
+        fileType: 'FILE',
+        id: this.data.studyID,
+        name: this.fileName,
+        versionable: form.value.validPeriod ? true : false,
+        validityFrom: form.value.dateFrom ? form.value.dateFrom : Date(),
       }
     };
+    console.log(data);
     this.fileService.uploadFile(data).subscribe(res => {
       console.log(res);
     }, err => {
