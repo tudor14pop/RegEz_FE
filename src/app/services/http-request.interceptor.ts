@@ -17,7 +17,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
             req = req.clone({
                 headers: req.headers
                     .append('X-FORWARDED-FOR', localStorage.getItem('regEz.ip'))
-                    .append('Authorization', token !== null ? token : '')
+                    .append('Authorization', (token !== null && token !== 'null') ? token : '')
             });
         }
         return next.handle(req);

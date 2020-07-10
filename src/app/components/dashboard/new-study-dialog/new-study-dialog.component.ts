@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {InfoPopupComponent} from "../../common/info-popup.component";
@@ -16,7 +16,7 @@ export class NewStudyDialogComponent implements OnInit {
 
     newStudyForm: FormGroup;
     studySuccessfullyCreated = new EventEmitter();
-    
+
     constructor(
         @Inject(MAT_DIALOG_DATA) public initDashboardDto: InitDashboardDto,
         private formBuilder: FormBuilder,
@@ -28,36 +28,36 @@ export class NewStudyDialogComponent implements OnInit {
     ngOnInit() {
         this.newStudyForm = this.formBuilder.group({
             sponsor: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             }),
-            protocolName: '',
+            protocolName: ['', Validators.required],
             cro: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             }),
-            nickname: '',
-            indNumber: '',
+            nickname: ['', Validators.required],
+            indNumber: ['', Validators.required],
             principalInvestigator: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             }),
             subInvestigator: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             }),
             site: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             }),
-            siteNumber: '',
+            siteNumber: ['', Validators.required],
             leadCrc: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             }),
             backupCrc: this.formBuilder.group({
-                id: ''
+                id: ['', Validators.required]
             })
         });
     }
 
-    create(form) {
+    create() {
         this.dialog.closeAll();
-        this.http.post<Study>(environment.serverUrl + '/study', form.value).subscribe(
+        this.http.post<Study>(environment.serverUrl + '/study', this.newStudyForm.value).subscribe(
             res => {
                 if (res.errorMessage) {
                     this.showError(res.errorMessage);

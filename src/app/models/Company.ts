@@ -16,5 +16,6 @@ export interface Company extends GeneralResponse{
     billingState: string
     billingZip: string
     billingPhone: string
-    createdOn: Date
+    createdOn?: Date
+    modified?: Date
 }

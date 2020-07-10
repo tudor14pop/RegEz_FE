@@ -10,5 +10,6 @@ export interface Site extends GeneralResponse {
     city: string
     state: string
     zip: string
-    createdOn: Date;
+    createdOn?: Date
+    modified?: Date
 }

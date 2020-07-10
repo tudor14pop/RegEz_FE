@@ -1,90 +1,123 @@
 <div class="middle-box text-center animated fadeInDown">
     <div>
         <h4>Create New Study</h4>
-        <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="create(newStudyForm)">
+        <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="create()">
             <div formGroupName="sponsor">
                 <div class="form-group">
-                    <select type="text" class="form-control" required=""
+                    <select type="text" class="form-control"
                             formControlName="id">
-                        <option value="" disabled selected>Sponsor Name</option>
+                        <option value="" disabled selected>*Sponsor Name</option>
                         <option *ngFor="let sponsor of initDashboardDto?.sponsors"
                                 [value]="sponsor.id">{{sponsor.name}}</option>
                     </select>
+                    <div *ngIf="newStudyForm.get('sponsor.id').touched && newStudyForm.get('sponsor.id').hasError('required')" class="error text-danger">
+                        Sponsor is required.
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Protocol #" required=""
+                <input type="text" class="form-control" placeholder="*Protocol #"
                        formControlName="protocolName">
+                <div *ngIf="newStudyForm.get('protocolName').touched && newStudyForm.get('protocolName').hasError('required')" class="error text-danger">
+                    Protocol is required.
+                </div>
             </div>
             <div formGroupName="cro">
                 <div class="form-group">
-                    <select type="text" class="form-control" required="" formControlName="id">
-                        <option value="" disabled selected>CRO Name</option>
+                    <select type="text" class="form-control" formControlName="id">
+                        <option value="" disabled selected>*CRO Name</option>
                         <option *ngFor="let cro of initDashboardDto?.cros" [value]="cro.id">{{cro.name}}</option>
                     </select>
+                    <div *ngIf="newStudyForm.get('cro.id').touched && newStudyForm.get('cro.id').hasError('required')" class="error text-danger">
+                        Cro is required.
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-lg-6">
-                    <input type="text" class="form-control" placeholder="Nickname" required=""
+                    <input type="text" class="form-control" placeholder="*Nickname"
                            formControlName="nickname">
                 </div>
                 <div class="form-group col-lg-6">
-                    <input type="text" class="form-control" placeholder="IND #" required=""
+                    <input type="text" class="form-control" placeholder="*IND #"
                            formControlName="indNumber">
                 </div>
+                <p *ngIf="newStudyForm.get('nickname').touched && newStudyForm.get('nickname').hasError('required')" class="error text-danger ml-4 w-100">
+                    Nickname is required.
+                </p>
+                <p *ngIf="newStudyForm.get('indNumber').touched && newStudyForm.get('indNumber').hasError('required')" class="error text-danger ml-4 w-100">
+                    IND is required.
+                </p>
             </div>
             <div formGroupName="principalInvestigator">
                 <div class="form-group">
-                    <select type="text" class="form-control" required="" formControlName="id">
-                        <option value="" disabled selected>Pricipal Investigator</option>
+                    <select type="text" class="form-control" formControlName="id">
+                        <option value="" disabled selected>*Pricipal Investigator</option>
                         <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
+                    <div *ngIf="newStudyForm.get('principalInvestigator.id').touched && newStudyForm.get('principalInvestigator.id').hasError('required')" class="error text-danger">
+                        Pricipal Investigator is required.
+                    </div>
                 </div>
             </div>
             <div formGroupName="subInvestigator">
                 <div class="form-group">
-                    <select type="text" class="form-control" required="" formControlName="id">
-                        <option value="" disabled selected>Sub Investigator</option>
+                    <select type="text" class="form-control" formControlName="id">
+                        <option value="" disabled selected>*Sub Investigator</option>
                         <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
+                    <div *ngIf="newStudyForm.get('subInvestigator.id').touched && newStudyForm.get('subInvestigator.id').hasError('required')" class="error text-danger">
+                        Sub Investigator is required.
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div formGroupName="site" class="col-lg-8">
                     <div class="form-group">
-                        <select type="text" class="form-control" required="" formControlName="id">
-                            <option value="" disabled selected>Site</option>
+                        <select type="text" class="form-control" formControlName="id">
+                            <option value="" disabled selected>*Site</option>
                             <option *ngFor="let site of initDashboardDto?.sites" [value]="site.id">{{site.name}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group col-lg-4">
-                    <input type="text" class="form-control" placeholder="Site #" required=""
+                    <input type="text" class="form-control" placeholder="*Site #"
                            formControlName="siteNumber">
                 </div>
             </div>
+            <p *ngIf="newStudyForm.get('site.id').touched && newStudyForm.get('site.id').hasError('required')" class="error text-danger ml-4 w-100">
+                Site is required.
+            </p>
+            <p *ngIf="newStudyForm.get('siteNumber').touched && newStudyForm.get('siteNumber').hasError('required')" class="error text-danger ml-4 w-100">
+                Site number is required.
+            </p>
             <div formGroupName="leadCrc">
                 <div class="form-group">
-                    <select type="text" class="form-control" required="" formControlName="id">
-                        <option value="" disabled selected>Lead CRC</option>
+                    <select type="text" class="form-control" formControlName="id">
+                        <option value="" disabled selected>*Lead CRC</option>
                         <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
+                    <div *ngIf="newStudyForm.get('leadCrc.id').touched && newStudyForm.get('leadCrc.id').hasError('required')" class="error text-danger">
+                        Lead CRC is required.
+                    </div>
                 </div>
             </div>
             <div formGroupName="backupCrc">
                 <div class="form-group">
-                    <select type="text" class="form-control" required="" formControlName="id">
-                        <option value="" disabled selected>Backup CRC</option>
+                    <select type="text" class="form-control" formControlName="id">
+                        <option value="" disabled selected>*Backup CRC</option>
                         <option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                     </select>
+                    <div *ngIf="newStudyForm.get('backupCrc.id').touched && newStudyForm.get('backupCrc.id').hasError('required')" class="error text-danger">
+                        Backup CRC is required.
+                    </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+            <button type="submit" [disabled]="!newStudyForm.valid" class="btn btn-w-m btn-info block full-width">Create</button>
         </form>
     </div>
 </div>

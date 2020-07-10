@@ -16,4 +16,6 @@ export interface User extends GeneralResponse {
     receiveSms?: boolean
     accountType?: string
     role?: string
+    createdOn?: Date
+    modified?: Date
 }

@@ -17,4 +17,5 @@ export interface Study extends GeneralResponse{
     leadCrc?: User
     backupCrc?: User
     createdOn?: Date
+    modified?: Date
 }
