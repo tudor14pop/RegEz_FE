@@ -1,0 +1,60 @@
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4>Invite User</h4>
+        <form class="m-t" role="form" [formGroup]="inviteUserForm" (ngSubmit)="invite(inviteUserForm)">
+        <div class="d-flex">
+            <div class="form-group w-75 mr-2">
+                <input type="text" class="form-control" placeholder="First Name" required=""
+                        formControlName="firstName">
+            </div>
+            <div class="form-group w-25">
+                <input type="text" class="form-control" placeholder="Middle Initial" required=""
+                        formControlName="middleInitial">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Last Name" required=""
+                    formControlName="lastName">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="Email" required=""
+                    formControlName="email">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Address 1" required=""
+                    formControlName="address1">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Address 2" required=""
+                    formControlName="address2">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="City" required=""
+                    formControlName="city">
+        </div>
+        <div class="d-flex">
+            <div class="form-group w-75 mr-2">
+                <input type="text" class="form-control" placeholder="State" required=""
+                        formControlName="state">
+            </div>
+            <div class="form-group w-25">
+                <input type="text" class="form-control" placeholder="Zip" required=""
+                        formControlName="zip">
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Phone Number" required=""
+                    formControlName="phone">
+        </div>
+        <!-- <div class="form-group">
+            <select type="text" class="form-control" required=""
+                    formControlName="folderLocation">
+                <option value="" disabled selected>Select Folder Location</option>
+                <option *ngFor="let folder of [1,2,3,4]"
+                        [value]="folder">Folder No.{{folder}}</option>
+            </select>
+        </div> -->
+         <button type="submit" class="btn btn-w-m btn-info block full-width">Invite</button>
+        </form>
+    </div>
+</div>

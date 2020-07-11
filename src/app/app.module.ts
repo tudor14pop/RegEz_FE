@@ -28,6 +28,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NewFolderDialogComponent } from './components/common/new-folder-dialog/new-folder-dialog.component';
+import { AdministrationComponent } from './components/administration/administration.component';
+import { UsersComponent } from './components/administration/users/users.component';
+import { InviteUserDialogComponent } from './components/administration/users/invite-user-dialog/invite-user-dialog.component';
 
 
 @NgModule({
@@ -48,7 +51,10 @@ import { NewFolderDialogComponent } from './components/common/new-folder-dialog/
         InfoPopupComponent,
         StudyComponent,
         UploadFileDialogComponent,
-        NewFolderDialogComponent
+        NewFolderDialogComponent,
+        AdministrationComponent,
+        UsersComponent,
+        InviteUserDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -76,7 +82,7 @@ import { NewFolderDialogComponent } from './components/common/new-folder-dialog/
     ],
     bootstrap: [AppComponent],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
-                      UploadFileDialogComponent, NewFolderDialogComponent]
+                      UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent]
 })
 export class AppModule {
 }

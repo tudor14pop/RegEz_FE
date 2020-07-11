@@ -7,6 +7,8 @@ import {BasicLayoutComponent} from './components/common/layout/basicLayout.compo
 import {TaskManagerComponent} from './components/task-manager/task-manager.component';
 import { MasterFilesComponent } from './components/master-files/master-files.component';
 import { StudyComponent } from './components/dashboard/study/study.component';
+import { AdministrationComponent } from './components/administration/administration.component';
+import { UsersComponent } from './components/administration/users/users.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,9 @@ const routes: Routes = [
             {path: 'task-manager', component: TaskManagerComponent},
             {path: 'master-files', component: MasterFilesComponent},
             {path: 'study/:id', component: StudyComponent},
+            {path: 'administration/company', component: AdministrationComponent},
+            {path: 'administration/users', component: UsersComponent},
+
         ]
     },
 

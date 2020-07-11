@@ -26,3 +26,9 @@ body {
   float: right;
   bottom: 2.6rem;
 }
+
+*:focus
+{
+    outline:none; 
+    border: none;
+}

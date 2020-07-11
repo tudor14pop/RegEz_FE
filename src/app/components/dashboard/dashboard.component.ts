@@ -8,6 +8,7 @@ import {InfoPopupComponent} from "../common/info-popup.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Study} from "../../models/study/Study";
 import {RetrieveStudiesResponse} from "../../models/study/RetrieveStudiesResponse";
+declare var $: any;
 
 @Component({
     selector: 'app-dashboard',
