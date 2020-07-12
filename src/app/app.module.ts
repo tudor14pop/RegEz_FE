@@ -31,6 +31,10 @@ import { NewFolderDialogComponent } from './components/common/new-folder-dialog/
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import { AdministrationComponent } from './components/administration/administration.component';
+import { UsersComponent } from './components/administration/users/users.component';
+import { InviteUserDialogComponent } from './components/administration/users/invite-user-dialog/invite-user-dialog.component';
+import { ManageUserComponent } from './components/administration/users/manage-user/manage-user.component';
 
 
 @NgModule({
@@ -51,7 +55,11 @@ import {MatSelectModule} from "@angular/material/select";
         InfoPopupComponent,
         StudyComponent,
         UploadFileDialogComponent,
-        NewFolderDialogComponent
+        NewFolderDialogComponent,
+        AdministrationComponent,
+        UsersComponent,
+        InviteUserDialogComponent,
+        ManageUserComponent
     ],
     imports: [
         BrowserModule,
@@ -82,7 +90,7 @@ import {MatSelectModule} from "@angular/material/select";
     ],
     bootstrap: [AppComponent],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
-                      UploadFileDialogComponent, NewFolderDialogComponent]
+                      UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent]
 })
 export class AppModule {
 }

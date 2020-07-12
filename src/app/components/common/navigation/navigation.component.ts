@@ -7,7 +7,7 @@ import {AuthenticationService} from "../../../services/auth/AuthenticationServic
 })
 
 export class NavigationComponent {
-    
+    expand = false;
     constructor(
         public authenticationService: AuthenticationService
     ) {

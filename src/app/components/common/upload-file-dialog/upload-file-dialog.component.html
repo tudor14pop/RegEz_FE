@@ -17,7 +17,7 @@
              <div class="text-left">Enable valadity period?</div>
                 <div class="switch">
                     <div class="onoffswitch">
-                        <input type="checkbox" formControlName="validPeriod" class="onoffswitch-checkbox" id="example4">
+                        <input type="checkbox" formControlName="validPeriod" (click)="toggleDate()" class="onoffswitch-checkbox" id="example4">
                         <label class="onoffswitch-label" for="example4">
                             <span class="onoffswitch-inner"></span>
                             <span class="onoffswitch-switch"></span>
@@ -30,6 +30,7 @@
                 <input matInput class="date-picker form-control" placeholder="Date From"
                 formControlName="dateFrom"
                 [readonly] = "true"
+                [disabled] = "show"
                 [matDatepicker]="dateFrom">
                 <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
                 <mat-datepicker #dateFrom></mat-datepicker>
@@ -38,6 +39,7 @@
                 <input matInput class="date-picker form-control" placeholder="Date To"
                 formControlName="dateTo"
                 [readonly] = "true"
+                [disabled] = "show"
                 [matDatepicker]="dateTo">
                 <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
                 <mat-datepicker #dateTo></mat-datepicker>

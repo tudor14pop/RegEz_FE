@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { GeneralResponse } from '../models/GeneralResponse';
@@ -11,15 +11,24 @@ export class FileService {
 
   constructor(private http: HttpClient) { }
 
-  uploadFile(data): Observable<GeneralResponse> {
-    return this.http.post<GeneralResponse>(environment.serverUrl + '/file-management/new-file', data);
+  uploadFile(data) {
+    const formData: FormData  = new FormData();
+    formData.append('file', data.file);
+    console.log(JSON.stringify(data.filePath));
+    return this.http.post(environment.serverUrl + '/file-management/new-file', formData ,
+     {params: {filePath: JSON.stringify(data.filePath)}} );
+  }
+
+  createNewFolder(data) {
+    return this.http.post(environment.serverUrl + '/file-management/new-folder', data);
   }
 
   downloadFile() {
 
   }
 
-  retrieveFolderStructure() {
+    retrieveFolderStructure(data) {
+    return this.http.get(environment.serverUrl + '/file-management/study/' + data + '/retrieve');
 
   }
 }
