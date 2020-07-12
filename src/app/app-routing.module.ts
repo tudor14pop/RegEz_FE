@@ -9,6 +9,7 @@ import { MasterFilesComponent } from './components/master-files/master-files.com
 import { StudyComponent } from './components/dashboard/study/study.component';
 import { AdministrationComponent } from './components/administration/administration.component';
 import { UsersComponent } from './components/administration/users/users.component';
+import { ManageUserComponent } from './components/administration/users/manage-user/manage-user.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,8 @@ const routes: Routes = [
             {path: 'study/:id', component: StudyComponent},
             {path: 'administration/company', component: AdministrationComponent},
             {path: 'administration/users', component: UsersComponent},
+            {path: 'administration/users/:id', component: ManageUserComponent}
+
 
         ]
     },

@@ -13,9 +13,10 @@ export class FileService {
 
   uploadFile(data) {
     const formData: FormData  = new FormData();
-    formData.append('multipartFile', data.file);
-    formData.append('request', data.request);
-    return this.http.post(environment.serverUrl + '/file-management/new-file', formData);
+    formData.append('file', data.file);
+    console.log(JSON.stringify(data.filePath));
+    return this.http.post(environment.serverUrl + '/file-management/new-file', formData ,
+     {params: {filePath: JSON.stringify(data.filePath)}} );
   }
 
   createNewFolder(data) {
@@ -26,7 +27,7 @@ export class FileService {
 
   }
 
-  retrieveFolderStructure(data) {
+    retrieveFolderStructure(data) {
     return this.http.get(environment.serverUrl + '/file-management/study/' + data + '/retrieve');
 
   }

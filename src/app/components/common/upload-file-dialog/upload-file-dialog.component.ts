@@ -4,6 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import '../../../../scripts/daterangepicker.js';
 import { FileService } from 'src/app/services/file.service.js';
 import { ActivatedRoute } from '@angular/router';
+import { formatDate } from '@angular/common';
 declare var $: any;
 
 @Component({
@@ -14,6 +15,7 @@ declare var $: any;
 export class UploadFileDialogComponent implements OnInit {
   newFileForm: FormGroup;
   fileToUpload = null;
+  show = true;
   fileID = '';
   fileName = '';
   constructor(public matDialog: MatDialog,
@@ -26,8 +28,8 @@ export class UploadFileDialogComponent implements OnInit {
     uploadedFile: new FormControl(''),
     fileName: new FormControl(''),
     validPeriod: new FormControl(''),
-    dateFrom: new FormControl(''),
-    dateTo: new FormControl(''),
+    dateFrom: new FormControl(new Date()),
+    dateTo: new FormControl(null),
     description: new FormControl(''),
     folderLocation: new FormControl(''),
     versionable: new FormControl(''),
@@ -43,21 +45,25 @@ export class UploadFileDialogComponent implements OnInit {
     this.matDialog.closeAll();
     const data = {
       file: this.fileToUpload,
-      request: {
+      filePath: {
         description: form.value.description,
-        validityTo: form.value.dateTo,
+        validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'),
         fileType: 'FILE',
         id: this.data.studyID,
         name: this.fileName,
         versionable: form.value.validPeriod ? true : false,
-        validityFrom: form.value.dateFrom ? form.value.dateFrom : Date(),
+        validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
       }
     };
-    console.log(data);
+
     this.fileService.uploadFile(data).subscribe(res => {
       console.log(res);
     }, err => {
       console.log(err);
     });
+  }
+
+  toggleDate() {
+    this.show = !this.show;
   }
 }

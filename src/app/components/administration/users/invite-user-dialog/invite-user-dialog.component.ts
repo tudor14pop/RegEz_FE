@@ -21,7 +21,8 @@ export class InviteUserDialogComponent implements OnInit {
       city: new FormControl(''),
       state: new FormControl(''),
       zip: new FormControl(''),
-      phone: new FormControl('', Validators.pattern('[0-9]{10}'))
+      phone: new FormControl('', Validators.pattern('[0-9]{10}')),
+      method: new FormControl('')
     });
   }
   get inviteUserFormControls() { return this.inviteUserForm.controls; }

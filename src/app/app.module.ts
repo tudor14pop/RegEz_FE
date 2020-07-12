@@ -31,6 +31,7 @@ import { NewFolderDialogComponent } from './components/common/new-folder-dialog/
 import { AdministrationComponent } from './components/administration/administration.component';
 import { UsersComponent } from './components/administration/users/users.component';
 import { InviteUserDialogComponent } from './components/administration/users/invite-user-dialog/invite-user-dialog.component';
+import { ManageUserComponent } from './components/administration/users/manage-user/manage-user.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { InviteUserDialogComponent } from './components/administration/users/inv
         NewFolderDialogComponent,
         AdministrationComponent,
         UsersComponent,
-        InviteUserDialogComponent
+        InviteUserDialogComponent,
+        ManageUserComponent
     ],
     imports: [
         BrowserModule,

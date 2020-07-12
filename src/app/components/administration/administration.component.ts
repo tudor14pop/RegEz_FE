@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministrationService } from 'src/app/services/administration.service';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/models/user.model';
 import { Company } from 'src/app/models/Company';
 import { forkJoin } from 'rxjs';
 declare var $: any;

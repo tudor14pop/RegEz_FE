@@ -1,0 +1,102 @@
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
+        <h2 class="text-muted">{{user?.firstName}} {{user?.lastName}}</h2>
+        <div class="icon-container bg-primary float-right">
+            <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li><a class="nav-link active" data-toggle="tab" href="#tab-1">General Information</a></li>
+                <li><a class="nav-link" data-toggle="tab" href="#tab-2">Assigned Studies</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <form class="m-t" role="form" [formGroup]="editUserForm" autocomplete="on" (ngSubmit)="edit(editUserForm)">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First Name" required=""
+                                        formControlName="firstName" [(value)] = "user.firstName">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Middle Initial" required=""
+                                        formControlName="middleInitial" [(value)] = "user.middleInitial" >
+                            </div>
+                        
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name" required=""
+                                        formControlName="lastName" [(value)] = "user.lastName">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email" required=""
+                                        formControlName="email" [(value)] = "user.email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Address 1" required=""
+                                        formControlName="address1" [(value)] = "user.address1">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Address 2" required=""
+                                        formControlName="address2" [(value)] = "user.address2">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="City" required=""
+                                        formControlName="city" [(value)] = "user.city">
+                            </div>
+                            <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="State" required=""
+                                            formControlName="state" [(value)] = "user.state">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Zip" required=""
+                                        formControlName="zip" [(value)] = "user.zip">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Phone Number" required=""
+                                        formControlName="phone" [(value)] = "user.phone">
+                            </div>
+                            <div class="form-group">
+                                <select type="text" class="form-control" required="" formControlName="method">
+                                    <option value="" disabled selected>Select Validation Method</option>
+                                    <option *ngFor="let method of ['email','sms']"
+                                            [value]="method">Receive code via {{method}}</option>
+                                </select>
+                            </div>
+                             <button type="submit" class="btn btn-w-m btn-info block full-width">Save Changes</button>
+                            </form>
+                    
+                    </div>
+                </div>
+                <div role="tabpanel" id="tab-2" class="tab-pane w-100">
+                    <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                        <thead>
+                        <tr>
+                            <th>Study Name</th>
+                            <th>Site</th>
+                            <th>Investigator</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of [1,2,3,4]">
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td class="center"><button class="btn btn-sm btn-secondary">Remove</button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <ul class="pagination float-right"></ul>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

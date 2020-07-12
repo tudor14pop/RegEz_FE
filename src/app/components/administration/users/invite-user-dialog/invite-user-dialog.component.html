@@ -46,14 +46,13 @@
             <input type="text" class="form-control" placeholder="Phone Number" required=""
                     formControlName="phone">
         </div>
-        <!-- <div class="form-group">
-            <select type="text" class="form-control" required=""
-                    formControlName="folderLocation">
-                <option value="" disabled selected>Select Folder Location</option>
-                <option *ngFor="let folder of [1,2,3,4]"
-                        [value]="folder">Folder No.{{folder}}</option>
+        <div class="form-group">
+            <select type="text" class="form-control" required="" formControlName="method">
+                <option value="" disabled selected>Select Validation Method</option>
+                <option *ngFor="let method of ['email','sms']"
+                        [value]="method">Receive security code via {{method}}</option>
             </select>
-        </div> -->
+        </div>
          <button type="submit" class="btn btn-w-m btn-info block full-width">Invite</button>
         </form>
     </div>

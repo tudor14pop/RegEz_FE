@@ -38,7 +38,7 @@
                     <td>{{user.company?.name}}</td>
                     <td>{{user.accountStatus | titlecase }}</td>
                     <td class="center">{{user.modified |  date: 'MMM dd, yyyy '}}</td>
-                    <td class="center"><button class="btn btn-sm btn-secondary">Manage</button></td>
+                    <td class="center"><button class="btn btn-sm btn-secondary" [routerLink]="['/administration/users', user.id]">Manage</button></td>
                 </tr>
             </tbody>
             <tfoot>
