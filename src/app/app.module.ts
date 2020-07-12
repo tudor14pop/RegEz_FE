@@ -28,6 +28,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NewFolderDialogComponent } from './components/common/new-folder-dialog/new-folder-dialog.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -56,10 +59,13 @@ import { NewFolderDialogComponent } from './components/common/new-folder-dialog/
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
+        MatInputModule,
         MatDialogModule,
         BrowserAnimationsModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatAutocompleteModule,
+        MatSelectModule,
     ],
     providers: [
         {

@@ -4,6 +4,7 @@ import {Cro} from "./Cro";
 import {Site} from "./Site";
 import {GeneralResponse} from "./GeneralResponse";
 import {Company} from "./Company";
+import {Study} from "./study/Study";
 
 export interface InitDashboardDto extends GeneralResponse{
     companies: Array<Company>
@@ -11,4 +12,5 @@ export interface InitDashboardDto extends GeneralResponse{
     cros: Array<Cro>
     users: Array<User>
     sites: Array<Site>
+    studies: Array<Study>
 }

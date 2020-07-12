@@ -33,7 +33,6 @@
                                         <option value="" disabled selected>Site</option>
                                         <option *ngFor="let site of initDashboardDto?.sites"
                                                 [value]="site.id">{{site.name}}</option>
-                                        <option value="1">Site 1</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,7 +67,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let study of studies; let i = index">
+                                <tr *ngFor="let study of initDashboardDto?.studies; let i = index">
                                     <td [routerLink]="['/study', study.id]" style="cursor: pointer">{{study.nickname}}
                                         <p>{{study.site.company.name}}
                                             - {{study.site.company.address1}}
@@ -76,7 +75,7 @@
                                             - {{study.indNumber}}</p>
                                     </td>
                                     <td>3</td>
-                                    <td>{{study.modified | date:"MMM dd, yyyy"}}</td>
+                                    <td>{{study.modified | date}}</td>
                                     <td>
                                         <a (click)="showPopup(i)">
                                             <i class="fa fa-ellipsis-h fa-lg text-navy"></i>
