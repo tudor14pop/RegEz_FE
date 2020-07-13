@@ -28,10 +28,12 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NewFolderDialogComponent } from './components/common/new-folder-dialog/new-folder-dialog.component';
-import { AdministrationComponent } from './components/administration/administration.component';
 import { UsersComponent } from './components/administration/users/users.component';
 import { InviteUserDialogComponent } from './components/administration/users/invite-user-dialog/invite-user-dialog.component';
 import { ManageUserComponent } from './components/administration/users/manage-user/manage-user.component';
+import { CompaniesComponent } from './components/administration/companies/companies.component';
+import { ManageCompanyComponent } from './components/administration/companies/manage-company/manage-company.component';
+import { CreateCompanyDialogComponent } from './components/administration/companies/create-company-dialog/create-company-dialog.component';
 
 
 @NgModule({
@@ -53,10 +55,13 @@ import { ManageUserComponent } from './components/administration/users/manage-us
         StudyComponent,
         UploadFileDialogComponent,
         NewFolderDialogComponent,
-        AdministrationComponent,
         UsersComponent,
         InviteUserDialogComponent,
-        ManageUserComponent
+        ManageUserComponent,
+        CompaniesComponent,
+        ManageCompanyComponent,
+        CreateCompanyDialogComponent,
+
     ],
     imports: [
         BrowserModule,
@@ -84,7 +89,8 @@ import { ManageUserComponent } from './components/administration/users/manage-us
     ],
     bootstrap: [AppComponent],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
-                      UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent]
+                      UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
+                      CreateCompanyDialogComponent]
 })
 export class AppModule {
 }

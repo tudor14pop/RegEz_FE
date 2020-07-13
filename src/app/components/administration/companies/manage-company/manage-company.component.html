@@ -1,0 +1,79 @@
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
+        <h2 class="text-muted">{{companyName.value}}</h2>
+        <div class="icon-container bg-primary float-right">
+            <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li><a class="nav-link active" data-toggle="tab" href="#tab-1">Company Details</a></li>
+                <li><a class="nav-link" data-toggle="tab" href="#tab-2">Research Sites</a></li>
+                <li><a class="nav-link" data-toggle="tab" href="#tab-3">Binders Template</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" id="tab-1" class="tab-pane active">
+                    <div class="panel-body">
+                        <form class="m-t" role="form" [formGroup]="editCompanyForm" autocomplete="on" (ngSubmit)="edit(editCompanyForm)">
+                            <div class="form-group">
+                                <input #companyName type="text" class="form-control" placeholder="Company Name" required=""
+                                        formControlName="name" [(value)] = "company.name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Address 1" required=""
+                                        formControlName="address1" [(value)] = "company.address1">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Address 2" required=""
+                                        formControlName="address2" [(value)] = "company.address2">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Website" required=""
+                                        formControlName="website" [(value)] = "company.website">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="City" required=""
+                                        formControlName="city" [(value)] = "company.city">
+                            </div>
+                            <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="State" required=""
+                                            formControlName="state" [(value)] = "company.state">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Zip" required=""
+                                        formControlName="zip" [(value)] = "company.zip">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Billing Address 1" required=""
+                                        formControlName="billingAddress1" [(value)] = "company.billingAddress1">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Billing Address 2" required=""
+                                        formControlName="billingAddress2" [(value)] = "company.billingAddress2">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Billing City" required=""
+                                        formControlName="billingCity" [(value)] = "company.billingCity">
+                            </div>
+                            <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Billing State" required=""
+                                            formControlName="billingState" [(value)] = "company.billingState">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Billing Zip" required=""
+                                        formControlName="billingZip" [(value)] = "company.billingZip">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Billing Phone Number" required=""
+                                        formControlName="billingPhone" [(value)] = "company.billingPhone">
+                            </div>
+                             <button type="submit" class="btn btn-w-m btn-info block full-width">Save Changes</button>
+                            </form>
+                    
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>

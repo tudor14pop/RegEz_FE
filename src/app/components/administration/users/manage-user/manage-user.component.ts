@@ -40,7 +40,6 @@ export class ManageUserComponent implements OnInit {
      this.user = new UserModel(res.id, res.accountStatus, res.company, res.firstName, res.lastName, res.modified, res.city, res.address1,
        res.address2, res.email, res.zip, res.state, res.phone);
      this.setForm(this.user);
-
     }, err => {
       console.log(err);
     });

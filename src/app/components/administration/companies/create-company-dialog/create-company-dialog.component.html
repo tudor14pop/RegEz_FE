@@ -1,0 +1,86 @@
+<div class=" animated fadeInDown">
+    <div>
+        <div class="d-flex ">
+            <h4 class="mb-3 w-50">Create New Company</h4>
+            <h4 class="float-right w-50">Company Billing Details</h4>
+        </div>
+        <form class="m-t" role="form" [formGroup]="createCompanyForm" (ngSubmit)="create(createCompanyForm)">
+        <div class="d-flex flex-direction-column">
+            <div class="w-50 mr-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Company Name" required=""
+                            formControlName="companyName">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Address1" required=""
+                            formControlName="address1">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Address2" required=""
+                            formControlName="address2">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="City" required=""
+                            formControlName="city">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Person" required=""
+                            formControlName="person">
+                </div>
+
+                <div class="d-flex">
+                    <div class="form-group w-75 mr-2">
+                        <input type="text" class="form-control" placeholder="State" required=""
+                                formControlName="state">
+                    </div>
+                    <div class="form-group w-25">
+                        <input type="text" class="form-control" placeholder="Zip" required=""
+                                formControlName="zip">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Phone" required=""
+                            formControlName="phone">
+                </div>
+            </div>
+            <div class="w-50">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Billing Attn TO" required=""
+                            formControlName="billingAttnTo">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Billing Address1" required=""
+                            formControlName="billingAddress1">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Billing Address2" required=""
+                            formControlName="billingAddress2">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Billinc City" required=""
+                            formControlName="billingCity">
+                </div>
+                <div class="d-flex">
+                    <div class="form-group w-75 mr-2">
+                        <input type="text" class="form-control" placeholder="Billing State" required=""
+                                formControlName="billingState">
+                    </div>
+                    <div class="form-group w-25">
+                        <input type="text" class="form-control" placeholder="Billing Zip" required=""
+                                formControlName="billingZip">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Billing Phone" required=""
+                            formControlName="billingPhone">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Website" required=""
+                            formControlName="website">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+        </form>
+    </div>
+</div>

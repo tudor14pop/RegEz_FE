@@ -5,7 +5,7 @@ import {AuthenticationResponse, AuthenticationService} from '../services/auth/Au
 @Component({
     selector: 'app-login',
     template: `
-        <div class="gray-bg h-100">
+        <div class="gray-bg fh-150">
             <div class="middle-box text-center loginscreen animated fadeInDown">
                 <div>
                     <div>
