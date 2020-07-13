@@ -28,6 +28,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NewFolderDialogComponent } from './components/common/new-folder-dialog/new-folder-dialog.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import { UsersComponent } from './components/administration/users/users.component';
 import { InviteUserDialogComponent } from './components/administration/users/invite-user-dialog/invite-user-dialog.component';
 import { ManageUserComponent } from './components/administration/users/manage-user/manage-user.component';
@@ -69,10 +72,13 @@ import { CreateCompanyDialogComponent } from './components/administration/compan
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
+        MatInputModule,
         MatDialogModule,
         BrowserAnimationsModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatAutocompleteModule,
+        MatSelectModule,
     ],
     providers: [
         {

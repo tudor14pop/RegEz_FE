@@ -1,11 +1,15 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {InfoPopupComponent} from "../../common/info-popup.component";
 import {InitDashboardDto} from "../../../models/InitDashboardDto";
 import {Study} from "../../../models/study/Study";
+import {Observable} from "rxjs";
+import {map, startWith} from 'rxjs/operators';
+import {Sponsor} from "../../../models/Sponsor";
+
 
 @Component({
     selector: 'app-new-study-dialog',
@@ -16,6 +20,7 @@ export class NewStudyDialogComponent implements OnInit {
 
     newStudyForm: FormGroup;
     studySuccessfullyCreated = new EventEmitter();
+    study: string;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public initDashboardDto: InitDashboardDto,
@@ -25,14 +30,17 @@ export class NewStudyDialogComponent implements OnInit {
     ) {
     }
 
+    filteredSponsors: Observable<Sponsor[]>;
+    filteredCros: Observable<Sponsor[]>;
+
     ngOnInit() {
         this.newStudyForm = this.formBuilder.group({
             sponsor: this.formBuilder.group({
-                id: ['', Validators.required]
+                name: ['', Validators.required]
             }),
             protocolName: ['', Validators.required],
             cro: this.formBuilder.group({
-                id: ['', Validators.required]
+                name: ['', Validators.required]
             }),
             nickname: ['', Validators.required],
             indNumber: ['', Validators.required],
@@ -53,23 +61,38 @@ export class NewStudyDialogComponent implements OnInit {
                 id: ['', Validators.required]
             })
         });
+        this.filteredSponsors = this.newStudyForm.get('sponsor.name').valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value, this.initDashboardDto.sponsors))
+        );
+        this.filteredCros = this.newStudyForm.get('cro.name').valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value, this.initDashboardDto.cros))
+        );
     }
 
-    create() {
-        this.dialog.closeAll();
-        this.http.post<Study>(environment.serverUrl + '/study', this.newStudyForm.value).subscribe(
-            res => {
-                if (res.errorMessage) {
-                    this.showError(res.errorMessage);
-                } else {
-                    console.log(res);
-                    this.studySuccessfullyCreated.emit();
+    private _filter(value: string, items: Array<any>) {
+        const filterValue = value.toLowerCase();
+        return items.filter(item => item.name.toLowerCase().indexOf(filterValue) === 0);
+    }
+
+    submit() {
+        if (this.newStudyForm.valid) {
+            this.dialog.closeAll();
+            this.http.post<Study>(environment.serverUrl + '/study', this.newStudyForm.value).subscribe(
+                res => {
+                    if (res.errorMessage) {
+                        this.showError(res.errorMessage);
+                    } else {
+                        console.log(res);
+                        this.studySuccessfullyCreated.emit();
+                    }
+                },
+                err => {
+                    this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
                 }
-            },
-            err => {
-                this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
-            }
-        );
+            );
+        }
     }
 
     private showError(errMessage: string) {
@@ -77,4 +100,5 @@ export class NewStudyDialogComponent implements OnInit {
             data: errMessage
         });
     }
+
 }
