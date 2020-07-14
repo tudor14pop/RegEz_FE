@@ -1,7 +1,7 @@
 provision:
 	scp ./docker-compose.yml TOKEN.txt regez-prod:~/
 	scp ./docker-compose.yml TOKEN.txt regez-dev:~/
-   	scp ./config regez-ci:~/.ssh/
+	scp ./config regez-ci:~/.ssh/
 
 login:
 	cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u servuswoke --password-stdin
