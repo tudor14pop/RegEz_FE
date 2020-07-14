@@ -1,0 +1,18 @@
+# A workflow is a configurable automated process made up of one or more jobs.
+# You must create a YAML file to define your workflow configuration
+# https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: Automatic Deployment Dev
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    name: Build dev
+    runs-on: [self-hosted]
+    steps:
+      - run: make login
+      - run: make build
+      - run: make push
+      - run: make deploy-dev

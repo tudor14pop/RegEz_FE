@@ -1,0 +1,45 @@
+version: '3.8'
+# start mongo services: docker-compose up -d
+# stop mongo services: docker-compose down
+# restart service: docker restart mongo
+# stop service: docker stop mongo
+# start service: docker start mongo
+# remove service: docker stop mongo && docker rm mongo
+###
+# Start everything with: docker-compose up -d
+# -d argument means daemon
+#
+###
+services:
+
+  regez-fe:
+    image: docker.pkg.github.com/servuswoke/regez_fe/frontend
+    build: .
+    container_name: frontend
+    ports:
+      - 9000:9000
+
+  # build: ./ is missing because the app is built in the FE project
+  # this image must be pulled to be used docker-compose pull or docker-compose up -d
+  backend:
+    image: docker.pkg.github.com/servuswoke/regez_be/backend:1.0.0
+    container_name: backend
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
