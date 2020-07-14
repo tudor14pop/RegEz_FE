@@ -8,10 +8,11 @@ on:
       - dev
 
 jobs:
-  build:
+  deploy-dev:
     name: Build dev
     runs-on: [self-hosted]
     steps:
+      - uses: actions/checkout@v2
       - run: make login
       - run: make build
       - run: make push
