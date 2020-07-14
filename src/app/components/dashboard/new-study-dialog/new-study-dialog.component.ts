@@ -60,7 +60,7 @@ export class NewStudyDialogComponent implements OnInit {
             backupCrc: this.formBuilder.group({
                 id: ''
             }),
-            folderTemplate: this.formBuilder.group({
+            binderTemplate: this.formBuilder.group({
                 id: ['', Validators.required]
             }),
         });

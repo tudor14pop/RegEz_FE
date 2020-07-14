@@ -1,7 +1,7 @@
 import {Company} from './Company';
 import {GeneralResponse} from './GeneralResponse';
 
-export interface FolderTemplate extends GeneralResponse {
+export interface BinderTemplate extends GeneralResponse {
     id: string;
     company: Company;
     name: string;

@@ -117,15 +117,15 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div formGroupName="folderTemplate">
+            <div formGroupName="binderTemplate">
                 <mat-form-field class="w-100">
-                    <mat-label>Folder Template</mat-label>
+                    <mat-label>Binder Template</mat-label>
                     <mat-select formControlName="id">
-                        <mat-option *ngFor="let folderTemplate of initDashboardDto?.folderTemplates"
-                                    [value]="folderTemplate.id">{{folderTemplate.name}}</mat-option>
+                        <mat-option *ngFor="let binderTemplate of initDashboardDto?.binderTemplates"
+                                    [value]="binderTemplate.id">{{binderTemplate.name}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="newStudyForm.get('folderTemplate.id').touched &&
-                         newStudyForm.get('folderTemplate.id').hasError('required')"> Required
+                    <mat-error *ngIf="newStudyForm.get('binderTemplate.id').touched &&
+                         newStudyForm.get('binderTemplate.id').hasError('required')"> Required
                     </mat-error>
                 </mat-form-field>
             </div>
