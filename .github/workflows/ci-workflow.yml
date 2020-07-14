@@ -5,14 +5,14 @@ name: Automatic Deployment Dev
 on:
   push:
     branches:
-      - dev
+      - prod
 
 jobs:
   build:
-    name: Build dev
+    name: Build prod
     runs-on: [self-hosted]
     steps:
       - run: make login
       - run: make build
       - run: make push
-      - run: make deploy-dev
+      - run: make deploy-prod
