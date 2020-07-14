@@ -7,10 +7,10 @@ login:
 	cat ./TOKEN.txt | docker login https://docker.pkg.github.com -u servuswoke --password-stdin
 
 build:
-	docker-compose build backend
+	docker-compose build frontend
 
 push:
-	docker-compose push backend
+	docker-compose push frontend
 
 deploy-prod: build push
 	ssh regez-prod "docker-compose pull && docker-compose up -d"
