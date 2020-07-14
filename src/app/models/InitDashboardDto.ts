@@ -4,7 +4,8 @@ import {Cro} from "./Cro";
 import {Site} from "./Site";
 import {GeneralResponse} from "./GeneralResponse";
 import {Company} from "./Company";
-import {Study} from "./study/Study";
+import {Study} from "./Study";
+import {FolderTemplate} from "./FolderTemplate";
 
 export interface InitDashboardDto extends GeneralResponse{
     companies: Array<Company>
@@ -13,4 +14,5 @@ export interface InitDashboardDto extends GeneralResponse{
     users: Array<User>
     sites: Array<Site>
     studies: Array<Study>
+    folderTemplates: Array<FolderTemplate>
 }

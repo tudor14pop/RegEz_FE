@@ -5,7 +5,7 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {InfoPopupComponent} from "../../common/info-popup.component";
 import {InitDashboardDto} from "../../../models/InitDashboardDto";
-import {Study} from "../../../models/study/Study";
+import {Study} from "../../../models/Study";
 import {Observable} from "rxjs";
 import {map, startWith} from 'rxjs/operators';
 import {Sponsor} from "../../../models/Sponsor";
@@ -40,26 +40,29 @@ export class NewStudyDialogComponent implements OnInit {
             }),
             protocolName: ['', Validators.required],
             cro: this.formBuilder.group({
-                name: ['', Validators.required]
+                name: ''
             }),
             nickname: ['', Validators.required],
-            indNumber: ['', Validators.required],
+            indNumber: '',
             principalInvestigator: this.formBuilder.group({
                 id: ['', Validators.required]
             }),
             subInvestigator: this.formBuilder.group({
-                id: ['', Validators.required]
+                id: ''
             }),
             site: this.formBuilder.group({
                 id: ['', Validators.required]
             }),
-            siteNumber: ['', Validators.required],
+            siteNumber: '',
             leadCrc: this.formBuilder.group({
                 id: ['', Validators.required]
             }),
             backupCrc: this.formBuilder.group({
+                id: ''
+            }),
+            folderTemplate: this.formBuilder.group({
                 id: ['', Validators.required]
-            })
+            }),
         });
         this.filteredSponsors = this.newStudyForm.get('sponsor.name').valueChanges.pipe(
             startWith(''),
@@ -92,6 +95,8 @@ export class NewStudyDialogComponent implements OnInit {
                     this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
                 }
             );
+        } else {
+            this.newStudyForm.markAllAsTouched();
         }
     }
 

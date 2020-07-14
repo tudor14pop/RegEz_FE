@@ -1,6 +1,7 @@
 provision:
 	scp ./docker-compose.yml TOKEN.txt regez-prod:~/
 	scp ./docker-compose.yml TOKEN.txt regez-dev:~/
+	scp ./docker-compose.yml TOKEN.txt regez-ci:~/
 	scp ./config regez-ci:~/.ssh/
 
 login:
