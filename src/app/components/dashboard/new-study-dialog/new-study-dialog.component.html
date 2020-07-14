@@ -40,9 +40,6 @@
                             {{option.name}}
                         </mat-option>
                     </mat-autocomplete>
-                    <mat-error *ngIf="newStudyForm.get('cro.name').touched &&
-                         newStudyForm.get('cro.name').hasError('required')"> Required
-                    </mat-error>
                 </mat-form-field>
             </div>
             <mat-form-field class="w-100">
@@ -59,9 +56,6 @@
                        placeholder="IND #"
                        matInput
                        formControlName="indNumber">
-                <mat-error *ngIf="newStudyForm.get('indNumber').touched &&
-                         newStudyForm.get('indNumber').hasError('required')"> Required
-                </mat-error>
             </mat-form-field>
             <div formGroupName="principalInvestigator">
                 <mat-form-field class="w-100">
@@ -82,9 +76,6 @@
                         <mat-option *ngFor="let user of initDashboardDto?.users"
                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="newStudyForm.get('subInvestigator.id').touched &&
-                         newStudyForm.get('subInvestigator.id').hasError('required')"> Required
-                    </mat-error>
                 </mat-form-field>
             </div>
             <div formGroupName="site">
@@ -104,13 +95,10 @@
                        placeholder="Site #"
                        matInput
                        formControlName="siteNumber">
-                <mat-error *ngIf="newStudyForm.get('siteNumber').touched &&
-                         newStudyForm.get('siteNumber').hasError('required')"> Required
-                </mat-error>
             </mat-form-field>
             <div formGroupName="leadCrc">
                 <mat-form-field class="w-100">
-                    <mat-label>Sub Investigator</mat-label>
+                    <mat-label>Lead CRC</mat-label>
                     <mat-select formControlName="id">
                         <mat-option *ngFor="let user of initDashboardDto?.users"
                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
@@ -122,19 +110,26 @@
             </div>
             <div formGroupName="backupCrc">
                 <mat-form-field class="w-100">
-                    <mat-label>Sub Investigator</mat-label>
+                    <mat-label>Backup CRC</mat-label>
                     <mat-select formControlName="id">
                         <mat-option *ngFor="let user of initDashboardDto?.users"
                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="newStudyForm.get('backupCrc.id').touched &&
-                         newStudyForm.get('backupCrc.id').hasError('required')"> Required
+                </mat-form-field>
+            </div>
+            <div formGroupName="folderTemplate">
+                <mat-form-field class="w-100">
+                    <mat-label>Folder Template</mat-label>
+                    <mat-select formControlName="id">
+                        <mat-option *ngFor="let folderTemplate of initDashboardDto?.folderTemplates"
+                                    [value]="folderTemplate.id">{{folderTemplate.name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="newStudyForm.get('folderTemplate.id').touched &&
+                         newStudyForm.get('folderTemplate.id').hasError('required')"> Required
                     </mat-error>
                 </mat-form-field>
             </div>
-            <button type="submit" class="btn btn-w-m btn-info block full-width">
-                Create
-            </button>
+            <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
         </form>
     </div>
 </div>

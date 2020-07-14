@@ -1,7 +1,7 @@
-import {Cro} from "../Cro";
-import {User} from "../User";
-import {Site} from "../Site";
-import {GeneralResponse} from "../GeneralResponse";
+import {Cro} from "./Cro";
+import {User} from "./User";
+import {Site} from "./Site";
+import {GeneralResponse} from "./GeneralResponse";
 
 export interface Study extends GeneralResponse{
     id?: string
