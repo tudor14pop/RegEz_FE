@@ -12,6 +12,7 @@ jobs:
     name: Build prod
     runs-on: [self-hosted]
     steps:
+      - uses: actions/checkout@v2
       - run: make login
       - run: make build
       - run: make push
