@@ -13,6 +13,8 @@ jobs:
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v2
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - run: make login
       - run: make build
       - run: make push
