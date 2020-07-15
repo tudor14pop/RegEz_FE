@@ -2,18 +2,19 @@ import {Cro} from "./Cro";
 import {User} from "./User";
 import {Site} from "./Site";
 import {GeneralResponse} from "./GeneralResponse";
+import {Sponsor} from "./Sponsor";
 
 export interface Study extends GeneralResponse{
     id?: string
     nickname?: string
-    sponsor?: string
+    sponsor?: Sponsor
     cro?: Cro
-    protocolName?: string
+    protocol?: number
     principalInvestigator?: User
     subInvestigator?: User
     site?: Site
-    siteNumber?: string
-    indNumber?: string
+    siteNumber?: number
+    indNumber?: number
     leadCrc?: User
     backupCrc?: User
     createdOn?: Date

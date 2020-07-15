@@ -46,6 +46,7 @@ export class AuthenticationService {
     }
 
     login(loginForm: FormGroup): AuthenticationResponse {
+        localStorage.removeItem('regEz.token');
         this.http.put<LogInUserDto>(environment.serverUrl + '/auth/login', {
             user: {
                 email: loginForm.value.email,
@@ -79,18 +80,16 @@ export class AuthenticationService {
             res => {
                 if (res.errorMessage) {
                     this.showError(res.errorMessage);
-                } else {
-                    localStorage.removeItem('regEz.loginUser');
-                    localStorage.removeItem('regEz.token');
-                    this.loginUserSubject.next(null);
-                    this.router.navigate(['login']);
                 }
             },
             err => {
-                this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+                this.showError(err.error.message);
             }
         );
-
+        localStorage.removeItem('regEz.loginUser');
+        localStorage.removeItem('regEz.token');
+        this.loginUserSubject.next(null);
+        this.router.navigate(['login']);
     }
 
     private showError(errMessage: string) {
