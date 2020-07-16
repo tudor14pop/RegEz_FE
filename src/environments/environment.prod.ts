@@ -6,3 +6,5 @@ export const environment = {
   production: true,
   serverUrl: `${webProtocol}://${window.location.host}`,
 };
+
+

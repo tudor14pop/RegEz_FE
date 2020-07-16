@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { GeneralResponse } from '../models/GeneralResponse';
+import { FolderStructure } from '../models/folder-structure.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +19,20 @@ export class FileService {
     return this.http.post(environment.serverUrl + '/file-management/new-file', formData ,
      {params: {filePath: JSON.stringify(data.filePath)}} );
   }
-
   createNewFolder(data) {
-    return this.http.post(environment.serverUrl + '/file-management/new-folder', data);
+    console.log(JSON.stringify(data))
+    return this.http.post(environment.serverUrl + '/file-management/new-folder', data );
   }
-
   downloadFile() {
 
   }
 
-    retrieveFolderStructure(data) {
-    return this.http.get(environment.serverUrl + '/file-management/study/' + data + '/retrieve');
+  retrieveFile(data) {
+    return this.http.get(environment.serverUrl + '/file-management/file/' + data, {responseType: 'arraybuffer'});
+  }
+
+  retrieveFolderStructure(data): Observable<FolderStructure> {
+    return this.http.get<FolderStructure> (environment.serverUrl + '/file-management/study/' + data + '/retrieve');
 
   }
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewChecked } from '@angular/core';
 import { UploadFileDialogComponent } from '../../common/upload-file-dialog/upload-file-dialog.component.js';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from '../../common/new-folder-dialog/new-folder-dialog.component.js';
 import { ActivatedRoute } from '@angular/router';
 import { FileService } from 'src/app/services/file.service.js';
+import { FolderStructure } from 'src/app/models/folder-structure.model.js';
 declare var $: any;
 
 
@@ -14,6 +15,8 @@ declare var $: any;
 })
 export class StudyComponent implements OnInit {
   numbers;
+  initDone = false;
+  folders: FolderStructure[] = [];
   url = '../../assets/example.pdf';
   pdfDoc = null;
   pageNum = 1;
@@ -32,7 +35,8 @@ export class StudyComponent implements OnInit {
     async ngOnInit(): Promise<void> {
       this.route.params.subscribe(params => { this.studyID = params.id; });
       this.fileService.retrieveFolderStructure(this.studyID).subscribe(res => {
-          console.log(res);
+          Object.keys(res.filePathsByPath).map(key => ( this.folders.push(res.filePathsByPath[key])));
+          console.log(this.folders);
       }, err => {
           console.log(err);
       });
@@ -41,54 +45,53 @@ export class StudyComponent implements OnInit {
       this.numbers = Array(50).fill(0).map((x, i) => i);
       $('.footable').footable();
       $('.footable2').footable();
-      $('#jstree1').jstree({
-        core : {
-            check_callback : true
-        },
-        plugins : [ 'types', 'dnd' ],
-        types: {
-            default: {
-                icon: 'fa fa-folder'
+      setTimeout(() => {
+        $('#jstree1').jstree({
+            core : {
+                check_callback : true,
             },
-            html: {
-                icon: 'fa fa-file-code-o'
-            },
-            svg: {
-                icon: 'fa fa-file-picture-o'
-            },
-            css: {
-                icon: 'fa fa-file-code-o'
-            },
-            img: {
-                icon: 'fa fa-file-image-o'
-            },
-            js: {
-                icon: 'fa fa-file-text-o'
-            }
-        }
-  });
-      const pdfjs = await import('../../../../scripts/pdf.js');
-      const pdfjsWorker = await import('../../../../scripts/pdf.worker.js');
-      pdfjs.workerSrc = pdfjsWorker;
-
-      pdfjs.getDocument(this.url).then((pdfDoc_) => {
-          if (this.pdfDoc) {
-              this.pdfDoc.destroy();
-          }
-          this.pdfDoc = pdfDoc_;
-          const documentPagesNumber = this.pdfDoc.numPages;
-          this.totalPageNumber = documentPagesNumber;
-          document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
-          const selfRef = this;
-          $('#page_num').on('change', function() {
-              const pageNumber = Number($(this).val());
-              if (pageNumber > 0 && pageNumber <= documentPagesNumber) {
-                  selfRef.queueRenderPage(pageNumber, this.scale);
-              }
-          });
-          this.renderPage(this.pageNum, this.scale);
-
+            plugins : [ 'search', 'themes', 'types', 'dnd' ],
+            types: {
+                pdf: {
+                    icon: 'fa fa-file'
+                },
+                default: {
+                    icon: 'fa fa-folder'
+                },
+           },
       });
+    }, 0);
+      this.initDone = true;
+      $('#jstree1').on('select_node.jstree', (e, data) => {
+        this.retrieveFile(data.node.id);
+        });
+      this.previewFile(this.url);
+    }
+
+    async previewFile(url) {
+        const pdfjs = await import('../../../../scripts/pdf.js');
+        const pdfjsWorker = await import('../../../../scripts/pdf.worker.js');
+        pdfjs.workerSrc = pdfjsWorker;
+
+        pdfjs.getDocument(url).then((pdfDoc_) => {
+            if (this.pdfDoc) {
+                this.pdfDoc.destroy();
+            }
+            this.pdfDoc = pdfDoc_;
+            const documentPagesNumber = this.pdfDoc.numPages;
+            this.totalPageNumber = documentPagesNumber;
+            document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
+            const selfRef = this;
+            $('#page_num').on('change', function() {
+                const pageNumber = Number($(this).val());
+                if (pageNumber > 0 && pageNumber <= documentPagesNumber) {
+                    selfRef.queueRenderPage(pageNumber, this.scale);
+                }
+            });
+            this.renderPage(this.pageNum, this.scale);
+  
+        });
+       
     }
 
     openFileDialog() {
@@ -196,6 +199,13 @@ export class StudyComponent implements OnInit {
         this.queueRenderPage(num, this.scale);
     }
 
+    retrieveFile(id) {
+        this.fileService.retrieveFile(id).subscribe(res => {
+            console.log(res);
+        }, err => {
+            console.log(err)
+        })
+    }
 }
 
 

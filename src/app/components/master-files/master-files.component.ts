@@ -66,7 +66,7 @@ pageCount = document.getElementById('page_count');
         this.pdfDoc = pdfDoc_;
         const documentPagesNumber = this.pdfDoc.numPages;
         this.totalPageNumber = documentPagesNumber;
-        this.pageCount = documentPagesNumber;
+        this.pageCount  = documentPagesNumber;
         const selfRef = this;
         $('#page_num').on('change', function() {
             const pageNumber = Number($(this).val());
