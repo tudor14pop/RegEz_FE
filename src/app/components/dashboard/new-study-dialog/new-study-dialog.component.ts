@@ -36,33 +36,21 @@ export class NewStudyDialogComponent implements OnInit {
     ngOnInit() {
         this.newStudyForm = this.formBuilder.group({
             sponsor: this.formBuilder.group({
-                name: ['', Validators.required]
+                name: [null, Validators.required]
             }),
-            protocolName: ['', Validators.required],
+            protocol: [null, Validators.required],
             cro: this.formBuilder.group({
-                name: ''
+                name: null
             }),
-            nickname: ['', Validators.required],
-            indNumber: '',
-            principalInvestigator: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
-            subInvestigator: this.formBuilder.group({
-                id: ''
-            }),
-            site: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
-            siteNumber: '',
-            leadCrc: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
-            backupCrc: this.formBuilder.group({
-                id: ''
-            }),
-            folderTemplate: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
+            nickname: null,
+            indNumber: null,
+            principalInvestigator: [null, Validators.required],
+            subInvestigator: null,
+            site: [null, Validators.required],
+            siteNumber: null,
+            leadCrc: [null , Validators.required],
+            backupCrc: null,
+            structure: [[], Validators.required]
         });
         this.filteredSponsors = this.newStudyForm.get('sponsor.name').valueChanges.pipe(
             startWith(''),
@@ -76,7 +64,9 @@ export class NewStudyDialogComponent implements OnInit {
 
     private _filter(value: string, items: Array<any>) {
         const filterValue = value.toLowerCase();
-        return items.filter(item => item.name.toLowerCase().indexOf(filterValue) === 0);
+        return  items.filter(item => {
+            return item.name.toLowerCase().indexOf(filterValue) === 0
+        });
     }
 
     submit() {

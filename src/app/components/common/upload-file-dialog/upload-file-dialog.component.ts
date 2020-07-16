@@ -5,6 +5,7 @@ import '../../../../scripts/daterangepicker.js';
 import { FileService } from 'src/app/services/file.service.js';
 import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { InfoPopupComponent } from '../info-popup.component.js';
 declare var $: any;
 
 @Component({
@@ -20,6 +21,7 @@ export class UploadFileDialogComponent implements OnInit {
   fileName = '';
   constructor(public matDialog: MatDialog,
               private fileService: FileService,
+              private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class UploadFileDialogComponent implements OnInit {
     dateFrom: new FormControl(new Date()),
     dateTo: new FormControl(null),
     description: new FormControl(''),
-    folderLocation: new FormControl(''),
+    path: new FormControl(''),
     versionable: new FormControl(''),
     });
   }
@@ -49,15 +51,18 @@ export class UploadFileDialogComponent implements OnInit {
         description: form.value.description,
         validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'),
         fileType: 'FILE',
-        id: this.data.studyID,
+        study: {
+          id: this.data.studyID,
+        },
         name: this.fileName,
         versionable: form.value.validPeriod ? true : false,
+        path: form.value.path,
         validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
       }
     };
 
     this.fileService.uploadFile(data).subscribe(res => {
-      console.log(res);
+      window.location.reload();
     }, err => {
       console.log(err);
     });
@@ -65,5 +70,11 @@ export class UploadFileDialogComponent implements OnInit {
 
   toggleDate() {
     this.show = !this.show;
+  }
+
+  private showError(errMessage: string) {
+    this.dialog.open(InfoPopupComponent, {
+        data: errMessage
+    });
   }
 }
