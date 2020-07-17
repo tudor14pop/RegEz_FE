@@ -9,12 +9,12 @@ export interface Study extends GeneralResponse{
     nickname?: string
     sponsor?: Sponsor
     cro?: Cro
-    protocol?: number
+    protocol?: string
     principalInvestigator?: User
     subInvestigator?: User
     site?: Site
-    siteNumber?: number
-    indNumber?: number
+    siteNumber?: string
+    indNumber?: string
     leadCrc?: User
     backupCrc?: User
     createdOn?: Date

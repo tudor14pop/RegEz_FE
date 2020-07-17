@@ -47,10 +47,10 @@ export class DashboardComponent implements OnInit {
     }
 
     private init(investigatorId, siteId, companyId, keywords) {
-        let params = new HttpParams().set("investigatorId", investigatorId)
-            .set("siteId", siteId)
-            .set("companyId", companyId)
-            .set("keywords", keywords);
+        let params = new HttpParams().set("investigatorId", investigatorId ? investigatorId : '')
+            .set("siteId", siteId ? siteId : '')
+            .set("companyId", companyId ? companyId : '')
+            .set("keywords", keywords ? keywords : '');
         this.http.get<InitDashboardDto>(environment.serverUrl + '/dashboard/init', {params}).subscribe(
             res => {
                 if (res.errorMessage) {

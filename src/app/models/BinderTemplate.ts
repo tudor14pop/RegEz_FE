@@ -1,4 +1,4 @@
-import {Company} from './Company';
+import {Company} from './company/Company';
 import {GeneralResponse} from './GeneralResponse';
 import {FilePath} from "./FilePath";
 

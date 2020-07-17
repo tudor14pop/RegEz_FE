@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Company } from 'src/app/models/Company';
+import { Company } from 'src/app/models/company/Company';
 import { AdministrationService } from 'src/app/services/administration.service';
 import { forkJoin } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { InviteUserDialogComponent } from './invite-user-dialog/invite-user-dialog.component';
+import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
+import {UserService} from "../../../services/user.service";
 declare var $: any;
 
 @Component({
@@ -14,13 +16,15 @@ declare var $: any;
 })
 export class UsersComponent implements OnInit {
   userList: UserModel[] = [];
-  companies: Company[] = [];
-  constructor(private administrationService: AdministrationService,
+  companiesDetails: CompanyDetailsDto [] = [];
+  constructor(
+      private administrationService: AdministrationService,
+      private userService: UserService,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
     $('.footable').footable();
-    const users = this.administrationService.getUsers();
+    const users = this.userService.getUsers();
     const companies = this.administrationService.getCompanies();
     forkJoin([users, companies]).subscribe(res => {
       res[0].forEach(user => {
@@ -28,7 +32,7 @@ export class UsersComponent implements OnInit {
         this.userList.push(newUser);
       });
       res[1].forEach(company => {
-        this.companies.push(company);
+        this.companiesDetails.push(company);
       });
       }, err => {
       console.log(err);

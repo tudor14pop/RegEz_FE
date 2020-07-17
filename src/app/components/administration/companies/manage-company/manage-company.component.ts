@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
 import { CompanyService } from 'src/app/services/company.service';
-import { Company } from 'src/app/models/Company';
+import { Company } from 'src/app/models/company/Company';
 
 @Component({
   selector: 'app-manage-company',
