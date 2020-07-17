@@ -10,11 +10,11 @@
             <div class="float-left d-flex w-75">
                 <select type="text" class="form-control w-25 mr-5">
                     <option value="" disabled selected>Company Name</option>
-                    <option *ngFor="let company of companies" [value]="company.name">{{company.name}}</option>
+                    <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails.company.name">{{companyDetails.company.name}}</option>
                 </select>
                 <select type="text" class="form-control w-25">
-                    <option value="" disabled selected>Responsible Person Name</option>
-                    <option *ngFor="let company of companies" [value]="company.name">{{company.name}}</option>
+                    <option value="" disabled selected>Administrator</option>
+                    <option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
                 </select>
             </div>
             <div class="float-right">
@@ -32,12 +32,12 @@
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let company of companies">
-                    <td>{{company.name}}</td>
-                    <td>RESPONSE DOESN'T CONTAIN</td>
-                    <td class="center">RESPONSE DOESN'T CONTAIN</td>
-                    <td class="center">RESPONSE DOESN'T CONTAIN</td>
-                    <td class="center"><button class="btn btn-white" [routerLink]="['/administration/companies', company.id]">Manage</button></td>
+                <tr *ngFor="let companyDetails of companiesDetails">
+                    <td>{{companyDetails.company.name}}</td>
+                    <td><p *ngFor="let administrator of companyDetails.administrators">{{administrator.firstName}} {{administrator.lastName}}</p></td>
+                    <td class="center">{{companyDetails.sitesSize}}</td>
+                    <td class="center">{{companyDetails.studiesSize}}</td>
+                    <td class="center"><button class="btn btn-white" [routerLink]="['/administration/companies', companyDetails.company.id]">Manage</button></td>
                 </tr>
             </tbody>
             <tfoot>
