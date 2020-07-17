@@ -50,7 +50,7 @@ export class NewStudyDialogComponent implements OnInit {
             siteNumber: null,
             leadCrc: [null , Validators.required],
             backupCrc: null,
-            structure: [[]]
+            structure: [null]
         });
         this.filteredSponsors = this.newStudyForm.get('sponsor.name').valueChanges.pipe(
             startWith(''),
