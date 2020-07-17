@@ -36,7 +36,6 @@ export class StudyComponent implements OnInit {
       this.route.params.subscribe(params => { this.studyID = params.id; });
       this.fileService.retrieveFolderStructure(this.studyID).subscribe(res => {
           Object.keys(res.filePathsByPath).map(key => ( this.folders.push(res.filePathsByPath[key])));
-          console.log(this.folders);
       }, err => {
           console.log(err);
       });
@@ -73,11 +72,11 @@ export class StudyComponent implements OnInit {
         const pdfjsWorker = await import('../../../../scripts/pdf.worker.js');
         pdfjs.workerSrc = pdfjsWorker;
 
-        pdfjs.getDocument(url).then((pdfDoc_) => {
+        pdfjs.getDocument(url).then((pdfDoc) => {
             if (this.pdfDoc) {
                 this.pdfDoc.destroy();
             }
-            this.pdfDoc = pdfDoc_;
+            this.pdfDoc = pdfDoc;
             const documentPagesNumber = this.pdfDoc.numPages;
             this.totalPageNumber = documentPagesNumber;
             document.getElementById('page_count').textContent = '/ ' + documentPagesNumber;
@@ -89,9 +88,7 @@ export class StudyComponent implements OnInit {
                 }
             });
             this.renderPage(this.pageNum, this.scale);
-  
         });
-       
     }
 
     openFileDialog() {
@@ -99,7 +96,8 @@ export class StudyComponent implements OnInit {
             height: '50rem',
             width: '30rem',
             data: {
-                studyID: this.studyID
+                studyID: this.studyID,
+                folders: this.folders,
             }
         });
     }
@@ -109,12 +107,15 @@ export class StudyComponent implements OnInit {
             height: '50rem',
             width: '30rem',
             data: {
-                studyID: this.studyID
+                studyID: this.studyID,
+                folders: this.folders,
+
             }
         });
     }
   renderPage(num, scale) {
         this.pageRendering = true;
+        this.pageNum = num;
         this.pdfDoc.getPage(num).then((page) => {
             const viewport = page.getViewport(scale);
             this.canvas.height = viewport.height;
@@ -200,11 +201,12 @@ export class StudyComponent implements OnInit {
     }
 
     retrieveFile(id) {
+        this.pageNum = 1;
         this.fileService.retrieveFile(id).subscribe(res => {
-            console.log(res);
+            this.previewFile(res);
         }, err => {
             console.log(err)
-        })
+        });
     }
 }
 

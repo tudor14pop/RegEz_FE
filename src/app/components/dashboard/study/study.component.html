@@ -21,7 +21,7 @@
                                             <li *ngFor="let folder of folders; let i = index">{{folder[0].path}}
                                                 <ul *ngFor="let item of folder">
                                                     <li [id]="item.id" data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>
-                                                    <ul *ngIf='item.fileType === "FOLDER"'>{{item.name}}</ul>
+                                                    <li data-jstree='{"type":"default"}' *ngIf='item.fileType === "FOLDER"'>{{item.name}}</li>
                                                 </ul>
                                             </li>
                                         </ul>
