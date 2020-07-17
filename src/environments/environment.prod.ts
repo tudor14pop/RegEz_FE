@@ -4,7 +4,7 @@ const webProtocol = IP_ADDRESS_REGEX.test(window.location.host) ? 'http' : 'http
 
 export const environment = {
   production: true,
-  serverUrl: `${webProtocol}://${window.location.host}`,
+  serverUrl: `${webProtocol}://${window.location.host}/api`,
 };
 
 
