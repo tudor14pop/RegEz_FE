@@ -13,7 +13,7 @@ export class AppLoadService {
     }
 
     async initializeApp() {
-        let ipAddress = (await this.http.get("http://api.ipify.org/?format=json").toPromise() as any).ip;
+        let ipAddress = (await this.http.get("https://api.ipify.org/?format=json").toPromise() as any).ip;
         localStorage.setItem('regEz.ip', ipAddress);
     }
 }
