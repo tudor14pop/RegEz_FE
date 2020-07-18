@@ -1,16 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
-import {UserModel} from '../models/user.model';
+import {UserModel} from '../../models/user.model';
+import {RootHttpService} from "./root.http.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
-
-    constructor(private http: HttpClient) {
-    }
+export class UserService extends RootHttpService {
 
     getUsers(): Observable<UserModel[]> {
         return this.http.get<UserModel[]>(environment.serverUrl + '/user/all');
