@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AdministrationService} from 'src/app/services/administration.service';
 import {CreateCompanyDialogComponent} from './create-company-dialog/create-company-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
-import {UserService} from "../../../services/user.service";
+import {UserService} from "../../../services/http/user.service";
 import {UserModel} from "../../../models/user.model";
+import {CompanyService} from "../../../services/http/company.service";
 
 declare var $: any;
 
@@ -15,10 +15,10 @@ declare var $: any;
 })
 export class CompaniesComponent implements OnInit {
     companiesDetails: CompanyDetailsDto[] = [];
-    users: UserModel[] = []
+    users: UserModel[] = [];
 
     constructor(
-        private administrationService: AdministrationService,
+        private companyService: CompanyService,
         private userService: UserService,
         private dialog: MatDialog
     ) {
@@ -26,7 +26,7 @@ export class CompaniesComponent implements OnInit {
 
     ngOnInit(): void {
         $('.footable').footable();
-        this.administrationService.getCompanies().subscribe(res => {
+        this.companyService.getAll().subscribe(res => {
             this.companiesDetails = res;
         }, err => {
             console.log(err);

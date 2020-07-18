@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
-        <h2 class="text-muted">{{companyName.value}}</h2>
+        <h2 class="text-muted">{{companyDetailsDto?.company.name}}</h2>
         <div class="icon-container bg-primary float-right">
             <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
@@ -15,64 +15,71 @@
             <div class="tab-content">
                 <div role="tabpanel" id="tab-1" class="tab-pane active">
                     <div class="panel-body">
-                        <form class="m-t" role="form" [formGroup]="editCompanyForm" autocomplete="on" (ngSubmit)="edit(editCompanyForm)">
-                            <div class="form-group">
-                                <input #companyName type="text" class="form-control" placeholder="Company Name" required=""
-                                        formControlName="name" [(value)] = "company.name">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Address 1" required=""
-                                        formControlName="address1" [(value)] = "company.address1">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Address 2" required=""
-                                        formControlName="address2" [(value)] = "company.address2">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Website" required=""
-                                        formControlName="website" [(value)] = "company.website">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="City" required=""
-                                        formControlName="city" [(value)] = "company.city">
-                            </div>
-                            <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="State" required=""
-                                            formControlName="state" [(value)] = "company.state">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Zip" required=""
-                                        formControlName="zip" [(value)] = "company.zip">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Billing Address 1" required=""
-                                        formControlName="billingAddress1" [(value)] = "company.billingAddress1">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Billing Address 2" required=""
-                                        formControlName="billingAddress2" [(value)] = "company.billingAddress2">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Billing City" required=""
-                                        formControlName="billingCity" [(value)] = "company.billingCity">
-                            </div>
-                            <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Billing State" required=""
-                                            formControlName="billingState" [(value)] = "company.billingState">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Billing Zip" required=""
-                                        formControlName="billingZip" [(value)] = "company.billingZip">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Billing Phone Number" required=""
-                                        formControlName="billingPhone" [(value)] = "company.billingPhone">
-                            </div>
-                             <button type="submit" class="btn btn-w-m btn-info block full-width">Save Changes</button>
-                            </form>
-                    
+                        <form class="m-t" role="form" [formGroup]="editCompanyForm" autocomplete="on"
+                              (ngSubmit)="update()">
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Name" formControlName="name">
+                                <mat-error
+                                        *ngIf="editCompanyForm.get('name').touched && editCompanyForm.get('name').hasError('required')">
+                                    Required
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Address 1" formControlName="address1">
+                                <mat-error
+                                        *ngIf="editCompanyForm.get('address1').touched && editCompanyForm.get('address1').hasError('required')">
+                                    Required
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Address 2" formControlName="address2">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Website" formControlName="website">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="City" formControlName="city">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="State" formControlName="state">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Zip" formControlName="zip">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Billing Address 1"
+                                       formControlName="billingAddress1">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Billing Address 2"
+                                       formControlName="billingAddress2">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Billing City"
+                                       formControlName="billingCity">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Billing State"
+                                       formControlName="billingState">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Billing Zip"
+                                       formControlName="billingZip">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <input type="text" matInput placeholder="Billing Phone"
+                                       formControlName="billingPhone">
+                            </mat-form-field>
+                            <button type="submit" class="btn btn-w-m btn-info block full-width">Save Changes</button>
+                        </form>
+
                     </div>
-                </div>  
+                </div>
+                <div role="tabpanel" id="tab-2" class="tab-pane">
+                    <div class="panel-body">
+                        <app-site-form *ngFor="let site of companyDetailsDto?.sites" [site]="site"></app-site-form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

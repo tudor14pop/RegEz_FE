@@ -1,4 +1,6 @@
-export class Company {
+import {GeneralResponse} from "../GeneralResponse";
+
+export class Company implements GeneralResponse{
     id: string;
     name: string;
     address1: string;
@@ -16,6 +18,8 @@ export class Company {
     billingPhone: string;
     createdOn?: Date;
     modified?: Date;
+    errorMessage: string;
+    responseStatus: string;
 
     constructor(id: string, name: string, address1: string, address2: string, city: string, state: string,
                 zip: string, website: string, billingAttnTo: string, billingAddress1: string, billingAddress2: string,
