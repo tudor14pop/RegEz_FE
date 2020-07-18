@@ -76,6 +76,7 @@ export class NewStudyDialogComponent implements OnInit {
                         console.log(res);
                         this.studySuccessfullyCreated.emit();
                         this.dialog.closeAll();
+                        this.studyService.showSuccess()
                     }
                 },
                 err => {

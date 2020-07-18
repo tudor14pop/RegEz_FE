@@ -74,6 +74,7 @@ export class SiteFormComponent implements OnInit {
                         this.siteService.showError(res.errorMessage);
                     } else {
                         console.log(res);
+                        this.siteService.showSuccess();
                     }
                 },
                 err => {

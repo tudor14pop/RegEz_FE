@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {CompanyService} from 'src/app/services/http/company.service';
 import {SiteService} from "../../../../services/http/site.service";
@@ -46,12 +46,12 @@ export class ManageCompanyComponent implements OnInit {
             billingPhone: '',
         });
         this.siteService.getall(this.id).subscribe(res => this.sites = res);
-            this.companyService.getByID(this.id).subscribe(res => {
-                this.companyDetailsDto = res;
-                this.setEditCompanyForm(res.company)
-            }, err => {
-                console.log(err);
-            });
+        this.companyService.getByID(this.id).subscribe(res => {
+            this.companyDetailsDto = res;
+            this.setEditCompanyForm(res.company)
+        }, err => {
+            console.log(err);
+        });
     }
 
     setEditCompanyForm(company: Company) {
@@ -76,13 +76,14 @@ export class ManageCompanyComponent implements OnInit {
             this.companyService.update(this.editCompanyForm.value).subscribe(
                 res => {
                     if (res.errorMessage) {
-                        this.siteService.showError(res.errorMessage);
+                        this.companyService.showError(res.errorMessage);
                     } else {
                         console.log(res);
+                        this.companyService.showSuccess();
                     }
                 },
                 err => {
-                    this.siteService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+                    this.companyService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
                 }
             );
         } else {
