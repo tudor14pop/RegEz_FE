@@ -12,7 +12,7 @@
                     placeholder="Search">
                 <select type="text" class="form-control w-25">
                     <option value="" disabled selected>Company Name</option>
-                    <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails.company.name">{{companyDetails.company.name}}</option>
+                    <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
                 </select>
             </div>
             <div class="float-right">
