@@ -33,10 +33,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let companyDetails of companiesDetails">
-                    <td>{{companyDetails.company.name}}</td>
-                    <td><p *ngFor="let administrator of companyDetails.administrators">{{administrator.firstName}} {{administrator.lastName}}</p></td>
-                    <td class="center">{{companyDetails.sitesSize}}</td>
-                    <td class="center">{{companyDetails.studiesSize}}</td>
+                    <td>{{companyDetails?.company.name}}</td>
+                    <td><p *ngFor="let administrator of companyDetails?.administrators">{{administrator.firstName}} {{administrator.lastName}}</p></td>
+                    <td class="center">{{companyDetails?.sitesSize}}</td>
+                    <td class="center">{{companyDetails?.studiesSize}}</td>
                     <td class="center"><button class="btn btn-white" [routerLink]="['/administration/companies', companyDetails.company.id]">Manage</button></td>
                 </tr>
             </tbody>
