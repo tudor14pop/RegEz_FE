@@ -42,7 +42,7 @@ export class UploadFileDialogComponent implements OnInit {
     this.fileName = event.target.value.replace(/^.*\\/, '');
   }
 
-  upload(form){
+  upload(form) {
     this.matDialog.closeAll();
     const data = {
       file: this.fileToUpload,

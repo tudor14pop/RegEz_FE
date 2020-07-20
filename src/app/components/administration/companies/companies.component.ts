@@ -11,7 +11,7 @@ declare var $: any;
 @Component({
     selector: 'app-companies',
     templateUrl: './companies.component.html',
-    styleUrls: ['./companies.component.scss']
+    styleUrls: ['./companies.component.scss'],
 })
 export class CompaniesComponent implements OnInit {
     companiesDetails: CompanyDetailsDto[] = [];
@@ -33,7 +33,7 @@ export class CompaniesComponent implements OnInit {
         });
         this.userService.getUsers().subscribe(res => {
             this.users = res;
-        })
+        });
     }
 
     openCreateCompanyDialog() {

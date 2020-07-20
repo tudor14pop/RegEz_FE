@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { UploadFileDialogComponent } from '../../common/upload-file-dialog/upload-file-dialog.component.js';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from '../../common/new-folder-dialog/new-folder-dialog.component.js';
@@ -13,7 +13,8 @@ declare var $: any;
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
-  styleUrls: ['./study.component.scss']
+  styleUrls: ['./study.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StudyComponent implements OnInit {
   numbers;
@@ -34,7 +35,8 @@ export class StudyComponent implements OnInit {
   studyID = '';
     constructor(private dialog: MatDialog,
                 private route: ActivatedRoute,
-                private fileService: FileService) { }
+                private fileService: FileService,
+                private ref: ChangeDetectorRef) { }
 
     async ngOnInit(): Promise<void> {
       this.route.params.subscribe(params => { this.studyID = params.id; });
@@ -46,6 +48,7 @@ export class StudyComponent implements OnInit {
                     this.justFolders.push(element);
                 }
              });
+              this.ref.detectChanges();
         });
           delay(500);
       }, err => {

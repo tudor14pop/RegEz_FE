@@ -15,7 +15,7 @@
                             <button class="btn btn-muted border" (click)="openFolderDialog()"><i class="fa fa-folder mr-2"></i>New Folder</button>
                         </div>
                             <div id="jstree1">
-                                <ul *ngIf="folders">
+                                <ul >
                                     <li *ngFor="let folder of folders; let i = index">{{folder[0].path}}
                                         <ul *ngFor="let item of folder">
                                             <li [id]="item.id" data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>

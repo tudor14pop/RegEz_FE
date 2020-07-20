@@ -6,6 +6,8 @@ import {environment} from "../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {InfoPopupComponent} from "../common/info-popup.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { FileService } from 'src/app/services/file.service';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-dashboard',
@@ -21,7 +23,8 @@ export class DashboardComponent implements OnInit {
     constructor(
         public dialog: MatDialog,
         private formBuilder: FormBuilder,
-        private http: HttpClient
+        private http: HttpClient,
+        private fileService: FileService
     ) {
     }
 
@@ -77,5 +80,14 @@ export class DashboardComponent implements OnInit {
 
     filter(studyFilterForm: FormGroup) {
         this.init(studyFilterForm.value.investigatorId, studyFilterForm.value.siteId, studyFilterForm.value.companyId, studyFilterForm.value.keywords)
+    }
+
+    downloadStudy(id, name) {
+        this.fileService.downloadStudy(id).subscribe(res => {
+            const blob = new Blob([res], { type: 'application/zip' });
+            saveAs(blob, name);
+        }, err => {
+            console.log(err);
+        })
     }
 }
