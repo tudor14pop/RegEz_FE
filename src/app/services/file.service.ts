@@ -16,19 +16,20 @@ export class FileService {
     const formData: FormData  = new FormData();
     formData.append('file', data.file);
     console.log(JSON.stringify(data.filePath));
-    return this.http.post(environment.serverUrl + '/file-management/new-file', formData ,
+    return this.http.post(environment.serverUrl + '/file-management/study/' + data.filePath.id +  '/new-file', formData ,
      {params: {filePath: JSON.stringify(data.filePath)}} );
   }
   createNewFolder(data) {
     console.log(JSON.stringify(data))
-    return this.http.post(environment.serverUrl + '/file-management/new-folder', data );
+    return this.http.post(environment.serverUrl + '/file-management/study/' + data.id + '/new-folder', data );
   }
   downloadFile() {
 
   }
 
   retrieveFile(data) {
-    return this.http.get(environment.serverUrl + '/file-management/file/' + data, {responseType: 'arraybuffer'});
+    return this.http.get(environment.serverUrl + '/file-management/study/' + data.studyID + '/file/' + data.fileID, {responseType: 'arraybuffer'});
+
   }
 
   retrieveFolderStructure(data): Observable<FolderStructure> {

@@ -5,6 +5,8 @@ import { NewFolderDialogComponent } from '../../common/new-folder-dialog/new-fol
 import { ActivatedRoute } from '@angular/router';
 import { FileService } from 'src/app/services/file.service.js';
 import { FolderStructure } from 'src/app/models/folder-structure.model.js';
+import { saveAs } from 'file-saver';
+import { delay } from 'rxjs/operators';
 declare var $: any;
 
 
@@ -15,6 +17,8 @@ declare var $: any;
 })
 export class StudyComponent implements OnInit {
   numbers;
+  justFolders: FolderStructure[] = [];
+  actualFile;
   initDone = false;
   folders: FolderStructure[] = [];
   url = '../../assets/example.pdf';
@@ -35,7 +39,15 @@ export class StudyComponent implements OnInit {
     async ngOnInit(): Promise<void> {
       this.route.params.subscribe(params => { this.studyID = params.id; });
       this.fileService.retrieveFolderStructure(this.studyID).subscribe(res => {
-          Object.keys(res.filePathsByPath).map(key => ( this.folders.push(res.filePathsByPath[key])));
+          Object.keys(res.filePathsByPath).map(key => {
+              this.folders.push(res.filePathsByPath[key]);
+              res.filePathsByPath[key].forEach(element => {
+                if (element.fileType === 'FOLDER') {
+                    this.justFolders.push(element);
+                }
+             });
+        });
+          delay(500);
       }, err => {
           console.log(err);
       });
@@ -62,7 +74,9 @@ export class StudyComponent implements OnInit {
     }, 0);
       this.initDone = true;
       $('#jstree1').on('select_node.jstree', (e, data) => {
-        this.retrieveFile(data.node.id);
+        if ( data.node.icon !== 'fa fa-folder') {
+            this.retrieveFile(data.node.id);
+        }
         });
       this.previewFile(this.url);
     }
@@ -97,7 +111,7 @@ export class StudyComponent implements OnInit {
             width: '30rem',
             data: {
                 studyID: this.studyID,
-                folders: this.folders,
+                folders: this.justFolders,
             }
         });
     }
@@ -108,7 +122,7 @@ export class StudyComponent implements OnInit {
             width: '30rem',
             data: {
                 studyID: this.studyID,
-                folders: this.folders,
+                folders: this.justFolders,
 
             }
         });
@@ -202,11 +216,20 @@ export class StudyComponent implements OnInit {
 
     retrieveFile(id) {
         this.pageNum = 1;
-        this.fileService.retrieveFile(id).subscribe(res => {
+        const data = {
+            studyID: this.studyID,
+            fileID: id
+        };
+        this.fileService.retrieveFile(data).subscribe(res => {
             this.previewFile(res);
+            this.actualFile = res;
         }, err => {
-            console.log(err)
+            console.log(err);
         });
+    }
+    downloadFile() {
+        const blob = new Blob([this.actualFile], { type: 'application/pdf' });
+        saveAs(blob, this.pdfDoc.pdfInfo.fingerprint);
     }
 }
 

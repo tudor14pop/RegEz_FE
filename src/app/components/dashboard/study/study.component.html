@@ -15,15 +15,11 @@
                             <button class="btn btn-muted border" (click)="openFolderDialog()"><i class="fa fa-folder mr-2"></i>New Folder</button>
                         </div>
                             <div id="jstree1">
-                                <ul>
-                                    <li class="jstree-open">Study Name
-                                        <ul>
-                                            <li *ngFor="let folder of folders; let i = index">{{folder[0].path}}
-                                                <ul *ngFor="let item of folder">
-                                                    <li [id]="item.id" data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>
-                                                    <li data-jstree='{"type":"default"}' *ngIf='item.fileType === "FOLDER"'>{{item.name}}</li>
-                                                </ul>
-                                            </li>
+                                <ul *ngIf="folders">
+                                    <li *ngFor="let folder of folders; let i = index">{{folder[0].path}}
+                                        <ul *ngFor="let item of folder">
+                                            <li [id]="item.id" data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>
+                                            <li data-jstree='{"type":"default"}' *ngIf='item.fileType === "FOLDER"'>{{item.name}}</li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -42,13 +38,13 @@
                     <div class="tab-content">
                         <div role="tabpanel" id="tab-1" class="tab-pane active">
                             <div class="panel-body">
-                                <button class="btn btn-muted border mb-4"><i class="fa fa-upload mr-2"></i>Upload  Document</button>
+                                <button class="btn btn-muted border mb-4"><i class="fa fa-upload mr-2"></i>Update  Document</button>
 
                                 <div class="ibox">
                                     <div class="ibox-content">
                                         <div class="ibox-title border-bottom mb-3">
                                             <div class="float-right">
-                                                <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-download"></i></button>
+                                                <button class="btn btn-muted border mr-3" (click)="downloadFile()"><i class="fa fa-1x fa-download"></i></button>
                                                 <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-print"></i></button>
                                                 <button class="btn btn-lg btn-muted border"><i class="fa fa-1x fa-cog"></i></button>
                                             </div>
