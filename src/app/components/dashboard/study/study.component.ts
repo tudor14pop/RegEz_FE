@@ -48,8 +48,8 @@ export class StudyComponent implements OnInit {
                     this.justFolders.push(element);
                 }
              });
-              this.ref.detectChanges();
         });
+          this.ref.detectChanges();
           delay(500);
       }, err => {
           console.log(err);
