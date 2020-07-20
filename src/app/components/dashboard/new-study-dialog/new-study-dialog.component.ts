@@ -1,14 +1,11 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {environment} from "../../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {InfoPopupComponent} from "../../common/info-popup.component";
 import {InitDashboardDto} from "../../../models/InitDashboardDto";
-import {Study} from "../../../models/Study";
 import {Observable} from "rxjs";
 import {map, startWith} from 'rxjs/operators';
 import {Sponsor} from "../../../models/Sponsor";
+import {StudyService} from "../../../services/http/study.service";
 
 
 @Component({
@@ -26,7 +23,7 @@ export class NewStudyDialogComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public initDashboardDto: InitDashboardDto,
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
-        private http: HttpClient
+        private studyService: StudyService,
     ) {
     }
 
@@ -48,9 +45,9 @@ export class NewStudyDialogComponent implements OnInit {
             subInvestigator: null,
             site: [null, Validators.required],
             siteNumber: null,
-            leadCrc: [null , Validators.required],
+            leadCrc: [null, Validators.required],
             backupCrc: null,
-            structure: [null]
+            structure: [[], Validators.required]
         });
         this.filteredSponsors = this.newStudyForm.get('sponsor.name').valueChanges.pipe(
             startWith(''),
@@ -64,36 +61,31 @@ export class NewStudyDialogComponent implements OnInit {
 
     private _filter(value: string, items: Array<any>) {
         const filterValue = value.toLowerCase();
-        return  items.filter(item => {
+        return items.filter(item => {
             return item.name.toLowerCase().indexOf(filterValue) === 0
         });
     }
 
     submit() {
         if (this.newStudyForm.valid) {
-            this.dialog.closeAll();
-            this.http.post<Study>(environment.serverUrl + '/study', this.newStudyForm.value).subscribe(
+            this.studyService.save(this.newStudyForm.value).subscribe(
                 res => {
                     if (res.errorMessage) {
-                        this.showError(res.errorMessage);
+                        this.studyService.showError(res.errorMessage);
                     } else {
                         console.log(res);
                         this.studySuccessfullyCreated.emit();
+                        this.dialog.closeAll();
+                        this.studyService.showSuccess()
                     }
                 },
                 err => {
-                    this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+                    this.studyService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
                 }
             );
         } else {
             this.newStudyForm.markAllAsTouched();
         }
-    }
-
-    private showError(errMessage: string) {
-        this.dialog.open(InfoPopupComponent, {
-            data: errMessage
-        });
     }
 
 }

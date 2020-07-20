@@ -12,8 +12,8 @@
             <select type="text" class="form-control" required=""
                     formControlName="folderLocation">
                 <option value="" disabled selected>Select Folder Location</option>
-                <option *ngFor="let folder of [1,2,3,4,5,6,7]"
-                        [value]="folder">Folder No.{{folder}}</option>
+                <option *ngFor="let folder of data.folders"
+                        [value]="folder.path">{{folder.name}}</option>
             </select>
         </div>
          <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>

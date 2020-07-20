@@ -30,16 +30,16 @@
                 <input matInput class="date-picker form-control" placeholder="Date From"
                 formControlName="dateFrom"
                 [readonly] = "true"
-                [disabled] = "show"
+                [attr.disabled]= "show"
                 [matDatepicker]="dateFrom">
                 <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
                 <mat-datepicker #dateFrom></mat-datepicker>
             </div>
-            <div class="form-group mt-2">
+            <div class="form-group ml-3 mt-2">
                 <input matInput class="date-picker form-control" placeholder="Date To"
                 formControlName="dateTo"
                 [readonly] = "true"
-                [disabled] = "show"
+                [attr.disabled]= "show"
                 [matDatepicker]="dateTo">
                 <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
                 <mat-datepicker #dateTo></mat-datepicker>
@@ -53,8 +53,8 @@
             <select type="text" class="form-control" required=""
                     formControlName="path">
                 <option value="" disabled selected>Select Folder Location</option>
-                <option *ngFor="let folder of [1,2,3,4,5,6,7]"
-                        [value]="folder">Folder No.{{folder}}</option>
+                <option *ngFor="let folder of data.folders"
+                        [value]="folder.path">{{folder.name}}</option>
             </select>
         </div>
         <div class="d-flex justify-content-between">
@@ -69,7 +69,7 @@
                    </div>
                </div>
         </div>
-         <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+        <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
         </form>
     </div>
 </div>

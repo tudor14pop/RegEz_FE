@@ -20,7 +20,7 @@
                 </mat-form-field>
             </div>
             <mat-form-field class="w-100">
-                <input type="number"
+                <input type="text"
                        placeholder="Protocol #"
                        matInput
                        formControlName="protocol">
@@ -52,7 +52,7 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="w-100">
-                <input type="number"
+                <input type="text"
                        placeholder="IND #"
                        matInput
                        formControlName="indNumber">
@@ -85,7 +85,7 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field class="w-100">
-                <input type="number"
+                <input type="text"
                        placeholder="Site #"
                        matInput
                        formControlName="siteNumber">
@@ -113,9 +113,9 @@
                     <mat-option *ngFor="let binderTemplate of initDashboardDto?.binderTemplates"
                                 [value]="binderTemplate.structure">{{binderTemplate.name}}</mat-option>
                 </mat-select>
-                <!-- <mat-error *ngIf="newStudyForm.get('structure').touched &&
+                <mat-error *ngIf="newStudyForm.get('structure').touched &&
                          newStudyForm.get('structure').hasError('required')"> Required
-                </mat-error> -->
+                </mat-error>
             </mat-form-field>
             <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
         </form>

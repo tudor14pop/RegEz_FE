@@ -25,7 +25,6 @@ export class UploadFileDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-
     this.newFileForm =  new FormGroup({
     uploadedFile: new FormControl(''),
     fileName: new FormControl(''),
@@ -43,7 +42,7 @@ export class UploadFileDialogComponent implements OnInit {
     this.fileName = event.target.value.replace(/^.*\\/, '');
   }
 
-  upload(form){
+  upload(form) {
     this.matDialog.closeAll();
     const data = {
       file: this.fileToUpload,
@@ -51,9 +50,7 @@ export class UploadFileDialogComponent implements OnInit {
         description: form.value.description,
         validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'),
         fileType: 'FILE',
-        study: {
-          id: this.data.studyID,
-        },
+        id: this.data.studyID,
         name: this.fileName,
         versionable: form.value.validPeriod ? true : false,
         path: form.value.path,

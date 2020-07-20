@@ -31,9 +31,7 @@ export class NewFolderDialogComponent implements OnInit {
       fileType: form.value.fileType,
       name: form.value.folderName,
       path: form.value.folderLocation,
-      study: {
-          id: this.data.studyID,
-        },
+      id: this.data.studyID
       };
     this.fileService.createNewFolder(data).subscribe(res => {
       window.location.reload();

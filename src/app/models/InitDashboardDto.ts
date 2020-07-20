@@ -3,7 +3,7 @@ import {User} from "./User";
 import {Cro} from "./Cro";
 import {Site} from "./Site";
 import {GeneralResponse} from "./GeneralResponse";
-import {Company} from "./Company";
+import {Company} from "./company/Company";
 import {Study} from "./Study";
 import {BinderTemplate} from "./BinderTemplate";
 

@@ -37,6 +37,10 @@ import { ManageUserComponent } from './components/administration/users/manage-us
 import { CompaniesComponent } from './components/administration/companies/companies.component';
 import { ManageCompanyComponent } from './components/administration/companies/manage-company/manage-company.component';
 import { CreateCompanyDialogComponent } from './components/administration/companies/create-company-dialog/create-company-dialog.component';
+import { SiteFormComponent } from './components/administration/companies/manage-company/site-form/site-form.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {SuccessMessageComponent} from "./services/http/success-message.component";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -64,7 +68,8 @@ import { CreateCompanyDialogComponent } from './components/administration/compan
         CompaniesComponent,
         ManageCompanyComponent,
         CreateCompanyDialogComponent,
-
+        SiteFormComponent,
+        SuccessMessageComponent
     ],
     imports: [
         BrowserModule,
@@ -74,11 +79,13 @@ import { CreateCompanyDialogComponent } from './components/administration/compan
         HttpClientModule,
         MatInputModule,
         MatDialogModule,
+        MatSnackBarModule,
         BrowserAnimationsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatAutocompleteModule,
         MatSelectModule,
+        MatSlideToggleModule,
     ],
     providers: [
         {
