@@ -41,7 +41,12 @@ import { SiteFormComponent } from './components/administration/companies/manage-
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SuccessMessageComponent} from "./services/http/success-message.component";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LabelService } from './services/label.service';
+import { StudyAssignmentsComponent } from './components/administration/users/study-assignments/study-assignments.component';
 
+export function init(label: LabelService) {
+    return () => label.load();
+  }
 
 @NgModule({
     declarations: [
@@ -69,7 +74,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         ManageCompanyComponent,
         CreateCompanyDialogComponent,
         SiteFormComponent,
-        SuccessMessageComponent
+        SuccessMessageComponent,
+        StudyAssignmentsComponent,
     ],
     imports: [
         BrowserModule,
@@ -88,6 +94,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         MatSlideToggleModule,
     ],
     providers: [
+        { provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpRequestInterceptor,
@@ -100,7 +107,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
             multi: true
         },
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent,  ],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
                       UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
                       CreateCompanyDialogComponent]

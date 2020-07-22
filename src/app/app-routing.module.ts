@@ -11,6 +11,7 @@ import { UsersComponent } from './components/administration/users/users.componen
 import { ManageUserComponent } from './components/administration/users/manage-user/manage-user.component';
 import { CompaniesComponent } from './components/administration/companies/companies.component';
 import { ManageCompanyComponent } from './components/administration/companies/manage-company/manage-company.component';
+import { StudyAssignmentsComponent } from './components/administration/users/study-assignments/study-assignments.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
             {path: 'study/:id', component: StudyComponent},
             {path: 'administration/companies', component: CompaniesComponent},
             {path: 'administration/users', component: UsersComponent},
+            {path: 'administration/users/study-assignments', component: StudyAssignmentsComponent},
             {path: 'administration/users/:id', component: ManageUserComponent},
             {path: 'administration/companies/:id', component: ManageCompanyComponent}
 

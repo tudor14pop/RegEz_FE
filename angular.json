@@ -31,6 +31,7 @@
               "src/styles/animate.css",
               "src/styles/bootstrap.min.css",
               "src/styles/font-awesome.css",
+              "src/styles/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css",
               "src/styles/style.css",
               "src/styles/jstree/style.min.css",
               "src/styles/footable.core.css",

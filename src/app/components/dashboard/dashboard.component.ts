@@ -8,6 +8,9 @@ import {InfoPopupComponent} from "../common/info-popup.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import { FileService } from 'src/app/services/file.service';
 import { saveAs } from 'file-saver';
+import { AppComponent } from 'src/app/app.component';
+import { Label } from 'src/app/models/label.model';
+import { LabelService } from 'src/app/services/label.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,12 +18,12 @@ import { saveAs } from 'file-saver';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
     clicked = [].fill(false);
     initDashboardDto: InitDashboardDto;
     studyFilterForm: FormGroup;
 
     constructor(
+        public labelService: LabelService,
         public dialog: MatDialog,
         private formBuilder: FormBuilder,
         private http: HttpClient,

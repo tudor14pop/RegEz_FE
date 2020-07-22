@@ -230,6 +230,7 @@ export class StudyComponent implements OnInit {
             console.log(err);
         });
     }
+
     downloadFile() {
         const blob = new Blob([this.actualFile], { type: 'application/pdf' });
         saveAs(blob, this.pdfDoc.pdfInfo.fingerprint);
