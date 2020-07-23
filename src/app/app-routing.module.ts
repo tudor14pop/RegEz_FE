@@ -15,6 +15,7 @@ import { TranslationsComponent } from './components/administration/translations/
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { CreateLabelComponent } from './components/administration/translations/create-label/create-label.component';
 import { EditLabelComponent } from './components/administration/translations/edit-label/edit-label.component';
+import { VersionsComponent } from './components/common/versions/versions.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path: 'dashboard', component: DashboardComponent},
     {path: 'task-manager', component: TaskManagerComponent},
     {path: 'master-files', component: MasterFilesComponent},
+    {path: 'versions', component: VersionsComponent},
     {path: 'study/:id', component: StudyComponent},
     {path: 'administration/companies', component: CompaniesComponent},
     {path: 'administration/users', component: UsersComponent},

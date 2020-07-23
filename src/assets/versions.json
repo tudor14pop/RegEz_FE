@@ -1,0 +1,17 @@
+{
+    "v1.0.1": {
+        "version": "Versioning added in footer.",
+        "study-assignments": "Study assignments implemented on Frontend.",
+        "translations": "Translations added in Administration. Label edit working, label creating TBA.",
+        "404": "404 Not Found page implemented.",
+        "bug-fixes": "Font size corrected, and minor bug-fixes."
+    },
+
+    "v1.0.0": {
+        "task-manager-master-files": "Task Manager and Master files pages created without communication to the server.",
+        "new-study": "Create new study functionality implemented with filter.",
+        "file-upload": "File upload functionality added.",
+        "administrations-page": "Pages to administrate Companies and Users implemented.",
+        "login-and-security-code": "Login page and security code implemented."
+    }
+}

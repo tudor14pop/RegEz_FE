@@ -46,6 +46,7 @@ import { TranslationsComponent } from './components/administration/translations/
 import { NotFoundComponent } from './components/common/not-found/not-found.component';
 import { CreateLabelComponent } from './components/administration/translations/create-label/create-label.component';
 import { EditLabelComponent } from './components/administration/translations/edit-label/edit-label.component';
+import { VersionsComponent } from './components/common/versions/versions.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { EditLabelComponent } from './components/administration/translations/edi
         NotFoundComponent,
         CreateLabelComponent,
         EditLabelComponent,
+        VersionsComponent,
     ],
     imports: [
         BrowserModule,
