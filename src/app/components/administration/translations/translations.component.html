@@ -1,0 +1,42 @@
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
+        <h2 class="text-muted">Translations</h2>
+        <div class="icon-container bg-primary float-right">
+            <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="d-flex justify-content-between w-100 mb-3">
+            <div class="float-left d-flex w-75">
+                <input type="text" class="form-control form-control-sm m-b-xs w-25 mr-4" style="height: 2.5rem;" id="filter"
+                    placeholder="Search">
+            </div>
+            <div class="float-right">
+                <button class="btn btn-primary" [routerLink]="['/administration/translations/create']">Create New Label</button>
+            </div>
+        </div>
+        <table class="footable table table-stripped" data-page-size="6" data-filter=#filter   data-page-navigation=".pagination">
+            <thead>
+            <tr>
+                <th>Label Name</th>
+                <th>English</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let label of labelService.localeList; let i = index">
+                    <td>{{label.key}}</td>
+                    <td>{{label.value}}</td>
+                    <td><button class="btn btn-white" [routerLink]="['/administration/translations/edit/', i]">Edit</button></td>
+                </tr>
+            </tbody>
+            <tfoot >
+                <tr>
+                  <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+                  </td>
+                </tr>
+              </tfoot>
+        </table>
+    </div>
+</div>

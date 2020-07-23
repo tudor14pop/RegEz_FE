@@ -9,7 +9,7 @@
     <div class="ibox-content">
         <div class="d-flex justify-content-between w-100 mb-3">
             <div class="float-left d-flex w-75">
-                <select type="text" class="form-control w-25 mr-5">
+                <select id="filter" type="text" class="form-control w-25 mr-5">
                     <option value="" disabled selected>Company</option>
                     <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
                 </select>

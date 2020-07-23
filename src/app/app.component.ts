@@ -12,6 +12,9 @@ export class AppComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
+
+  getToken() {
+    return localStorage.getItem('regEz.token');
+ }
 }

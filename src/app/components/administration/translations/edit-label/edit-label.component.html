@@ -1,0 +1,56 @@
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
+        <h2 class="text-muted">Translations</h2>
+        <div class="icon-container bg-primary float-right">
+            <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
+        </div>
+    </div>
+        <div class="ibox ">
+
+            <div class="ibox-content  text-center">
+                <form class="m-t" role="form" [formGroup]="editLabelForm" (ngSubmit)="editLabel(editLabelForm)" >
+                    <div class="d-flex">
+                        <label class="col-2 col-form-label font-weight-bold">Label Name</label>
+                        <div class="form-group w-100">
+                        <input type="text" class="form-control" required=""
+                                formControlName="labelName">
+                        </div>
+                     </div>
+                     <div class="d-flex">
+                        <label class="col-2 col-form-label font-weight-bold">Comment</label>
+                        <div class="form-group w-100">
+                        <input type="text" class="form-control" placeholder="Comment" required=""
+                                formControlName="comment">
+                        </div>
+                     </div>
+                     <div class="d-flex">
+                        <label class="col-2 col-form-label font-weight-bold">Tags</label>
+                        <div class="form-group w-100">
+                        <input type="text" class="form-control" placeholder="Tags Name #1" required=""
+                                formControlName="tags">
+                        </div>
+                     </div>
+                     <div class="d-flex">
+                        <label class="col-2 col-form-label font-weight-bold">Editor Type</label>
+                        <div class="form-check abc-radio abc-radio-info form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio1" value="single_row" formControlName="editorType">
+                            <label class="form-check-label" for="inlineRadio1"> Single Row </label>
+                        </div>
+                        <div class="form-check abc-radio form-check-inline">
+                            <input class="form-check-input" type="radio" id="inlineRadio2" value="rich_text"  formControlName="editorType">
+                            <label class="form-check-label" for="inlineRadio2"> Rich Text </label>
+                        </div>
+                     </div>
+                     <div class="d-flex mt-2">
+                        <label class="col-2 col-form-label font-weight-bold">Label Content</label>
+                        <div class="form-group w-100">
+                            <input type="text" class="form-control" placeholder="Comment" required=""
+                            formControlName="labelContent">
+                        </div>
+                    </div>
+                        <button type="submit" class="btn btn-w-m btn-info ">Save Changes</button>
+                </form>
+               
+            </div>
+        </div>
+</div>

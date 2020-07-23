@@ -194,10 +194,7 @@
   cursor: pointer;
   opacity: 0;
   z-index: 1; }
-.abc-radio input[type="radio"]:focus + label::before {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px; }
+
 .abc-radio input[type="radio"]:checked + label::after {
   transform: scale(1, 1); }
 .abc-radio input[type="radio"]:disabled + label {

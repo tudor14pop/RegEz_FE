@@ -7,7 +7,6 @@ import {LoginComponent} from './components/login.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {BasicLayoutComponent} from './components/common/layout/basicLayout.component';
 import {FooterComponent} from './components/common/footer/footer.component';
 import {NavigationComponent} from './components/common/navigation/navigation.component';
 import {TopNavbarComponent} from './components/common/topnavbar/topnavbar.component';
@@ -38,20 +37,20 @@ import { CompaniesComponent } from './components/administration/companies/compan
 import { ManageCompanyComponent } from './components/administration/companies/manage-company/manage-company.component';
 import { CreateCompanyDialogComponent } from './components/administration/companies/create-company-dialog/create-company-dialog.component';
 import { SiteFormComponent } from './components/administration/companies/manage-company/site-form/site-form.component';
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {SuccessMessageComponent} from "./services/http/success-message.component";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {SuccessMessageComponent} from './services/http/success-message.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { LabelService } from './services/label.service';
 import { StudyAssignmentsComponent } from './components/administration/users/study-assignments/study-assignments.component';
+import { TranslationsComponent } from './components/administration/translations/translations.component';
+import { NotFoundComponent } from './components/common/not-found/not-found.component';
+import { CreateLabelComponent } from './components/administration/translations/create-label/create-label.component';
+import { EditLabelComponent } from './components/administration/translations/edit-label/edit-label.component';
 
-export function init(label: LabelService) {
-    return () => label.load();
-  }
 
 @NgModule({
     declarations: [
         FooterComponent,
-        BasicLayoutComponent,
         AppComponent,
         LoginComponent,
         DashboardComponent,
@@ -76,6 +75,10 @@ export function init(label: LabelService) {
         SiteFormComponent,
         SuccessMessageComponent,
         StudyAssignmentsComponent,
+        TranslationsComponent,
+        NotFoundComponent,
+        CreateLabelComponent,
+        EditLabelComponent,
     ],
     imports: [
         BrowserModule,
@@ -119,3 +122,6 @@ export function init_app(appLoadService: AppLoadService) {
     return () => appLoadService.initializeApp();
 }
 
+export function init(label: LabelService) {
+    return () => label.load();
+  }

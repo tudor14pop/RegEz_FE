@@ -1,2 +1,24 @@
+<!-- Wrapper-->
+<div id="wrapper">
 
-<router-outlet ></router-outlet>
+    <!-- Left navigation bar -->
+    <navigation *ngIf="getToken()"></navigation>
+  
+    <!-- Main page wrapper -->
+    <div id="page-wrapper" class="gray-bg w-100">
+  
+      <!-- Top navigation -->
+      <topnavbar *ngIf="getToken()"></topnavbar>
+  
+      <!-- Main view/routes wrapper-->
+      <router-outlet></router-outlet>
+  
+      <!-- Footer -->
+      <footer *ngIf="getToken()"></footer>
+  
+    </div>
+    <!-- End page wrapper-->
+  
+  </div>
+  <!-- End wrapper-->
+  
