@@ -1,5 +1,5 @@
 import {Company} from "./Company";
-import {User} from "../User";
+import {User} from "../user/User";
 import {BinderTemplate} from "../BinderTemplate";
 import {Site} from "../Site";
 

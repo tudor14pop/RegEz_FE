@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {FormGroup} from "@angular/forms";
-import {User} from "../../models/User";
+import {User} from "../../models/user/User";
 import {MatDialog} from "@angular/material/dialog";
 import {InfoPopupComponent} from "../../components/common/info-popup.component";
 

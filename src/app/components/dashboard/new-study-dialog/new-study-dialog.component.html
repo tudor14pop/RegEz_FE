@@ -3,7 +3,7 @@
         <h4>Create New Study</h4>
         <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="submit()">
             <div formGroupName="sponsor">
-                <mat-form-field class="w-100">
+                <mat-form-field>
                     <input type="text"
                            placeholder="Sponsor"
                            matInput
@@ -19,7 +19,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text"
                        placeholder="Protocol #"
                        matInput
@@ -29,7 +29,7 @@
                 </mat-error>
             </mat-form-field>
             <div formGroupName="cro">
-                <mat-form-field class="w-100">
+                <mat-form-field>
                     <input type="text"
                            placeholder="CRO Name"
                            matInput
@@ -42,7 +42,7 @@
                     </mat-autocomplete>
                 </mat-form-field>
             </div>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text"
                        placeholder="Nickname"
                        matInput
@@ -51,13 +51,13 @@
                          newStudyForm.get('nickname').hasError('required')"> Required
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text"
                        placeholder="IND #"
                        matInput
                        formControlName="indNumber">
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <mat-label>Pricipal Investigator</mat-label>
                 <mat-select formControlName="principalInvestigator">
                     <mat-option *ngFor="let user of initDashboardDto?.users"
@@ -67,14 +67,14 @@
                          newStudyForm.get('principalInvestigator').hasError('required')"> Required
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <mat-label>Sub Investigator</mat-label>
                 <mat-select formControlName="principalInvestigator">
                     <mat-option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <mat-label>Site</mat-label>
                 <mat-select formControlName="site">
                     <mat-option *ngFor="let site of initDashboardDto?.sites"
@@ -84,13 +84,13 @@
                          newStudyForm.get('site').hasError('required')"> Required
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text"
                        placeholder="Site #"
                        matInput
                        formControlName="siteNumber">
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <mat-label>Lead CRC</mat-label>
                 <mat-select formControlName="leadCrc">
                     <mat-option *ngFor="let user of initDashboardDto?.users"
@@ -100,14 +100,14 @@
                          newStudyForm.get('leadCrc').hasError('required')"> Required
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <mat-label>Backup CRC</mat-label>
                 <mat-select formControlName="backupCrc">
                     <mat-option *ngFor="let user of initDashboardDto?.users"
                                 [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <mat-label>Binder Template</mat-label>
                 <mat-select formControlName="structure">
                     <mat-option *ngFor="let binderTemplate of initDashboardDto?.binderTemplates"

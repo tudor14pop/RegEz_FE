@@ -1,4 +1,4 @@
-import {GeneralResponse} from './GeneralResponse';
+import {GeneralResponse} from '../GeneralResponse';
 
 export interface User extends GeneralResponse {
     id?: string;
