@@ -7,16 +7,16 @@
     </div>
     <div class="ibox-content">
         <div class="d-flex justify-content-between w-100 mb-3">
-            <div class="float-left d-flex w-75">
-                <input type="text" class="form-control form-control-sm m-b-xs w-25 mr-4" style="height: 2.5rem;" id="filter"
+            <div class="float-left d-flex">
+                <input type="text" class="form-control form-control-sm m-b-xs mr-1" style="height: 2.5rem;" id="filter"
                     placeholder="Search">
-                <select type="text" class="form-control w-25">
+                <select type="text" class="form-control">
                     <option value="" disabled selected>Company Name</option>
                     <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
                 </select>
             </div>
             <div class="float-right">
-                <button class="btn btn-primary mr-5" [routerLink]="['/administration/users/study-assignments']" routerLinkActive="router-link-active" >Study Assignments</button>
+                <button class="btn btn-primary mr-1" [routerLink]="['/administration/users/study-assignments']" routerLinkActive="router-link-active" >Study Assignments</button>
                 <button class="btn btn-primary" (click)='openInviteUserDialog()'>Invite User</button>
             </div>
         </div>

@@ -19,7 +19,7 @@
                         <form class="row no-gutters pt-3" role="form" [formGroup]="studyFilterForm"
                               (ngSubmit)="filter(studyFilterForm)">
                             <div class="col-sm-3 pr-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <mat-label>Company</mat-label>
                                     <mat-select formControlName="companyId">
                                         <mat-option [value]=""></mat-option>
@@ -29,7 +29,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-3 pr-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <mat-label>Site</mat-label>
                                     <mat-select formControlName="siteId">
                                         <mat-option [value]=""></mat-option>
@@ -39,7 +39,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-3 pr-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <mat-label>Investigator</mat-label>
                                     <mat-select formControlName="investigatorId">
                                         <mat-option [value]=""></mat-option>
@@ -49,7 +49,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <input type="text"
                                            placeholder="Search"
                                            matInput
