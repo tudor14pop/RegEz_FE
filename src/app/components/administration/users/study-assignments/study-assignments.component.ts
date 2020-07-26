@@ -4,6 +4,11 @@ import { UserModel } from 'src/app/models/user.model';
 import { CompanyService } from 'src/app/services/http/company.service';
 import { CompanyDetailsDto } from 'src/app/models/company/CompanyDetailsDto';
 import { forkJoin } from 'rxjs';
+import { StudyService } from 'src/app/services/http/study.service';
+import { InitDashboardDto } from 'src/app/models/InitDashboardDto';
+import { MatDialog } from '@angular/material/dialog';
+import { AddRoleDialogComponent } from './add-role-dialog/add-role-dialog.component';
+
 declare var $: any;
 @Component({
   selector: 'app-study-assignments',
@@ -13,8 +18,10 @@ declare var $: any;
 export class StudyAssignmentsComponent implements OnInit {
   users: UserModel[] = [];
   companiesDetails: CompanyDetailsDto[] = [];
-
+  dashboardDTO: InitDashboardDto;
   constructor(private userService: UserService,
+              private dialog: MatDialog,
+              private studyService: StudyService,
               private companyService: CompanyService) { }
 
   ngOnInit(): void {
@@ -33,9 +40,25 @@ export class StudyAssignmentsComponent implements OnInit {
     });
     setTimeout(() => {
       $('.footable').footable();
-    }, 0); 
+    }, 0);
 
+    this.studyService.getStudies().subscribe(res => {
+      this.dashboardDTO = res;
+    }, err => {
+      console.log(err);
+    });
+  }
 
+  openAddRoleDialog(person, study) {
+    const dialogRef = this.dialog.open(AddRoleDialogComponent , {
+      height: '21rem',
+      width: '30rem',
+      data: {
+          study,
+          user: person
+
+      }
+  });
   }
 
 }

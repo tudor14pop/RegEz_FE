@@ -1,0 +1,13 @@
+<div class="animated fadeInDown">
+    <div class="py-3">
+        <h2>{{data.user.firstName}} {{data.user.lastName}}</h2>
+        <h4>{{data.study.nickname}}</h4>
+        <h4>{{data.study.site.state}}</h4>
+        <form class="m-t" role="form" (ngSubmit)="addRoles()">
+            <select class="select2_demo_2 form-control" multiple="multiple"  >
+                <option *ngFor="let item of accounts; let i = index" [value]="item" formArrayName="roles">{{item}}</option>
+            </select>
+            <button type="submit" class="btn btn-w-m btn-info block mt-3 full-width">Save</button>
+        </form>
+    </div>
+</div>

@@ -15,7 +15,7 @@
                 </select>
                 <select type="text" class="form-control w-25">
                     <option value="" disabled selected>Site</option>
-                    <option *ngFor="let user of users" [value]="user?.id">{{user?.firstName}} {{user?.lastName}}</option>
+                    <option *ngFor="let site of dashboardDTO?.sites" [value]="site?.id">{{site.name}}</option>
                 </select>
             </div>
 
@@ -24,18 +24,17 @@
             <thead>
             <tr>
                 <th>User Name</th>
-                <th *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]">{{item}}</th>
+                <th *ngFor="let item of dashboardDTO?.studies">{{item.nickname}}</th>
             </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let user of users; let i = index" >
                     <td>{{user.firstName}} {{user.lastName}} </td>
-                    <td *ngFor="let item of [1,2,3,4,5,6,7,8,9,10];let j = index ">
+                    <td *ngFor="let study of dashboardDTO?.studies;let j = index ">
                         <div>
-                            <div class="form-check abc-checkbox abc-checkbox-danger">
-                                <input class="form-check-input" [id]="'checkbox' + i + j" type="checkbox" checked="">
-                                <label class="form-check-label" [for]="'checkbox' + i + j">
-                                </label>
+                            <div class="form-check abc-checkbox" [ngClass]="study.leadCrc.id === user.id ? 'abc-checkbox-primary' : 'abc-checkbox-danger'">
+                                <input class="form-check-input"  [id]="'checkbox' + i + j" disabled   type="checkbox" checked="">
+                                <label class="form-check-label" [for]="'checkbox' + i + j" (click)="openAddRoleDialog(user, study );"></label>
                             </div> 
                         </div>
                     </td>

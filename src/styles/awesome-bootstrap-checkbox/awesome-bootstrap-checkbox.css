@@ -59,13 +59,7 @@
 .abc-checkbox input[type="checkbox"]:disabled + label,
 .abc-checkbox input[type="radio"]:disabled + label {
   opacity: 0.65; }
-.abc-checkbox input[type="checkbox"]:disabled + label::before,
-.abc-checkbox input[type="radio"]:disabled + label::before {
-  background-color: #e9ecef;
-  cursor: not-allowed; }
-.abc-checkbox input[type="checkbox"]:disabled + label::after,
-.abc-checkbox input[type="radio"]:disabled + label::after {
-  cursor: not-allowed; }
+
 .abc-checkbox.abc-checkbox-circle label::before {
   border-radius: 50%; }
 .abc-checkbox.checkbox-inline {

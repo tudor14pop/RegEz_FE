@@ -91,6 +91,6 @@ export class DashboardComponent implements OnInit {
             saveAs(blob, name);
         }, err => {
             console.log(err);
-        })
+        });
     }
 }

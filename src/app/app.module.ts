@@ -47,6 +47,7 @@ import { NotFoundComponent } from './components/common/not-found/not-found.compo
 import { CreateLabelComponent } from './components/administration/translations/create-label/create-label.component';
 import { EditLabelComponent } from './components/administration/translations/edit-label/edit-label.component';
 import { VersionsComponent } from './components/common/versions/versions.component';
+import { AddRoleDialogComponent } from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { VersionsComponent } from './components/common/versions/versions.compone
         CreateLabelComponent,
         EditLabelComponent,
         VersionsComponent,
+        AddRoleDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -115,7 +117,7 @@ import { VersionsComponent } from './components/common/versions/versions.compone
     bootstrap: [AppComponent,  ],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
                       UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
-                      CreateCompanyDialogComponent]
+                      CreateCompanyDialogComponent, AddRoleDialogComponent]
 })
 export class AppModule {
 }

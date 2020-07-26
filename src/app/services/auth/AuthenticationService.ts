@@ -7,6 +7,7 @@ import {FormGroup} from "@angular/forms";
 import {User} from "../../models/user/User";
 import {MatDialog} from "@angular/material/dialog";
 import {InfoPopupComponent} from "../../components/common/info-popup.component";
+import { LabelService } from '../label.service';
 
 export interface AuthenticationResponse {
     showSecurityCodeField: boolean;
@@ -33,6 +34,7 @@ export class AuthenticationService {
 
     constructor(
         private http: HttpClient,
+        private labelService: LabelService,
         public dialog: MatDialog,
         private router: Router
     ) {
@@ -61,6 +63,7 @@ export class AuthenticationService {
                     localStorage.setItem('regEz.loginUser', JSON.stringify(res.user));
                     localStorage.setItem('regEz.token', res.token);
                     this.loginUserSubject.next(res.user);
+                    this.labelService.load();
                     this.router.navigate(['dashboard']);
                 } else {
                     this.authenticationResponse.showSecurityCodeField = true;

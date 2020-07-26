@@ -16,7 +16,7 @@ export class LabelService {
 
   load() {
     const params = new HttpParams().set('isoCode', 'EN');
-    this.http.get<Label>(environment.serverUrl + '/label', {params}  ).subscribe(res => {
+    this.http.get<Label>(environment.serverUrl + '/label/retrieve', {params}  ).subscribe(res => {
       res.labels.forEach(label => {
         this.locale[label.key] = label.value;
         this.localeList.push(label);

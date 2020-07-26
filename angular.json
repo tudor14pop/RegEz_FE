@@ -35,6 +35,8 @@
               "src/styles/summernote/summernote-bs4.css",
               "src/styles/style.css",
               "src/styles/jstree/style.min.css",
+              "src/styles/select2/select2-bootstrap4.min.css",
+              "src/styles/select2/select2.min.css",
               "src/styles/footable.core.css",
               "src/styles.scss"
             ],
@@ -50,7 +52,8 @@
               "src/scripts/jquery.metisMenu.js",
               "src/scripts/jquery.slimscroll.min.js",
               "src/scripts/inspinia.js",
-              "src/scripts/summernote-bs4.js"
+              "src/scripts/summernote-bs4.js",
+              "src/scripts/select2.full.min.js"
             ]
           },
           "configurations": {
