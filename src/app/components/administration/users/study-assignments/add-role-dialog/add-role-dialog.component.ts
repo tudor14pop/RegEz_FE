@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {AccountType} from 'src/app/models/user/AccountType';
+import {StudyRoles} from 'src/app/models/user/StudyRoles';
 declare var $: any;
 @Component({
   selector: 'app-add-role-dialog',
@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./add-role-dialog.component.scss']
 })
 export class AddRoleDialogComponent implements OnInit {
-  accounts = Object.values(AccountType);
+  accounts = Object.values(StudyRoles);
   addRoleForm: FormGroup;
   constructor( @Inject(MAT_DIALOG_DATA) public data) { }
 
@@ -19,7 +19,7 @@ export class AddRoleDialogComponent implements OnInit {
       placeholder: 'Select Role'
     });
     this.accounts.forEach((role, i) => {
-      const newOption = new Option(role, i.toString(), false, false);
+      const newOption = new Option(role, Object.keys(StudyRoles)[i] , false, false);
       $('.select2_demo_2').append(newOption).trigger('change');
     });
   }

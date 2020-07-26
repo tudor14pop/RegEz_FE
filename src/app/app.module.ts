@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FooterComponent} from './components/common/footer/footer.component';
 import {NavigationComponent} from './components/common/navigation/navigation.component';
@@ -99,6 +99,7 @@ import { AddRoleDialogComponent } from './components/administration/users/study-
         MatAutocompleteModule,
         MatSelectModule,
         MatSlideToggleModule,
+        FormsModule
     ],
     providers: [
         { provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
