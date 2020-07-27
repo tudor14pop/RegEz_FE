@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LabelService } from 'src/app/services/label.service.js';
 declare var $: any;
 
 
@@ -21,7 +22,7 @@ canvas = null;
 ctx = null;
 pageCount = document.getElementById('page_count');
 
-  constructor() { }
+  constructor(public labelService: LabelService) { }
 
   async ngOnInit(): Promise<void> {
     this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
@@ -66,7 +67,7 @@ pageCount = document.getElementById('page_count');
         this.pdfDoc = pdfDoc_;
         const documentPagesNumber = this.pdfDoc.numPages;
         this.totalPageNumber = documentPagesNumber;
-        this.pageCount = documentPagesNumber;
+        this.pageCount  = documentPagesNumber;
         const selfRef = this;
         $('#page_num').on('change', function() {
             const pageNumber = Number($(this).val());

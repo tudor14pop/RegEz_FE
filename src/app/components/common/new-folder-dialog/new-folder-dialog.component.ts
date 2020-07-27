@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FileService } from 'src/app/services/file.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { InfoPopupComponent } from '../info-popup.component';
 
 @Component({
   selector: 'app-new-folder-dialog',
@@ -11,6 +12,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class NewFolderDialogComponent implements OnInit {
   newFolderForm: FormGroup;
   constructor(private fileService: FileService,
+              private matDialog: MatDialog,
+              private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -23,11 +26,22 @@ export class NewFolderDialogComponent implements OnInit {
   }
 
   upload(form) {
-    this.fileService.createNewFolder(form.value).subscribe(res => {
-      console.log(res);
+    this.matDialog.closeAll();
+    const data = {
+      fileType: form.value.fileType,
+      name: form.value.folderName,
+      path: form.value.folderLocation,
+      id: this.data.studyID
+      };
+    this.fileService.createNewFolder(data).subscribe(res => {
+      window.location.reload();
     }, err => {
-      console.log(err);
+      this.showError(err.errorMessage);
     });
   }
-
+  private showError(errMessage: string) {
+    this.dialog.open(InfoPopupComponent, {
+        data: errMessage
+    });
+  }
 }

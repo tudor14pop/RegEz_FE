@@ -1,14 +1,11 @@
-import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {environment} from "../../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {InfoPopupComponent} from "../../common/info-popup.component";
 import {InitDashboardDto} from "../../../models/InitDashboardDto";
-import {Study} from "../../../models/Study";
 import {Observable} from "rxjs";
 import {map, startWith} from 'rxjs/operators';
 import {Sponsor} from "../../../models/Sponsor";
+import {StudyService} from "../../../services/http/study.service";
 
 
 @Component({
@@ -19,14 +16,14 @@ import {Sponsor} from "../../../models/Sponsor";
 export class NewStudyDialogComponent implements OnInit {
 
     newStudyForm: FormGroup;
-    studySuccessfullyCreated = new EventEmitter();
+    @Output() studySuccessfullyCreated = new EventEmitter();
     study: string;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public initDashboardDto: InitDashboardDto,
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
-        private http: HttpClient
+        private studyService: StudyService,
     ) {
     }
 
@@ -36,33 +33,21 @@ export class NewStudyDialogComponent implements OnInit {
     ngOnInit() {
         this.newStudyForm = this.formBuilder.group({
             sponsor: this.formBuilder.group({
-                name: ['', Validators.required]
+                name: [null, Validators.required]
             }),
-            protocolName: ['', Validators.required],
+            protocol: [null, Validators.required],
             cro: this.formBuilder.group({
-                name: ''
+                name: null
             }),
-            nickname: ['', Validators.required],
-            indNumber: '',
-            principalInvestigator: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
-            subInvestigator: this.formBuilder.group({
-                id: ''
-            }),
-            site: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
-            siteNumber: '',
-            leadCrc: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
-            backupCrc: this.formBuilder.group({
-                id: ''
-            }),
-            folderTemplate: this.formBuilder.group({
-                id: ['', Validators.required]
-            }),
+            nickname: null,
+            indNumber: null,
+            principalInvestigator: [null, Validators.required],
+            subInvestigator: null,
+            site: [null, Validators.required],
+            siteNumber: null,
+            leadCrc: [null, Validators.required],
+            backupCrc: null,
+            structure: [[], Validators.required]
         });
         this.filteredSponsors = this.newStudyForm.get('sponsor.name').valueChanges.pipe(
             startWith(''),
@@ -76,34 +61,31 @@ export class NewStudyDialogComponent implements OnInit {
 
     private _filter(value: string, items: Array<any>) {
         const filterValue = value.toLowerCase();
-        return items.filter(item => item.name.toLowerCase().indexOf(filterValue) === 0);
+        return items.filter(item => {
+            return item.name.toLowerCase().indexOf(filterValue) === 0
+        });
     }
 
     submit() {
         if (this.newStudyForm.valid) {
-            this.dialog.closeAll();
-            this.http.post<Study>(environment.serverUrl + '/study', this.newStudyForm.value).subscribe(
+            this.studyService.create(this.newStudyForm.value).subscribe(
                 res => {
-                    if (res.errorMessage) {
-                        this.showError(res.errorMessage);
+                    if (res.responseStatus != "SUCCESS") {
+                        this.studyService.showError(res.responseMessage);
                     } else {
                         console.log(res);
                         this.studySuccessfullyCreated.emit();
+                        this.dialog.closeAll();
+                        this.studyService.showSuccess()
                     }
                 },
                 err => {
-                    this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+                    this.studyService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
                 }
             );
         } else {
             this.newStudyForm.markAllAsTouched();
         }
-    }
-
-    private showError(errMessage: string) {
-        this.dialog.open(InfoPopupComponent, {
-            data: errMessage
-        });
     }
 
 }

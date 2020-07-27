@@ -1,45 +1,62 @@
-import { Component, OnInit } from '@angular/core';
-import { Company } from 'src/app/models/Company';
-import { AdministrationService } from 'src/app/services/administration.service';
-import { forkJoin } from 'rxjs';
-import { UserModel } from 'src/app/models/user.model';
-import { MatDialog } from '@angular/material/dialog';
-import { InviteUserDialogComponent } from './invite-user-dialog/invite-user-dialog.component';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {InviteUserDialogComponent} from './invite-user-dialog/invite-user-dialog.component';
+import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
+import {UserService} from "../../../services/http/user.service";
+import {CompanyService} from "../../../services/http/company.service";
+import {User} from "../../../models/user/User";
+
 declare var $: any;
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  userList: UserModel[] = [];
-  companies: Company[] = [];
-  constructor(private administrationService: AdministrationService,
-              private dialog: MatDialog) { }
+    userList: User[] = [];
+    companyDetailsDtos: CompanyDetailsDto [] = [];
 
-  ngOnInit(): void {
-    $('.footable').footable();
-    const users = this.administrationService.getUsers();
-    const companies = this.administrationService.getCompanies();
-    forkJoin([users, companies]).subscribe(res => {
-      res[0].forEach(user => {
-        const newUser: UserModel = new UserModel(user.id, user.accountStatus, user.company, user.firstName, user.lastName, user.modified);
-        this.userList.push(newUser);
-      });
-      res[1].forEach(company => {
-        this.companies.push(company);
-      });
-      }, err => {
-      console.log(err);
-    });
-  }
+    constructor(
+        private companyService: CompanyService,
+        private userService: UserService,
+        private dialog: MatDialog) {
+    }
 
-  openInviteUserDialog() {
-    const dialogRef = this.dialog.open(InviteUserDialogComponent, {
-      height: '45rem',
-      width: '30rem',
-  });
-  }
+    ngOnInit(): void {
+        this.initUsers();
+        this.initCompany();
+    }
+
+    private initUsers() {
+        this.userService.getAll().subscribe(res => {
+                this.userList = res;
+            },
+            err => {
+                this.userService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+            }
+        );
+    }
+
+    private initCompany() {
+        this.companyService.getAll().subscribe(res => {
+                this.companyDetailsDtos = res;
+            },
+            err => {
+                this.companyService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+            }
+        );
+    }
+
+    openInviteUserDialog() {
+        const dialogRef = this.dialog.open(InviteUserDialogComponent, {
+            height: '45rem',
+            width: '30rem',
+            data: this.companyDetailsDtos
+        });
+        const sub = dialogRef.componentInstance.onUserAdded.subscribe(() => {
+            this.initUsers();
+        });
+    }
 
 }

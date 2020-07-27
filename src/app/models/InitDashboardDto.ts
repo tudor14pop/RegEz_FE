@@ -1,11 +1,11 @@
 import {Sponsor} from "./Sponsor";
-import {User} from "./User";
+import {User} from "./user/User";
 import {Cro} from "./Cro";
 import {Site} from "./Site";
 import {GeneralResponse} from "./GeneralResponse";
-import {Company} from "./Company";
+import {Company} from "./company/Company";
 import {Study} from "./Study";
-import {FolderTemplate} from "./FolderTemplate";
+import {BinderTemplate} from "./BinderTemplate";
 
 export interface InitDashboardDto extends GeneralResponse{
     companies: Array<Company>
@@ -14,5 +14,5 @@ export interface InitDashboardDto extends GeneralResponse{
     users: Array<User>
     sites: Array<Site>
     studies: Array<Study>
-    folderTemplates: Array<FolderTemplate>
+    binderTemplates: Array<BinderTemplate>
 }

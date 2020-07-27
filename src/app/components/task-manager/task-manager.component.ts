@@ -3,6 +3,7 @@ import { ESignDialogComponent } from './e-sign-dialog/e-sign-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { InternalDialogComponent } from './internal-dialog/internal-dialog.component';
 import { ExternalDialogComponent } from './external-dialog/external-dialog.component';
+import { LabelService } from 'src/app/services/label.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,7 +13,9 @@ import { ExternalDialogComponent } from './external-dialog/external-dialog.compo
 })
 export class TaskManagerComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              public labelService: LabelService
+    ) {}
 
   ngOnInit(): void {
   }

@@ -4,9 +4,11 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {FormGroup} from "@angular/forms";
-import {User} from "../../models/User";
+import {User} from "../../models/user/User";
 import {MatDialog} from "@angular/material/dialog";
 import {InfoPopupComponent} from "../../components/common/info-popup.component";
+import {GeneralResponse} from "../../models/GeneralResponse";
+import { LabelService } from '../label.service';
 
 export interface AuthenticationResponse {
     showSecurityCodeField: boolean;
@@ -14,11 +16,10 @@ export interface AuthenticationResponse {
     message: string
 }
 
-export interface LogInUserDto {
+export interface LogInUserDto extends GeneralResponse{
     user: User
     token: string
     ip: string
-    errorMessage: string
 }
 
 @Injectable({providedIn: 'root'})
@@ -33,6 +34,7 @@ export class AuthenticationService {
 
     constructor(
         private http: HttpClient,
+        private labelService: LabelService,
         public dialog: MatDialog,
         private router: Router
     ) {
@@ -46,6 +48,7 @@ export class AuthenticationService {
     }
 
     login(loginForm: FormGroup): AuthenticationResponse {
+        localStorage.removeItem('regEz.token');
         this.http.put<LogInUserDto>(environment.serverUrl + '/auth/login', {
             user: {
                 email: loginForm.value.email,
@@ -54,12 +57,13 @@ export class AuthenticationService {
             securityCode: loginForm.value.securityCode
         }).subscribe(
             res => {
-                if (res.errorMessage) {
-                    this.showError(res.errorMessage);
+                if (res.responseStatus != "SUCCESS") {
+                    this.showError(res.responseMessage);
                 } else if (loginForm.value.securityCode) {
                     localStorage.setItem('regEz.loginUser', JSON.stringify(res.user));
                     localStorage.setItem('regEz.token', res.token);
                     this.loginUserSubject.next(res.user);
+                    this.labelService.load();
                     this.router.navigate(['dashboard']);
                 } else {
                     this.authenticationResponse.showSecurityCodeField = true;
@@ -75,22 +79,22 @@ export class AuthenticationService {
     }
 
     logout() {
-        this.http.put<LogInUserDto>(environment.serverUrl + '/auth/logout', {user: this.loginUserValue}).subscribe(
-            res => {
-                if (res.errorMessage) {
-                    this.showError(res.errorMessage);
-                } else {
-                    localStorage.removeItem('regEz.loginUser');
-                    localStorage.removeItem('regEz.token');
-                    this.loginUserSubject.next(null);
-                    this.router.navigate(['login']);
+        if (this.loginUserValue) {
+            this.http.put<LogInUserDto>(environment.serverUrl + '/auth/logout', {user: this.loginUserValue}).subscribe(
+                res => {
+                    if (res.responseStatus != "SUCCESS") {
+                        this.showError(res.responseMessage);
+                    }
+                },
+                err => {
+                    this.showError(err.error.message);
                 }
-            },
-            err => {
-                this.showError(err.error.substr(err.error.indexOf('message: ') + 9));
-            }
-        );
-
+            );
+            localStorage.removeItem('regEz.loginUser');
+            localStorage.removeItem('regEz.token');
+            this.loginUserSubject.next(null);
+            this.router.navigate(['login']);
+        }
     }
 
     private showError(errMessage: string) {

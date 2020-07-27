@@ -1,7 +1,9 @@
+import {Company} from "./company/Company";
+
 export class UserModel {
     id: string;
     accountStatus: string;
-    company: string;
+    company: Company;
     firstName: string;
     lastName: string;
     address1: string;
@@ -14,7 +16,7 @@ export class UserModel {
     zip: string;
     phone: string;
 
-    constructor(id: string, accountStatus: string, company: string, firstName: string, lastname: string, modified: Date, city?: string,
+    constructor(id: string, accountStatus: string, company: Company, firstName: string, lastname: string, modified: Date, city?: string,
                 address1?: string, address2?: string, email?: string, zip?: string, state?: string, phone?: string) {
         this.id = id;
         this.accountStatus = accountStatus;
