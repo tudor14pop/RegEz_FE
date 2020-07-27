@@ -1,4 +1,5 @@
 import {GeneralResponse} from '../GeneralResponse';
+import {Company} from "../company/Company";
 
 export interface User extends GeneralResponse {
     id?: string;
@@ -13,8 +14,10 @@ export interface User extends GeneralResponse {
     state?: string;
     zip?: string;
     phone?: string;
-    receiveSms?: boolean;
+    validationMethod?: string;
+    company: Company;
     accountType?: string;
+    accountStatus: string;
     role?: string;
     createdOn?: Date;
     modified?: Date;

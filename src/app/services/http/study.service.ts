@@ -11,7 +11,7 @@ import { InitDashboardDto } from 'src/app/models/InitDashboardDto';
 })
 export class StudyService extends RootHttpService {
 
-    save(study: Study): Observable<Study> {
+    create(study: Study): Observable<Study> {
         return this.http.post<Study>(environment.serverUrl + '/study', study);
     }
 

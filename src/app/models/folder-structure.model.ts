@@ -3,7 +3,7 @@ export interface FolderStructure {
     filePathsByPath: {
         createdOn: Date;
         description: string;
-        errorMessage: string;
+        responseMessage: string;
         fileType: string;
         id: string;
         path: string;

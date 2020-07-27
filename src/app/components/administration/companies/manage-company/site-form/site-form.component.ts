@@ -70,8 +70,8 @@ export class SiteFormComponent implements OnInit {
         if (this.formGroup.valid) {
             this.siteService.update(this.formGroup.value).subscribe(
                 res => {
-                    if (res.errorMessage) {
-                        this.siteService.showError(res.errorMessage);
+                    if (res.responseStatus != "SUCCESS") {
+                        this.siteService.showError(res.responseMessage);
                     } else {
                         console.log(res);
                         this.siteService.showSuccess();

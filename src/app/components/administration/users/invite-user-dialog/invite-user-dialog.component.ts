@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AccountTypeService} from "../../../../models/user/AccountTypeService";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {CompanyDetailsDto} from "../../../../models/company/CompanyDetailsDto";
+import {UserService} from "../../../../services/http/user.service";
 
 @Component({
     selector: 'app-invite-user-dialog',
@@ -8,9 +12,14 @@ import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 })
 export class InviteUserDialogComponent implements OnInit {
     form: FormGroup;
+    @Output() onUserAdded = new EventEmitter();
 
     constructor(
-        private formBuilder: FormBuilder
+        @Inject(MAT_DIALOG_DATA) public companyDetailsDtos: Array<CompanyDetailsDto>,
+        private formBuilder: FormBuilder,
+        private userService: UserService,
+        public dialog: MatDialog,
+        public accountTypeService: AccountTypeService
     ) {
     }
 
@@ -26,6 +35,7 @@ export class InviteUserDialogComponent implements OnInit {
             state: '',
             zip: '',
             phone: ['', [Validators.required, Validators.pattern('^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$')]],
+            company: ['', Validators.required],
             validationMethod: ['', Validators.required],
             accountType: ['', Validators.required],
         });
@@ -35,9 +45,24 @@ export class InviteUserDialogComponent implements OnInit {
         return this.form.controls;
     }
 
-    invite(form) {
+    submit() {
         if (this.form.valid) {
-            console.log(form.value);
+            console.log(this.form.value);
+            this.userService.create(this.form.value).subscribe(
+                res => {
+                    if (res.responseStatus != "SUCCESS") {
+                        this.userService.showError(res.responseMessage);
+                    } else {
+                        console.log(res);
+                        this.onUserAdded.emit();
+                        this.dialog.closeAll();
+                        this.userService.showSuccess()
+                    }
+                },
+                err => {
+                    this.userService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+                }
+            );
         } else {
             this.form.markAllAsTouched();
         }

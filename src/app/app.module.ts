@@ -47,7 +47,9 @@ import { NotFoundComponent } from './components/common/not-found/not-found.compo
 import { CreateLabelComponent } from './components/administration/translations/create-label/create-label.component';
 import { EditLabelComponent } from './components/administration/translations/edit-label/edit-label.component';
 import { VersionsComponent } from './components/common/versions/versions.component';
+import {UserInviteComponent} from "./components/user.invite.component";
 import { AddRoleDialogComponent } from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -55,6 +57,7 @@ import { AddRoleDialogComponent } from './components/administration/users/study-
         FooterComponent,
         AppComponent,
         LoginComponent,
+        UserInviteComponent,
         DashboardComponent,
         NavigationComponent,
         TopNavbarComponent,
@@ -99,7 +102,8 @@ import { AddRoleDialogComponent } from './components/administration/users/study-
         MatAutocompleteModule,
         MatSelectModule,
         MatSlideToggleModule,
-        FormsModule
+        FormsModule,
+        MatIconModule
     ],
     providers: [
         { provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},

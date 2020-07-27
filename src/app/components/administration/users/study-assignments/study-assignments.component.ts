@@ -25,7 +25,7 @@ export class StudyAssignmentsComponent implements OnInit {
               private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    const users = this.userService.getUsers();
+    const users = this.userService.getAll();
     const companies = this.companyService.getAll();
     forkJoin([users, companies]).subscribe(res => {
       res[0].forEach(user => {

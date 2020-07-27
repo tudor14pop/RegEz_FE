@@ -5,6 +5,7 @@ import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
 import {UserService} from "../../../services/http/user.service";
 import {UserModel} from "../../../models/user.model";
 import {CompanyService} from "../../../services/http/company.service";
+import {User} from "../../../models/user/User";
 
 declare var $: any;
 
@@ -15,7 +16,7 @@ declare var $: any;
 })
 export class CompaniesComponent implements OnInit {
     companiesDetails: CompanyDetailsDto[] = [];
-    users: UserModel[] = [];
+    users: User[] = [];
 
     constructor(
         private companyService: CompanyService,
@@ -31,7 +32,7 @@ export class CompaniesComponent implements OnInit {
         }, err => {
             console.log(err);
         });
-        this.userService.getUsers().subscribe(res => {
+        this.userService.getAll().subscribe(res => {
             this.users = res;
         });
     }

@@ -1,4 +1,4 @@
 export interface GeneralResponse {
-    errorMessage: string
+    responseMessage: string
     responseStatus: string
 }

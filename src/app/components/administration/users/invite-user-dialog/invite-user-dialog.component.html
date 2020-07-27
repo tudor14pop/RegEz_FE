@@ -1,7 +1,7 @@
 <div class="text-center animated fadeInDown">
     <div>
         <h4>Invite User</h4>
-        <form class="m-t" role="form" [formGroup]="form" (ngSubmit)="invite(form)">
+        <form class="m-t" role="form" [formGroup]="form" (ngSubmit)="submit()">
             <mat-form-field>
                 <input type="text"
                        placeholder="First Name"
@@ -81,9 +81,19 @@
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
+                <mat-label>Company</mat-label>
+                <mat-select formControlName="company">
+                    <mat-option *ngFor="let companyDetailsDto of companyDetailsDtos"
+                                [value]="companyDetailsDto.company">{{companyDetailsDto.company.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('company').touched &&
+                         form.get('company').hasError('required')"> Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
                 <mat-label>Validation Method</mat-label>
                 <mat-select formControlName="validationMethod">
-                    <mat-option *ngFor="let method of ['email','sms']"
+                    <mat-option *ngFor="let method of ['EMAIL','SMS']"
                                 [value]="method">{{method}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('validationMethod').touched &&
@@ -93,8 +103,8 @@
             <mat-form-field>
                 <mat-label>Account Type</mat-label>
                 <mat-select formControlName="accountType">
-                    <mat-option *ngFor="let method of ['email','sms']"
-                                [value]="method">{{method}}</mat-option>
+                    <mat-option *ngFor="let type of accountTypeService.getAccountTypes"
+                                [value]="type">{{type}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="form.get('accountType').touched &&
                          form.get('accountType').hasError('required')"> Required

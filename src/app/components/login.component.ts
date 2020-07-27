@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticationService.logout();
     this.loginForm = this.formBuilder.group({
       email: '',
       password: '',
