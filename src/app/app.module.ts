@@ -50,6 +50,7 @@ import { VersionsComponent } from './components/common/versions/versions.compone
 import {UserInviteComponent} from "./components/user.invite.component";
 import { AddRoleDialogComponent } from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import {MatIconModule} from "@angular/material/icon";
     ],
     providers: [
         { provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpRequestInterceptor,
