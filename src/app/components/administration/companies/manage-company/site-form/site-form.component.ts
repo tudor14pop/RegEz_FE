@@ -9,30 +9,30 @@ import {SiteService} from "../../../../../services/http/site.service";
         <form class="m-t pb-4 border-bottom" role="form" [formGroup]="formGroup" autocomplete="on"
               (ngSubmit)="update()">
             <mat-slide-toggle [color]="'primary'" class="float-right" formControlName="active">Active</mat-slide-toggle>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text" matInput placeholder="Name" formControlName="name">
                 <mat-error
                         *ngIf="formGroup.get('name').touched && formGroup.get('name').hasError('required')">
                     Required
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text" matInput placeholder="Address 1" formControlName="address1">
                 <mat-error
                         *ngIf="formGroup.get('address1').touched && formGroup.get('address1').hasError('required')">
                     Required
                 </mat-error>
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text" matInput placeholder="Address 2" formControlName="address2">
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text" matInput placeholder="City" formControlName="city">
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text" matInput placeholder="State" formControlName="state">
             </mat-form-field>
-            <mat-form-field class="w-100">
+            <mat-form-field>
                 <input type="text" matInput placeholder="Zip" formControlName="zip">
             </mat-form-field>
             <button type="submit" class="btn btn-w-m btn-info block full-width">Update</button>
@@ -70,8 +70,8 @@ export class SiteFormComponent implements OnInit {
         if (this.formGroup.valid) {
             this.siteService.update(this.formGroup.value).subscribe(
                 res => {
-                    if (res.errorMessage) {
-                        this.siteService.showError(res.errorMessage);
+                    if (res.responseStatus != "SUCCESS") {
+                        this.siteService.showError(res.responseMessage);
                     } else {
                         console.log(res);
                         this.siteService.showSuccess();

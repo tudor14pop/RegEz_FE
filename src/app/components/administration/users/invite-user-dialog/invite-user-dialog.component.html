@@ -1,59 +1,116 @@
-<div class="middle-box text-center animated fadeInDown">
+<div class="text-center animated fadeInDown">
     <div>
         <h4>Invite User</h4>
-        <form class="m-t" role="form" [formGroup]="inviteUserForm" (ngSubmit)="invite(inviteUserForm)">
-        <div class="d-flex">
-            <div class="form-group w-75 mr-2">
-                <input type="text" class="form-control" placeholder="First Name" required=""
-                        formControlName="firstName">
-            </div>
-            <div class="form-group w-25">
-                <input type="text" class="form-control" placeholder="Middle Initial" required=""
-                        formControlName="middleInitial">
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Last Name" required=""
-                    formControlName="lastName">
-        </div>
-        <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email" required=""
-                    formControlName="email">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Address 1" required=""
-                    formControlName="address1">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Address 2" required=""
-                    formControlName="address2">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="City" required=""
-                    formControlName="city">
-        </div>
-        <div class="d-flex">
-            <div class="form-group w-75 mr-2">
-                <input type="text" class="form-control" placeholder="State" required=""
-                        formControlName="state">
-            </div>
-            <div class="form-group w-25">
-                <input type="text" class="form-control" placeholder="Zip" required=""
-                        formControlName="zip">
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Phone Number" required=""
-                    formControlName="phone">
-        </div>
-        <div class="form-group">
-            <select type="text" class="form-control" required="" formControlName="method">
-                <option value="" disabled selected>Select Validation Method</option>
-                <option *ngFor="let method of ['email','sms']"
-                        [value]="method">Receive security code via {{method}}</option>
-            </select>
-        </div>
-         <button type="submit" class="btn btn-w-m btn-info block full-width">Invite</button>
+        <form class="m-t" role="form" [formGroup]="form" (ngSubmit)="submit()">
+            <mat-form-field>
+                <input type="text"
+                       placeholder="First Name"
+                       matInput
+                       formControlName="firstName">
+                <mat-error *ngIf="form.get('firstName').touched &&
+                         form.get('firstName').hasError('required')"> Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="Middle Initial"
+                       matInput
+                       formControlName="middleInitial">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="Last Name"
+                       matInput
+                       formControlName="lastName">
+                <mat-error *ngIf="form.get('lastName').touched &&
+                         form.get('lastName').hasError('required')"> Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="email"
+                       placeholder="Email"
+                       matInput
+                       formControlName="email">
+                <mat-error *ngIf="form.get('email').touched &&
+                         form.get('email').hasError('required')"> Required
+                </mat-error>
+                <mat-error *ngIf="form.get('email').touched &&
+                         form.get('email').hasError('email')"> Email not valid
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="Address 1"
+                       matInput
+                       formControlName="address1">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="Address 2"
+                       matInput
+                       formControlName="address2">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="City"
+                       matInput
+                       formControlName="city">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="State"
+                       matInput
+                       formControlName="state">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="text"
+                       placeholder="Zip"
+                       matInput
+                       formControlName="zip">
+            </mat-form-field>
+            <mat-form-field>
+                <input type="tel"
+                       placeholder="Phone"
+                       matInput
+                       formControlName="phone">
+                <mat-error *ngIf="form.get('phone').touched &&
+                         form.get('phone').hasError('required')"> Required
+                </mat-error>
+                <mat-error *ngIf="form.get('phone').touched &&
+                         form.get('phone').hasError('pattern')"> Can start with plus and the rest of chars can be only numbers, lines or dots 
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Company</mat-label>
+                <mat-select formControlName="company">
+                    <mat-option *ngFor="let companyDetailsDto of companyDetailsDtos"
+                                [value]="companyDetailsDto.company">{{companyDetailsDto.company.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('company').touched &&
+                         form.get('company').hasError('required')"> Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Validation Method</mat-label>
+                <mat-select formControlName="validationMethod">
+                    <mat-option *ngFor="let method of ['EMAIL','SMS']"
+                                [value]="method">{{method}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('validationMethod').touched &&
+                         form.get('validationMethod').hasError('required')"> Required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Account Type</mat-label>
+                <mat-select formControlName="accountType">
+                    <mat-option *ngFor="let type of accountTypeService.getAccountTypes"
+                                [value]="type">{{type}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('accountType').touched &&
+                         form.get('accountType').hasError('required')"> Required
+                </mat-error>
+            </mat-form-field>
+            <button type="submit" class="btn btn-w-m btn-info block full-width">Invite</button>
         </form>
     </div>
 </div>

@@ -3,17 +3,31 @@ import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../models/user.model';
 import {RootHttpService} from "./root.http.service";
+import {User} from "../../models/user/User";
+import {UserInviteToken} from "../../models/user/UserInviteToken";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService extends RootHttpService {
 
-    getUsers(): Observable<UserModel[]> {
-        return this.http.get<UserModel[]>(environment.serverUrl + '/user/all');
+    getAll(): Observable<User[]> {
+        return this.http.get<User[]>(environment.serverUrl + '/user/all');
     }
 
     getUserByID(id): Observable<UserModel> {
         return this.http.get<UserModel>(environment.serverUrl + '/user', {params: {id}});
+    }
+
+    create(user: User): Observable<User> {
+        return this.http.post<User>(environment.serverUrl + '/user', user);
+    }
+
+    confirmUserInviteToken(userInviteToken: string): Observable<UserInviteToken> {
+        return this.http.get<UserInviteToken>(environment.serverUrl + '/user/confirmUserInviteToken', {params: {userInviteToken}});
+    }
+
+    registerUser(userRegister: any): Observable<User> {
+        return this.http.post<User>(environment.serverUrl + '/user/register',  userRegister);
     }
 }

@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {forkJoin} from 'rxjs';
-import {UserModel} from 'src/app/models/user.model';
 import {MatDialog} from '@angular/material/dialog';
 import {InviteUserDialogComponent} from './invite-user-dialog/invite-user-dialog.component';
 import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
 import {UserService} from "../../../services/http/user.service";
 import {CompanyService} from "../../../services/http/company.service";
+import {User} from "../../../models/user/User";
 
 declare var $: any;
 
@@ -15,8 +14,8 @@ declare var $: any;
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    userList: UserModel[] = [];
-    companiesDetails: CompanyDetailsDto [] = [];
+    userList: User[] = [];
+    companyDetailsDtos: CompanyDetailsDto [] = [];
 
     constructor(
         private companyService: CompanyService,
@@ -25,26 +24,38 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        $('.footable').footable();
-        const users = this.userService.getUsers();
-        const companies = this.companyService.getAll();
-        forkJoin([users, companies]).subscribe(res => {
-            res[0].forEach(user => {
-                const newUser: UserModel = new UserModel(user.id, user.accountStatus, user.company, user.firstName, user.lastName, user.modified);
-                this.userList.push(newUser);
-            });
-            res[1].forEach(company => {
-                this.companiesDetails.push(company);
-            });
-        }, err => {
-            console.log(err);
-        });
+        this.initUsers();
+        this.initCompany();
+    }
+
+    private initUsers() {
+        this.userService.getAll().subscribe(res => {
+                this.userList = res;
+            },
+            err => {
+                this.userService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+            }
+        );
+    }
+
+    private initCompany() {
+        this.companyService.getAll().subscribe(res => {
+                this.companyDetailsDtos = res;
+            },
+            err => {
+                this.companyService.showError(err.error.substr(err.error.indexOf('message: ') + 9));
+            }
+        );
     }
 
     openInviteUserDialog() {
         const dialogRef = this.dialog.open(InviteUserDialogComponent, {
             height: '45rem',
             width: '30rem',
+            data: this.companyDetailsDtos
+        });
+        const sub = dialogRef.componentInstance.onUserAdded.subscribe(() => {
+            this.initUsers();
         });
     }
 

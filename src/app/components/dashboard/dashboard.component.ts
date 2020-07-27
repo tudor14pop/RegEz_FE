@@ -6,8 +6,9 @@ import {environment} from "../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {InfoPopupComponent} from "../common/info-popup.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import { FileService } from 'src/app/services/file.service';
-import { saveAs } from 'file-saver';
+import {FileService} from 'src/app/services/file.service';
+import {saveAs} from 'file-saver';
+import {LabelService} from 'src/app/services/label.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,12 +16,12 @@ import { saveAs } from 'file-saver';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
     clicked = [].fill(false);
     initDashboardDto: InitDashboardDto;
     studyFilterForm: FormGroup;
 
     constructor(
+        public labelService: LabelService,
         public dialog: MatDialog,
         private formBuilder: FormBuilder,
         private http: HttpClient,
@@ -56,8 +57,8 @@ export class DashboardComponent implements OnInit {
             .set("keywords", keywords ? keywords : '');
         this.http.get<InitDashboardDto>(environment.serverUrl + '/dashboard/init', {params}).subscribe(
             res => {
-                if (res.errorMessage) {
-                    this.showError(res.errorMessage);
+                if (res.responseStatus != "SUCCESS") {
+                    this.showError(res.responseMessage);
                 } else {
                     this.initDashboardDto = res;
                 }
@@ -84,10 +85,10 @@ export class DashboardComponent implements OnInit {
 
     downloadStudy(id, name) {
         this.fileService.downloadStudy(id).subscribe(res => {
-            const blob = new Blob([res], { type: 'application/zip' });
+            const blob = new Blob([res], {type: 'application/zip'});
             saveAs(blob, name);
         }, err => {
             console.log(err);
-        })
+        });
     }
 }

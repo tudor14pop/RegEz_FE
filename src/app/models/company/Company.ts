@@ -18,12 +18,13 @@ export class Company implements GeneralResponse{
     billingPhone: string;
     createdOn?: Date;
     modified?: Date;
-    errorMessage: string;
+    responseMessage: string;
     responseStatus: string;
+    userInviteTokenExpirationDays: number;
 
     constructor(id: string, name: string, address1: string, address2: string, city: string, state: string,
                 zip: string, website: string, billingAttnTo: string, billingAddress1: string, billingAddress2: string,
-                billingCity: string, billingState: string, billingZip: string, billingPhone: string) {
+                billingCity: string, billingState: string, billingZip: string, billingPhone: string, userInviteTokenExpirationDays: number) {
         this.id = id;
         this.name = name;
         this.address1 = address1;
@@ -39,5 +40,6 @@ export class Company implements GeneralResponse{
         this.billingState = billingState;
         this.billingZip = billingZip;
         this.billingPhone = billingPhone;
+        this.userInviteTokenExpirationDays = userInviteTokenExpirationDays;
     }
 }

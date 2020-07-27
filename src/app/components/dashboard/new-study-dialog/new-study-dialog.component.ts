@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {InitDashboardDto} from "../../../models/InitDashboardDto";
@@ -16,7 +16,7 @@ import {StudyService} from "../../../services/http/study.service";
 export class NewStudyDialogComponent implements OnInit {
 
     newStudyForm: FormGroup;
-    studySuccessfullyCreated = new EventEmitter();
+    @Output() studySuccessfullyCreated = new EventEmitter();
     study: string;
 
     constructor(
@@ -68,10 +68,10 @@ export class NewStudyDialogComponent implements OnInit {
 
     submit() {
         if (this.newStudyForm.valid) {
-            this.studyService.save(this.newStudyForm.value).subscribe(
+            this.studyService.create(this.newStudyForm.value).subscribe(
                 res => {
-                    if (res.errorMessage) {
-                        this.studyService.showError(res.errorMessage);
+                    if (res.responseStatus != "SUCCESS") {
+                        this.studyService.showError(res.responseMessage);
                     } else {
                         console.log(res);
                         this.studySuccessfullyCreated.emit();

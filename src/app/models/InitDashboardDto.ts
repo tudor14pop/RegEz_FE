@@ -1,5 +1,5 @@
 import {Sponsor} from "./Sponsor";
-import {User} from "./User";
+import {User} from "./user/User";
 import {Cro} from "./Cro";
 import {Site} from "./Site";
 import {GeneralResponse} from "./GeneralResponse";

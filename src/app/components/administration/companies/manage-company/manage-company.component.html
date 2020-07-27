@@ -17,58 +17,66 @@
                     <div class="panel-body">
                         <form class="m-t" role="form" [formGroup]="editCompanyForm" autocomplete="on"
                               (ngSubmit)="update()">
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Name" formControlName="name">
                                 <mat-error
                                         *ngIf="editCompanyForm.get('name').touched && editCompanyForm.get('name').hasError('required')">
                                     Required
                                 </mat-error>
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Address 1" formControlName="address1">
                                 <mat-error
                                         *ngIf="editCompanyForm.get('address1').touched && editCompanyForm.get('address1').hasError('required')">
                                     Required
                                 </mat-error>
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Address 2" formControlName="address2">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Website" formControlName="website">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="City" formControlName="city">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="State" formControlName="state">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Zip" formControlName="zip">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Billing Address 1"
                                        formControlName="billingAddress1">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Billing Address 2"
                                        formControlName="billingAddress2">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Billing City"
                                        formControlName="billingCity">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Billing State"
                                        formControlName="billingState">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Billing Zip"
                                        formControlName="billingZip">
                             </mat-form-field>
-                            <mat-form-field class="w-100">
+                            <mat-form-field>
                                 <input type="text" matInput placeholder="Billing Phone"
                                        formControlName="billingPhone">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="User Invite Token Expiration Days"
+                                       formControlName="userInviteTokenExpirationDays">
+                                <mat-error
+                                        *ngIf="editCompanyForm.get('userInviteTokenExpirationDays').touched && editCompanyForm.get('userInviteTokenExpirationDays').hasError('required')">
+                                    Required
+                                </mat-error>
                             </mat-form-field>
                             <button type="submit" class="btn btn-w-m btn-info block full-width">Save Changes</button>
                         </form>

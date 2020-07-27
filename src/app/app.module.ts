@@ -5,9 +5,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {BasicLayoutComponent} from './components/common/layout/basicLayout.component';
 import {FooterComponent} from './components/common/footer/footer.component';
 import {NavigationComponent} from './components/common/navigation/navigation.component';
 import {TopNavbarComponent} from './components/common/topnavbar/topnavbar.component';
@@ -38,17 +37,27 @@ import { CompaniesComponent } from './components/administration/companies/compan
 import { ManageCompanyComponent } from './components/administration/companies/manage-company/manage-company.component';
 import { CreateCompanyDialogComponent } from './components/administration/companies/create-company-dialog/create-company-dialog.component';
 import { SiteFormComponent } from './components/administration/companies/manage-company/site-form/site-form.component';
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {SuccessMessageComponent} from "./services/http/success-message.component";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {SuccessMessageComponent} from './services/http/success-message.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LabelService } from './services/label.service';
+import { StudyAssignmentsComponent } from './components/administration/users/study-assignments/study-assignments.component';
+import { TranslationsComponent } from './components/administration/translations/translations.component';
+import { NotFoundComponent } from './components/common/not-found/not-found.component';
+import { CreateLabelComponent } from './components/administration/translations/create-label/create-label.component';
+import { EditLabelComponent } from './components/administration/translations/edit-label/edit-label.component';
+import { VersionsComponent } from './components/common/versions/versions.component';
+import {UserInviteComponent} from "./components/user.invite.component";
+import { AddRoleDialogComponent } from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
     declarations: [
         FooterComponent,
-        BasicLayoutComponent,
         AppComponent,
         LoginComponent,
+        UserInviteComponent,
         DashboardComponent,
         NavigationComponent,
         TopNavbarComponent,
@@ -69,7 +78,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         ManageCompanyComponent,
         CreateCompanyDialogComponent,
         SiteFormComponent,
-        SuccessMessageComponent
+        SuccessMessageComponent,
+        StudyAssignmentsComponent,
+        TranslationsComponent,
+        NotFoundComponent,
+        CreateLabelComponent,
+        EditLabelComponent,
+        VersionsComponent,
+        AddRoleDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -86,8 +102,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         MatAutocompleteModule,
         MatSelectModule,
         MatSlideToggleModule,
+        FormsModule,
+        MatIconModule
     ],
     providers: [
+        { provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpRequestInterceptor,
@@ -100,10 +119,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
             multi: true
         },
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent,  ],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
                       UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
-                      CreateCompanyDialogComponent]
+                      CreateCompanyDialogComponent, AddRoleDialogComponent]
 })
 export class AppModule {
 }
@@ -112,3 +131,6 @@ export function init_app(appLoadService: AppLoadService) {
     return () => appLoadService.initializeApp();
 }
 
+export function init(label: LabelService) {
+    return () => label.load();
+  }

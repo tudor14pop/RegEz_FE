@@ -44,7 +44,8 @@ export class ManageCompanyComponent implements OnInit {
             billingState: '',
             billingZip: '',
             billingPhone: '',
-        });
+            userInviteTokenExpirationDays: [null, Validators.required]
+    });
         this.siteService.getall(this.id).subscribe(res => this.sites = res);
         this.companyService.getByID(this.id).subscribe(res => {
             this.companyDetailsDto = res;
@@ -69,14 +70,15 @@ export class ManageCompanyComponent implements OnInit {
         this.editCompanyForm.controls.billingZip.setValue(company.billingZip);
         this.editCompanyForm.controls.billingState.setValue(company.billingState);
         this.editCompanyForm.controls.billingPhone.setValue(company.billingPhone);
+        this.editCompanyForm.controls.userInviteTokenExpirationDays.setValue(company.userInviteTokenExpirationDays);
     }
 
     update() {
         if (this.editCompanyForm.valid) {
             this.companyService.update(this.editCompanyForm.value).subscribe(
                 res => {
-                    if (res.errorMessage) {
-                        this.companyService.showError(res.errorMessage);
+                    if (res.responseStatus != "SUCCESS") {
+                        this.companyService.showError(res.responseMessage);
                     } else {
                         console.log(res);
                         this.companyService.showSuccess();

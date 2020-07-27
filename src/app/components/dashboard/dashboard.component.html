@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
-        <h2 class="text-muted"> Dashboard</h2>
+        <h2 class="text-muted"> {{labelService.locale['DASHBOARD_TITLE']}}</h2>
         <div class="icon-container bg-primary float-right">
             <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
@@ -11,15 +11,15 @@
                 <div class="ibox">
                     <div class="ibox-content">
                         <div class="row no-gutters border-bottom pb-2">
-                            <h5 class="col-9">Study Regulatory Binders</h5>
+                            <h5 class="col-9">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TITLE']}}</h5>
                             <div class="col-3">
-                                <button class="btn btn-primary w-100" (click)="openNewStudyDialog()">New Study</button>
+                                <button class="btn btn-primary w-100" (click)="openNewStudyDialog()">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_NEW_STUDY_BUTTON_TITLE']}}</button>
                             </div>
                         </div>
                         <form class="row no-gutters pt-3" role="form" [formGroup]="studyFilterForm"
                               (ngSubmit)="filter(studyFilterForm)">
                             <div class="col-sm-3 pr-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <mat-label>Company</mat-label>
                                     <mat-select formControlName="companyId">
                                         <mat-option [value]=""></mat-option>
@@ -29,7 +29,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-3 pr-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <mat-label>Site</mat-label>
                                     <mat-select formControlName="siteId">
                                         <mat-option [value]=""></mat-option>
@@ -39,7 +39,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-3 pr-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <mat-label>Investigator</mat-label>
                                     <mat-select formControlName="investigatorId">
                                         <mat-option [value]=""></mat-option>
@@ -49,7 +49,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-2">
-                                <mat-form-field class="w-100">
+                                <mat-form-field>
                                     <input type="text"
                                            placeholder="Search"
                                            matInput
@@ -57,7 +57,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-1">
-                                <button type="submit" class="btn btn-primary w-100">Go</button>
+                                <button type="submit" class="btn btn-primary w-100">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_FILTER_BUTTON']}}</button>
                             </div>
                         </form>
 
@@ -108,7 +108,7 @@
             <div class="col-lg-4">
                 <div class="ibox">
                     <div class="ibox-title">
-                        <h5>Oveview</h5>
+                        <h5>{{labelService.locale['DASHBOARD_OVERVIEW_TITLE']}}</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link" href="">
                                 <i class="fa fa-chevron-up"></i>
@@ -117,40 +117,40 @@
                     </div>
                     <div class="d-flex">
                         <div class="col-sm-4 border-right overview-container">
-                            <h5>My Tasks</h5>
+                            <h5>{{labelService.locale['DASHBOARD_OVERVIEW_MY_TASKS']}}</h5>
                             <div class="row mt-4">
                                 <div class="col-sm-2 mr-2"><i class="fa fa-tasks fa-2x"></i></div>
                                 <div class="d-flex flex-column col-sm-4 overview-panel">
-                                    <div class="col-sm-2 text-muted">PENDING</div>
+                                    <div class="col-sm-2 text-muted">{{labelService.locale['DASHBOARD_OVERVIEW_PENDING']}}</div>
                                     <div class="col-sm-2 font-weight-bold">43</div>
-                                    <div class="col-sm-2 text-warning">OVERDUE</div>
+                                    <div class="col-sm-2 text-warning">{{labelService.locale['DASHBOARD_OVERVIEW_OVERDUE']}}</div>
                                     <div class="col-sm-2 text-warning font-weight-bold">5</div>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-sm-4 border-right overview-container">
-                            <h5>e-Signature</h5>
+                            <h5>{{labelService.locale['DASHBOARD_OVERVIEW_E_SIGNATURE']}}</h5>
                             <div class="row mt-4">
                                 <div class="col-sm-2 mr-2"><span class="iconify" data-icon="fa-solid:file-signature"
                                                                  data-inline="false"></span></div>
                                 <div class="d-flex flex-column col-sm-4 overview-panel">
-                                    <div class="col-sm-2 text-muted">PENDING</div>
+                                    <div class="col-sm-2 text-muted">{{labelService.locale['DASHBOARD_OVERVIEW_PENDING']}}</div>
                                     <div class="col-sm-2 font-weight-bold">17</div>
-                                    <div class="col-sm-2 text-warning">OVERDUE</div>
+                                    <div class="col-sm-2 text-warning">{{labelService.locale['DASHBOARD_OVERVIEW_OVERDUE']}}</div>
                                     <div class="col-sm-2 text-warning font-weight-bold">3</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4 overview-container">
-                            <h5>Expiring Doc.</h5>
+                            <h5>{{labelService.locale['DASHBOARD_OVERVIEW_EXPIRING']}}</h5>
                             <div class="row mt-4">
                                 <div class="col-sm-2 mr-2"><span class="iconify" data-icon="fa-regular:calendar-times"
                                                                  data-inline="false"></span></div>
                                 <div class="d-flex flex-column col-sm-4 overview-panel">
-                                    <div class="col-sm-2 text-muted">DAYS</div>
+                                    <div class="col-sm-2 text-muted">{{labelService.locale['DASHBOARD_OVERVIEW_DAYS']}}</div>
                                     <div class="col-sm-2 font-weight-bold">26</div>
-                                    <div class="col-sm-2 text-danger">EXPIRED</div>
+                                    <div class="col-sm-2 text-danger">{{labelService.locale['DASHBOARD_OVERVIEW_EXPIRED']}}</div>
                                     <div class="col-sm-2 text-danger font-weight-bold">3</div>
                                 </div>
                             </div>

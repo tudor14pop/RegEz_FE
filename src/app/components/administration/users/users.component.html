@@ -7,16 +7,19 @@
     </div>
     <div class="ibox-content">
         <div class="d-flex justify-content-between w-100 mb-3">
-            <div class="float-left d-flex w-75">
-                <input type="text" class="form-control form-control-sm m-b-xs w-25 mr-4" style="height: 2.5rem;" id="filter"
-                    placeholder="Search">
-                <select type="text" class="form-control w-25">
+            <div class="float-left d-flex">
+                <input type="text" class="form-control form-control-sm m-b-xs mr-1" style="height: 2.5rem;" id="filter"
+                       placeholder="Search">
+                <select type="text" class="form-control">
                     <option value="" disabled selected>Company Name</option>
-                    <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
+                    <option *ngFor="let companyDetails of companyDetailsDtos"
+                            [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
                 </select>
             </div>
             <div class="float-right">
-                <button class="btn btn-primary mr-5">Study Assignments</button>
+                <button class="btn btn-primary mr-1" [routerLink]="['/administration/users/study-assignments']"
+                        routerLinkActive="router-link-active">Study Assignments
+                </button>
                 <button class="btn btn-primary" (click)='openInviteUserDialog()'>Invite User</button>
             </div>
         </div>
@@ -31,13 +34,15 @@
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of userList">
-                    <td>{{user.firstName}} {{user.lastName}}</td>
-                    <td>{{user.company?.name}}</td>
-                    <td class="center">{{user.accountStatus | titlecase }}</td>
-                    <td class="center">{{user.modified |  date: 'MMM dd, yyyy '}}</td>
-                    <td class="center"><button class="btn btn-white" [routerLink]="['/administration/users', user.id]">Manage</button></td>
-                </tr>
+            <tr *ngFor="let user of userList">
+                <td>{{user.firstName}} {{user.lastName}}</td>
+                <td>{{user.company?.name}}</td>
+                <td class="center">{{user.accountStatus | titlecase }}</td>
+                <td class="center">{{user.modified |  date: 'MMM dd, yyyy '}}</td>
+                <td class="center">
+                    <button class="btn btn-white" [routerLink]="['/administration/users', user.id]">Manage</button>
+                </td>
+            </tr>
             </tbody>
             <tfoot>
             <tr>

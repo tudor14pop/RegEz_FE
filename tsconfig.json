@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
@@ -18,7 +19,8 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true 
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

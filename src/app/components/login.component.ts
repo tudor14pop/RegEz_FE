@@ -5,7 +5,7 @@ import {AuthenticationResponse, AuthenticationService} from '../services/auth/Au
 @Component({
     selector: 'app-login',
     template: `
-        <div class="gray-bg fh-150">
+        <div class="gray-bg fh-150 w-100">
             <div class="middle-box text-center loginscreen animated fadeInDown">
                 <div>
                     <div>
@@ -27,7 +27,7 @@ import {AuthenticationResponse, AuthenticationService} from '../services/auth/Au
                         </div>
                         <button type="submit" class="btn btn-w-m btn-info block full-width">Login</button>
 
-                        <a href="#"><small>Forgot password?</small></a>
+                        <a><small>Forgot password?</small></a>
                     </form>
                     <p class="m-t"><small>eRegulatory System Copyright &copy; 2020</small></p>
                 </div>
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticationService.logout();
     this.loginForm = this.formBuilder.group({
       email: '',
       password: '',
