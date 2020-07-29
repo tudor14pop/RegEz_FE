@@ -19,9 +19,9 @@ import {UserInviteComponent} from "./components/user.invite.component";
 
 
 const routes: Routes = [
-    {path: '', component: LoginComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'confirmUserInvite/:userInviteToken', component: UserInviteComponent},
+    {path: '', redirectTo: '/login', pathMatch: 'full'},
+    {path: 'login', component: LoginComponent, pathMatch: 'full'},
+    {path: 'confirmUserInvite/:userInviteToken', component: UserInviteComponent , pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'task-manager', component: TaskManagerComponent},
     {path: 'master-files', component: MasterFilesComponent},

@@ -5,11 +5,11 @@ name: Automatic Deployment Dev
 on:
   push:
     branches:
-      - dev
+      - prod
 
 jobs:
-  deploy-dev:
-    name: Build dev
+  build:
+    name: Build prod
     runs-on: [self-hosted]
     steps:
       - uses: actions/checkout@v2
@@ -17,4 +17,4 @@ jobs:
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository }} --password-stdin
       - run: make build
       - run: make push
-      - run: make deploy-dev
+      - run: make deploy-prod

@@ -69,7 +69,7 @@ export class UserInviteComponent implements OnInit {
         localStorage.removeItem('regEz.token');
         this.route.params.subscribe(params => {
             this.userService.confirmUserInviteToken(params.userInviteToken).subscribe(res => {
-                    if (res.responseStatus != "SUCCESS") {
+                    if (res.responseStatus !== "SUCCESS") {
                         this.userService.showError(res.responseStatus + ' ' + res.responseMessage);
                     } else {
                         console.log(res);
