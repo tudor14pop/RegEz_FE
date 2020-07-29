@@ -16,7 +16,7 @@ declare var $: any;
 export class UploadFileDialogComponent implements OnInit {
   newFileForm: FormGroup;
   fileToUpload = null;
-  show = true;
+  show = false;
   fileID = '';
   fileName = '';
   constructor(public matDialog: MatDialog,

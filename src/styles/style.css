@@ -2907,9 +2907,10 @@ select.form-control:not([size]):not([multiple]) {
 }
 .onoffswitch-inner:before {
   content: "ON";
-  padding-left: 7px;
+  text-align: left;
   background-color: #1AB394;
   color: #FFFFFF;
+  padding-left: 7px;
 }
 .onoffswitch-inner:after {
   content: "OFF";

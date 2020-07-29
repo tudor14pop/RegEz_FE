@@ -16,7 +16,7 @@
                         </div>
                             <div id="jstree1">
                                 <ul >
-                                    <li *ngFor="let folder of folders; let i = index">{{folder[0].path}}
+                                    <li *ngFor="let folder of folders; let i = index" class="jstree-open">{{folder[0].path}}
                                         <ul *ngFor="let item of folder">
                                             <li [id]="item.id" data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>
                                             <li data-jstree='{"type":"default"}' *ngIf='item.fileType === "FOLDER"'>{{item.name}}</li>
@@ -34,6 +34,8 @@
                         <li><a class="nav-link" data-toggle="tab" href="#tab-2">View Tasks</a></li>
                         <li><a class="nav-link" data-toggle="tab" href="#tab-3">eSignatures</a></li>
                         <li><a class="nav-link" data-toggle="tab" href="#tab-4">Previous versions</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#tab-5">Validation</a></li>
+
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" id="tab-1" class="tab-pane active">
@@ -45,7 +47,7 @@
                                         <div class="ibox-title border-bottom mb-3">
                                             <div class="float-right">
                                                 <button class="btn btn-muted border mr-3" (click)="downloadFile()"><i class="fa fa-1x fa-download"></i></button>
-                                                <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-print"></i></button>
+                                                <button class="btn btn-muted border mr-3" (click)="printFile()"><i class="fa fa-1x fa-print"></i></button>
                                                 <button class="btn btn-lg btn-muted border"><i class="fa fa-1x fa-cog"></i></button>
                                             </div>
                                             
@@ -118,6 +120,44 @@
                                                placeholder="Search in table">
             
                                         <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                                            <thead>
+                                            <tr>
+                                                <th>Rendering engine</th>
+                                                <th>Browser</th>
+                                                <th data-hide="phone,tablet">Platform(s)</th>
+                                                <th data-hide="phone,tablet">Engine version</th>
+                                                <th data-hide="phone,tablet">CSS grade</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="gradeU" *ngFor="let item of numbers">
+                                                <td>Other browsers</td>
+                                                <td>All others</td>
+                                                <td>-</td>
+                                                <td class="center">-</td>
+                                                <td class="center">U</td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <ul class="pagination float-right"></ul>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="tab-5" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="ibox ">
+                                    <div class="ibox-content">
+                                        <input type="text" class="form-control form-control-sm m-b-xs" id="filter2"
+                                               placeholder="Search in table">
+            
+                                        <table class="footable table table-stripped" data-page-size="8" data-filter=#filter2>
                                             <thead>
                                             <tr>
                                                 <th>Rendering engine</th>

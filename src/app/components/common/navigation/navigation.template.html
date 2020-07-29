@@ -11,7 +11,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle">
                             <span class="block m-t-xs font-bold">
                                 {{authenticationService.loginUserValue?.firstName + ' ' + authenticationService.loginUserValue?.lastName}}</span>
-                            <span class="text-muted text-xs block">{{authenticationService.loginUserValue?.accountType}}
+                            <span class="text-muted text-xs block">{{authenticationService.loginUserValue?.accountType | i18nSelect: accounTypeMap}}
                                 <b class="caret"></b>
                             </span>
                         </a>
