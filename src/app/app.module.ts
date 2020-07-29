@@ -50,6 +50,7 @@ import {VersionsComponent} from './components/common/versions/versions.component
 import {UserInviteComponent} from "./components/user.invite.component";
 import {AddRoleDialogComponent} from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
     declarations: [
@@ -102,7 +103,8 @@ import {MatIconModule} from "@angular/material/icon";
         MatSelectModule,
         MatSlideToggleModule,
         FormsModule,
-        MatIconModule
+        MatIconModule,
+        MatCardModule
     ],
     providers: [
         {provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
