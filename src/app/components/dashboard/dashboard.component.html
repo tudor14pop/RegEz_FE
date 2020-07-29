@@ -45,7 +45,7 @@
                                     <mat-select formControlName="investigatorId">
                                         <mat-option [value]=""></mat-option>
                                         <span *ngFor="let user of initDashboardDto?.users">
-                                            <mat-option *ngIf="user.roles.includes(UserRolesEnum.INVESTIGATOR)"
+                                            <mat-option *ngIf="user?.roles?.includes(UserRolesEnum.INVESTIGATOR)"
                                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
                                         </span>
                                     </mat-select>
