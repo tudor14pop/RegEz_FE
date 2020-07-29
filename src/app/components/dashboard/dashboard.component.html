@@ -19,7 +19,7 @@
                         </div>
                         <form class="row no-gutters pt-3" role="form" [formGroup]="studyFilterForm"
                               (ngSubmit)="filter(studyFilterForm)">
-                            <div class="col-sm-3 pr-2">
+                            <div *ngIf="!loginUserIsCompanyAdmin" class="col-sm-3 pr-2">
                                 <mat-form-field>
                                     <mat-label>Company</mat-label>
                                     <mat-select formControlName="companyId">
@@ -29,7 +29,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3 pr-2">
+                            <div [ngClass]="loginUserIsCompanyAdmin ? 'col-sm-4 pr-2' : 'col-sm-3 pr-2'">
                                 <mat-form-field>
                                     <mat-label>Site</mat-label>
                                     <mat-select formControlName="siteId">
@@ -39,19 +39,19 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3 pr-2">
+                            <div [ngClass]="loginUserIsCompanyAdmin ? 'col-sm-4 pr-2' : 'col-sm-3 pr-2'">
                                 <mat-form-field>
                                     <mat-label>Investigator</mat-label>
                                     <mat-select formControlName="investigatorId">
                                         <mat-option [value]=""></mat-option>
                                         <span *ngFor="let user of initDashboardDto?.users">
-                                            <mat-option *ngIf="user.roles.includes('INVESTIGATOR')"
+                                            <mat-option *ngIf="user.roles.includes(UserRolesEnum.INVESTIGATOR)"
                                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
                                         </span>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-2">
+                            <div [ngClass]="loginUserIsCompanyAdmin ? 'col-sm-3' : 'col-sm-2'">
                                 <mat-form-field>
                                     <input type="text"
                                            placeholder="Search"

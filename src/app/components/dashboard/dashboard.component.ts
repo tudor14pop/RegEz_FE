@@ -9,6 +9,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {FileService} from 'src/app/services/file.service';
 import {saveAs} from 'file-saver';
 import {LabelService} from 'src/app/services/label.service';
+import {UserRoles} from "../../models/user/user-role.service";
+import {AccountType} from "../../models/user/AccountTypeService";
 
 @Component({
     selector: 'app-dashboard',
@@ -19,6 +21,8 @@ export class DashboardComponent implements OnInit {
     clicked = [].fill(false);
     initDashboardDto: InitDashboardDto;
     studyFilterForm: FormGroup;
+    public UserRolesEnum = UserRoles;
+    public loginUserIsCompanyAdmin: boolean;
 
     constructor(
         public labelService: LabelService,
@@ -47,6 +51,7 @@ export class DashboardComponent implements OnInit {
             investigatorId: "",
             keywords: ""
         });
+        this.loginUserIsCompanyAdmin = JSON.parse(localStorage.getItem('regEz.loginUser')).accountType === AccountType.COMPANY_ADMINISTRATOR;
         this.init("", "", "", "");
     }
 
