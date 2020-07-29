@@ -15,8 +15,8 @@ export class UserService extends RootHttpService {
         return this.http.get<User[]>(environment.serverUrl + '/user/all');
     }
 
-    getUserByID(id): Observable<UserModel> {
-        return this.http.get<UserModel>(environment.serverUrl + '/user', {params: {id}});
+    getUserByID(id): Observable<User> {
+        return this.http.get<User>(environment.serverUrl + '/user', {params: {id}});
     }
 
     create(user: User): Observable<User> {

@@ -18,7 +18,7 @@ export interface User extends GeneralResponse {
     company: Company;
     accountType?: string;
     accountStatus: string;
-    role?: string;
+    roles?: Array<String>;
     createdOn?: Date;
     modified?: Date;
 }
