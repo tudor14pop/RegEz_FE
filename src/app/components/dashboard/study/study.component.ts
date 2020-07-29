@@ -10,6 +10,7 @@ import { delay } from 'rxjs/operators';
 import print from 'print-js';
 import { StudyService } from 'src/app/services/http/study.service.js';
 import printJS from 'print-js';
+import { EditStudyFileDialogComponent } from '../../common/edit-study-file-dialog/edit-study-file-dialog.component.js';
 declare var $: any;
 
 
@@ -119,6 +120,13 @@ export class StudyComponent implements OnInit {
                 studyID: this.studyID,
                 folders: this.justFolders,
             }
+        });
+    }
+
+    openEditFileDialog() {
+        const dialogRef = this.dialog.open(EditStudyFileDialogComponent, {
+            height: '28rem',
+            width: '30rem',
         });
     }
 
