@@ -19,6 +19,6 @@ COPY --from=builder /app/dist/regEz /app
 
 EXPOSE 9000
 
-ENTRYPOINT ["serve", "app","-p","9000"]
+ENTRYPOINT ["serve", "-s","app","-l","9000"]
 
 
