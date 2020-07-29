@@ -3,7 +3,6 @@ import {CreateCompanyDialogComponent} from './create-company-dialog/create-compa
 import {MatDialog} from '@angular/material/dialog';
 import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
 import {UserService} from "../../../services/http/user.service";
-import {UserModel} from "../../../models/user.model";
 import {CompanyService} from "../../../services/http/company.service";
 import {User} from "../../../models/user/User";
 

@@ -13,7 +13,8 @@
                         <div class="row no-gutters border-bottom pb-2">
                             <h5 class="col-9">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TITLE']}}</h5>
                             <div class="col-3">
-                                <button class="btn btn-primary w-100" (click)="openNewStudyDialog()">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_NEW_STUDY_BUTTON_TITLE']}}</button>
+                                <button class="btn btn-primary w-100"
+                                        (click)="openNewStudyDialog()">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_NEW_STUDY_BUTTON_TITLE']}}</button>
                             </div>
                         </div>
                         <form class="row no-gutters pt-3" role="form" [formGroup]="studyFilterForm"
@@ -43,8 +44,10 @@
                                     <mat-label>Investigator</mat-label>
                                     <mat-select formControlName="investigatorId">
                                         <mat-option [value]=""></mat-option>
-                                        <mat-option *ngFor="let user of initDashboardDto?.users"
+                                        <span *ngFor="let user of initDashboardDto?.users">
+                                            <mat-option *ngIf="user.roles.includes('INVESTIGATOR')"
                                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
+                                        </span>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -57,7 +60,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-1">
-                                <button type="submit" class="btn btn-primary w-100">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_FILTER_BUTTON']}}</button>
+                                <button type="submit"
+                                        class="btn btn-primary w-100">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_FILTER_BUTTON']}}</button>
                             </div>
                         </form>
 
@@ -74,7 +78,7 @@
                                 <tbody>
                                 <tr *ngFor="let study of initDashboardDto?.studies; let i = index">
                                     <td [routerLink]="['/study', study.id]"
-                                        style="cursor: pointer">{{study.sponsor.name}} {{study.protocol}} {{study.nickname? '"'+study.nickname+'"' : ''}}
+                                        style="cursor: pointer">{{study.sponsor.name}} {{study.protocol}} {{study.nickname ? '"' + study.nickname + '"' : ''}}
                                         <p>{{study.site.company.name}}
                                             - {{study.site.company.address1}}
                                             - {{study.principalInvestigator.firstName}} {{study.principalInvestigator.lastName}}
@@ -91,7 +95,9 @@
                                                                 class="fa fa-edit mr-3"></i>Rename</span>
                                                     <span class="mb-1 ml-3"><i
                                                             class="fa fa-user mr-3"></i> User Roles</span>
-                                                    <span class="mb-1 ml-3" (click)="downloadStudy(study.id, study.nickname)"><i class="fa fa-download mr-3" ></i>Download</span>
+                                                    <span class="mb-1 ml-3"
+                                                          (click)="downloadStudy(study.id, study.nickname)"><i
+                                                            class="fa fa-download mr-3"></i>Download</span>
                                                     <span class="mb-1 ml-3"><i class="fa fa-check mr-3"></i>Close Study</span>
                                                 </div>
                                             </div>

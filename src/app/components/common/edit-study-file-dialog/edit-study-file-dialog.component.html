@@ -1,0 +1,60 @@
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4>Study File Setting</h4>
+        <form role="form" enctype="multipart/form-data" [formGroup]="editFileForm" (ngSubmit)="edit(editFileForm)">
+      
+         <div class="form-group w-100">
+            <input type="text" class="form-control" placeholder="File Name..." required=""
+                   formControlName="fileName">
+        </div>
+         <div class="d-flex justify-content-between">
+             <div class="text-left">Enable validity period?</div>
+                <div class="switch">
+                    <div class="onoffswitch">
+                        <input type="checkbox" formControlName="validPeriod" (click)="toggleDate()" class="onoffswitch-checkbox" id="example4">
+                        <label class="onoffswitch-label" for="example4">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+         </div>
+         <div class="d-flex justify-content-between date-container" *ngIf="show">
+            <div class="form-group mt-2">
+                <input matInput class="date-picker form-control" placeholder="Date From"
+                formControlName="dateFrom"
+                [readonly] = "true"
+                [matDatepicker]="dateFrom">
+                <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+                <mat-datepicker #dateFrom></mat-datepicker>
+            </div>
+            <div class="form-group ml-3 mt-2">
+                <input matInput class="date-picker form-control" placeholder="Date To"
+                formControlName="dateTo"
+                [readonly] = "true"
+                [attr.disabled]= "show"
+                [matDatepicker]="dateTo">
+                <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+                <mat-datepicker #dateTo></mat-datepicker>
+            </div>
+        </div>
+        <div class="form-group w-100">
+            <textarea class="form-control" placeholder="Description"
+                   formControlName="description"></textarea>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="text-left">Versionable File?</div>
+               <div class="switch">
+                   <div class="onoffswitch">
+                       <input type="checkbox" formControlName="versionable" class="onoffswitch-checkbox" id="example5">
+                       <label class="onoffswitch-label" for="example5">
+                           <span class="onoffswitch-inner"></span>
+                           <span class="onoffswitch-switch"></span>
+                       </label>
+                   </div>
+               </div>
+        </div>
+        <button type="submit" class="btn btn-w-m btn-info block full-width">Save Changes</button>
+        </form>
+    </div>
+</div>

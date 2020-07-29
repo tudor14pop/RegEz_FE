@@ -4,6 +4,7 @@ import {AccountTypeService} from "../../../../models/user/AccountTypeService";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {CompanyDetailsDto} from "../../../../models/company/CompanyDetailsDto";
 import {UserService} from "../../../../services/http/user.service";
+import {RoleService} from "../../../../models/user/role.service";
 
 @Component({
     selector: 'app-invite-user-dialog',
@@ -19,7 +20,8 @@ export class InviteUserDialogComponent implements OnInit {
         private formBuilder: FormBuilder,
         private userService: UserService,
         public dialog: MatDialog,
-        public accountTypeService: AccountTypeService
+        public accountTypeService: AccountTypeService,
+        public roleService: RoleService
     ) {
     }
 
@@ -38,6 +40,7 @@ export class InviteUserDialogComponent implements OnInit {
             company: ['', Validators.required],
             validationMethod: ['', Validators.required],
             accountType: ['', Validators.required],
+            roles: [[], Validators.required],
         });
     }
 

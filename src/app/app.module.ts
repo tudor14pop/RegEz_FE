@@ -50,6 +50,8 @@ import {VersionsComponent} from './components/common/versions/versions.component
 import {UserInviteComponent} from "./components/user.invite.component";
 import {AddRoleDialogComponent} from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
+import { EditStudyFileDialogComponent } from './components/common/edit-study-file-dialog/edit-study-file-dialog.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
     declarations: [
@@ -85,6 +87,7 @@ import {MatIconModule} from "@angular/material/icon";
         EditLabelComponent,
         VersionsComponent,
         AddRoleDialogComponent,
+        EditStudyFileDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -102,7 +105,8 @@ import {MatIconModule} from "@angular/material/icon";
         MatSelectModule,
         MatSlideToggleModule,
         FormsModule,
-        MatIconModule
+        MatIconModule,
+        MatCardModule
     ],
     providers: [
         {provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
@@ -121,7 +125,7 @@ import {MatIconModule} from "@angular/material/icon";
     bootstrap: [AppComponent,],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
         UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
-        CreateCompanyDialogComponent, AddRoleDialogComponent]
+        CreateCompanyDialogComponent, AddRoleDialogComponent, EditStudyFileDialogComponent]
 })
 export class AppModule {
 }
