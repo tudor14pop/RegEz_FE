@@ -7,6 +7,9 @@ import { FileService } from 'src/app/services/file.service.js';
 import { FolderStructure } from 'src/app/models/folder-structure.model.js';
 import { saveAs } from 'file-saver';
 import { delay } from 'rxjs/operators';
+import print from 'print-js';
+import { StudyService } from 'src/app/services/http/study.service.js';
+import printJS from 'print-js';
 declare var $: any;
 
 
@@ -22,7 +25,7 @@ export class StudyComponent implements OnInit {
   actualFile;
   initDone = false;
   folders: FolderStructure[] = [];
-  url = '../../assets/example.pdf';
+  url = null;
   pdfDoc = null;
   pageNum = 1;
   pageRendering = false;
@@ -36,7 +39,8 @@ export class StudyComponent implements OnInit {
     constructor(private dialog: MatDialog,
                 private route: ActivatedRoute,
                 private fileService: FileService,
-                private ref: ChangeDetectorRef) { }
+                private ref: ChangeDetectorRef,
+                private studyService: StudyService) { }
 
     async ngOnInit(): Promise<void> {
       this.route.params.subscribe(params => { this.studyID = params.id; });
@@ -81,7 +85,6 @@ export class StudyComponent implements OnInit {
             this.retrieveFile(data.node.id);
         }
         });
-      this.previewFile(this.url);
     }
 
     async previewFile(url) {
@@ -110,7 +113,7 @@ export class StudyComponent implements OnInit {
 
     openFileDialog() {
         const dialogRef = this.dialog.open(UploadFileDialogComponent , {
-            height: '50rem',
+            height: '40rem',
             width: '30rem',
             data: {
                 studyID: this.studyID,
@@ -121,7 +124,7 @@ export class StudyComponent implements OnInit {
 
     openFolderDialog() {
         const dialogRef = this.dialog.open(NewFolderDialogComponent , {
-            height: '50rem',
+            height: '20rem',
             width: '30rem',
             data: {
                 studyID: this.studyID,
@@ -224,6 +227,7 @@ export class StudyComponent implements OnInit {
             fileID: id
         };
         this.fileService.retrieveFile(data).subscribe(res => {
+            this.url = res;
             this.previewFile(res);
             this.actualFile = res;
         }, err => {
@@ -231,6 +235,18 @@ export class StudyComponent implements OnInit {
         });
     }
 
+    ab2str(buf) {
+        return String.fromCharCode.apply(null, new Uint16Array(buf));
+    }
+
+    printFile() {
+        if (this.url === null) {
+            this.studyService.showError('Please select a PDF first.');
+        } else {
+            const base64String = btoa(String.fromCharCode(...new Uint8Array(this.url)));
+            printJS({printable: base64String, type: 'pdf', showModal: false,  base64: true});
+        }
+    }
     downloadFile() {
         const blob = new Blob([this.actualFile], { type: 'application/pdf' });
         saveAs(blob, this.pdfDoc.pdfInfo.fingerprint);

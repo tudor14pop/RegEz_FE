@@ -14,7 +14,7 @@
                    formControlName="fileName">
         </div>
          <div class="d-flex justify-content-between">
-             <div class="text-left">Enable valadity period?</div>
+             <div class="text-left">Enable validity period?</div>
                 <div class="switch">
                     <div class="onoffswitch">
                         <input type="checkbox" formControlName="validPeriod" (click)="toggleDate()" class="onoffswitch-checkbox" id="example4">
@@ -25,12 +25,11 @@
                     </div>
                 </div>
          </div>
-         <div class="d-flex justify-content-between date-container ">
-            <div class="form-group mt-2" >
+         <div class="d-flex justify-content-between date-container" *ngIf="show">
+            <div class="form-group mt-2">
                 <input matInput class="date-picker form-control" placeholder="Date From"
                 formControlName="dateFrom"
                 [readonly] = "true"
-                [attr.disabled]= "show"
                 [matDatepicker]="dateFrom">
                 <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
                 <mat-datepicker #dateFrom></mat-datepicker>
