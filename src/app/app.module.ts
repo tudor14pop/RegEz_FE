@@ -50,6 +50,7 @@ import {VersionsComponent} from './components/common/versions/versions.component
 import {UserInviteComponent} from "./components/user.invite.component";
 import {AddRoleDialogComponent} from './components/administration/users/study-assignments/add-role-dialog/add-role-dialog.component';
 import {MatIconModule} from "@angular/material/icon";
+import { EditStudyFileDialogComponent } from './components/common/edit-study-file-dialog/edit-study-file-dialog.component';
 import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
@@ -86,6 +87,7 @@ import {MatCardModule} from "@angular/material/card";
         EditLabelComponent,
         VersionsComponent,
         AddRoleDialogComponent,
+        EditStudyFileDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -123,7 +125,7 @@ import {MatCardModule} from "@angular/material/card";
     bootstrap: [AppComponent,],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
         UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
-        CreateCompanyDialogComponent, AddRoleDialogComponent]
+        CreateCompanyDialogComponent, AddRoleDialogComponent, EditStudyFileDialogComponent]
 })
 export class AppModule {
 }
