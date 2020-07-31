@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeIn"  >
+<div class="wrapper wrapper-content animated fadeIn" >
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
         <h2 class="text-muted">Study Name</h2>
         <div class="icon-container bg-primary float-right"> 
@@ -11,14 +11,14 @@
                 <div class="ibox">
                     <div class="ibox-content" >
                         <div class="ibox-title border-bottom mb-3">
-                            <button class="btn btn-muted border mr-3" (click)="openFileDialog()"><i class="fa fa-file mr-2"></i>Upload New File</button>
-                            <button class="btn btn-muted border" (click)="openFolderDialog()"><i class="fa fa-folder mr-2"></i>New Folder</button>
+                            <button class="btn btn-muted border mr-3"  (click)="openFileDialog()"><i class="fa fa-file mr-2"></i>{{labelService.locale['DASHBOARD_STUDY_UPLOAD_NEW_FILE_TITLE']}}</button>
+                            <button class="btn btn-muted border" (click)="openFolderDialog()"><i class="fa fa-folder mr-2"></i>{{labelService.locale['DASHBOARD_STUDY_UPLOAD_NEW_FOLDER_TITLE']}}</button>
                         </div>
                             <div id="jstree1">
                                 <ul >
                                     <li *ngFor="let folder of folders; let i = index" class="jstree-open">{{folder[0].path}}
                                         <ul *ngFor="let item of folder">
-                                            <li [id]="item.id" data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>
+                                            <li [id]="item.id"  data-jstree='{"type":"pdf"}'  *ngIf='item.fileType === "FILE"'>{{item.name}}</li>
                                             <li data-jstree='{"type":"default"}' *ngIf='item.fileType === "FOLDER"'>{{item.name}}</li>
                                         </ul>
                                     </li>

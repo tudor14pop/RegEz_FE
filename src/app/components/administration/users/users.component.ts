@@ -5,6 +5,7 @@ import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
 import {UserService} from "../../../services/http/user.service";
 import {CompanyService} from "../../../services/http/company.service";
 import {User} from "../../../models/user/User";
+import { LabelService } from 'src/app/services/label.service';
 
 declare var $: any;
 
@@ -20,7 +21,8 @@ export class UsersComponent implements OnInit {
     constructor(
         private companyService: CompanyService,
         private userService: UserService,
-        private dialog: MatDialog) {
+        private dialog: MatDialog,
+        public labelService: LabelService) {
     }
 
     ngOnInit(): void {
@@ -50,8 +52,8 @@ export class UsersComponent implements OnInit {
 
     openInviteUserDialog() {
         const dialogRef = this.dialog.open(InviteUserDialogComponent, {
-            height: '45rem',
-            width: '30rem',
+            height: '32rem',
+            width: '40rem',
             data: this.companyDetailsDtos
         });
         const sub = dialogRef.componentInstance.onUserAdded.subscribe(() => {

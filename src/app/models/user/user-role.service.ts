@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 
-export enum Roles {
+export enum UserRoles {
     DEFAULT = 'DEFAULT',
     MONITOR = 'MONITOR',
     AUDITOR = 'AUDITOR',
@@ -13,10 +13,10 @@ export enum Roles {
 }
 
 @Injectable({providedIn: 'root'})
-export class RoleService {
+export class UserRoleService {
 
     get getAccountRoles() {
-        return Object.keys(Roles);
+        return Object.keys(UserRoles);
     }
 
 }

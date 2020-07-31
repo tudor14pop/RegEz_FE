@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
-        <h2 class="text-muted"> Company Administration</h2>
+        <h2 class="text-muted"> {{labelService.locale['ADMINISTRATION_COMPANY_TITLE']}}</h2>
         <div class="icon-container bg-primary float-right">
             <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
@@ -18,17 +18,17 @@
                 </select>
             </div>
             <div class="float-right">
-                <button class="btn btn-primary" (click)="openCreateCompanyDialog()">Create Company</button>
+                <button class="btn btn-primary" (click)="openCreateCompanyDialog()">{{labelService.locale['ADMINISTRATION_COMPANY_CREATE_BUTTON']}}</button>
             </div>
         </div>
         <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
             <thead>
             <tr>
-                <th>Company</th>
-                <th>Responsible</th>
-                <th>Research Sites</th>
-                <th>Studies</th>
-                <th>Action</th>
+                <th>{{labelService.locale['ADMINISTRATION_COMPANY_TABLE_COLUMN_COMPANY_NAME']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_COMPANY_TABLE_COLUMN_RESPONSIBLE']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_COMPANY_TABLE_COLUMN_RESEARCH_SITES']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_COMPANY_TABLE_COLUMN_STUDIES']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_COMPANY_TABLE_COLUMN_ACTION']}}</th>
             </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                     <td><p *ngFor="let administrator of companyDetails?.administrators">{{administrator?.firstName}} {{administrator?.lastName}}</p></td>
                     <td class="center">{{companyDetails?.sitesSize}}</td>
                     <td class="center">{{companyDetails?.studiesSize}}</td>
-                    <td class="center"><button class="btn btn-white" [routerLink]="['/administration/companies', companyDetails?.company?.id]">Manage</button></td>
+                    <td class="center"><button class="btn btn-white" [routerLink]="['/administration/companies', companyDetails?.company?.id]">{{labelService.locale['ADMINISTRATION_COMPANY_TABLE_ACTION']}}</button></td>
                 </tr>
             </tbody>
             <tfoot>

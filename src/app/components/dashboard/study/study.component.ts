@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { UploadFileDialogComponent } from '../../common/upload-file-dialog/upload-file-dialog.component.js';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFolderDialogComponent } from '../../common/new-folder-dialog/new-folder-dialog.component.js';
@@ -11,6 +11,7 @@ import print from 'print-js';
 import { StudyService } from 'src/app/services/http/study.service.js';
 import printJS from 'print-js';
 import { EditStudyFileDialogComponent } from '../../common/edit-study-file-dialog/edit-study-file-dialog.component.js';
+import { LabelService } from 'src/app/services/label.service.js';
 declare var $: any;
 
 
@@ -37,13 +38,16 @@ export class StudyComponent implements OnInit {
   canvas = null;
   ctx = null;
   studyID = '';
+
     constructor(private dialog: MatDialog,
                 private route: ActivatedRoute,
                 private fileService: FileService,
                 private ref: ChangeDetectorRef,
-                private studyService: StudyService) { }
+                private studyService: StudyService,
+                public labelService: LabelService) {
+                }
 
-    async ngOnInit(): Promise<void> {
+     ngOnInit() {
       this.route.params.subscribe(params => { this.studyID = params.id; });
       this.fileService.retrieveFolderStructure(this.studyID).subscribe(res => {
           Object.keys(res.filePathsByPath).map(key => {
@@ -55,10 +59,10 @@ export class StudyComponent implements OnInit {
              });
         });
           this.ref.detectChanges();
-          delay(500);
       }, err => {
           console.log(err);
       });
+      console.log(this.folders)
       this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
       this.ctx = this.canvas.getContext('2d');
       this.numbers = Array(50).fill(0).map((x, i) => i);
@@ -79,8 +83,8 @@ export class StudyComponent implements OnInit {
                 },
            },
       });
+        this.initDone = true;
     }, 0);
-      this.initDone = true;
       $('#jstree1').on('select_node.jstree', (e, data) => {
         if ( data.node.icon !== 'fa fa-folder') {
             this.retrieveFile(data.node.id);

@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
-        <h2 class="text-muted">Users Administration</h2>
-        <h3 class="text-muted">Users Administration / Study Assignments</h3>
+        <h2 class="text-muted">{{labelService.locale['ADMINISTRATION_USERS_TITLE']}}</h2>
+        <h3 class="text-muted">{{labelService.locale['ADMINISTRATION_USERS_TITLE']}} / {{labelService.locale['ADMINISTRATION_USERS_STUDY_ASSIGNMENTS_BUTTON']}}</h3>
         <div class="icon-container bg-primary float-right">
             <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
@@ -10,11 +10,11 @@
         <div class="d-flex justify-content-between w-100 mb-3">
             <div class="float-left d-flex w-75">
                 <select id="filter" type="text" class="form-control w-25 mr-5">
-                    <option value="" disabled selected>Company</option>
+                    <option value="" disabled selected>{{labelService.locale['ADMINISTRATION_USERS_STUDY_ASSIGNMENTS_COMPANY_DROPDOWN']}}</option>
                     <option *ngFor="let companyDetails of companiesDetails" [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
                 </select>
                 <select type="text" class="form-control w-25">
-                    <option value="" disabled selected>Site</option>
+                    <option value="" disabled selected>{{labelService.locale['ADMINISTRATION_USERS_STUDY_ASSIGNMENTS_SITE_DROPDOWN']}}</option>
                     <option *ngFor="let site of dashboardDTO?.sites" [value]="site?.id">{{site.name}}</option>
                 </select>
             </div>
@@ -23,8 +23,8 @@
         <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
             <thead>
             <tr>
-                <th>User Name</th>
-                <th *ngFor="let item of dashboardDTO?.studies">{{item.nickname}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_USERS_STUDY_ASSIGNMENTS_TABLE_COLUMN_USER']}}</th>
+                <th *ngFor="let study of dashboardDTO?.studies">{{study.sponsor.name}} {{study.protocol}} {{study.nickname ? '"' + study.nickname + '"' : ''}}</th>
             </tr>
             </thead>
             <tbody>

@@ -5,6 +5,7 @@ import {CompanyDetailsDto} from "../../../models/company/CompanyDetailsDto";
 import {UserService} from "../../../services/http/user.service";
 import {CompanyService} from "../../../services/http/company.service";
 import {User} from "../../../models/user/User";
+import { LabelService } from 'src/app/services/label.service';
 
 declare var $: any;
 
@@ -20,7 +21,8 @@ export class CompaniesComponent implements OnInit {
     constructor(
         private companyService: CompanyService,
         private userService: UserService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        public labelService: LabelService
     ) {
     }
 

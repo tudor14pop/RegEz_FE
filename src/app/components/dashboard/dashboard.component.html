@@ -19,9 +19,9 @@
                         </div>
                         <form class="row no-gutters pt-3" role="form" [formGroup]="studyFilterForm"
                               (ngSubmit)="filter(studyFilterForm)">
-                            <div class="col-sm-3 pr-2">
+                            <div *ngIf="!loginUserIsCompanyAdmin" class="col-sm-3 pr-2">
                                 <mat-form-field>
-                                    <mat-label>Company</mat-label>
+                                    <mat-label>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_FILTER_COMPANY']}}</mat-label>
                                     <mat-select formControlName="companyId">
                                         <mat-option [value]=""></mat-option>
                                         <mat-option *ngFor="let company of initDashboardDto?.companies"
@@ -29,9 +29,9 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3 pr-2">
+                            <div [ngClass]="loginUserIsCompanyAdmin ? 'col-sm-4 pr-2' : 'col-sm-3 pr-2'">
                                 <mat-form-field>
-                                    <mat-label>Site</mat-label>
+                                    <mat-label>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_FILTER_SITE']}}</mat-label>
                                     <mat-select formControlName="siteId">
                                         <mat-option [value]=""></mat-option>
                                         <mat-option *ngFor="let site of initDashboardDto?.sites"
@@ -39,19 +39,19 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-3 pr-2">
+                            <div [ngClass]="loginUserIsCompanyAdmin ? 'col-sm-4 pr-2' : 'col-sm-3 pr-2'">
                                 <mat-form-field>
-                                    <mat-label>Investigator</mat-label>
+                                    <mat-label>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_FILTER_INVESTIGATOR']}}</mat-label>
                                     <mat-select formControlName="investigatorId">
                                         <mat-option [value]=""></mat-option>
                                         <span *ngFor="let user of initDashboardDto?.users">
-                                            <mat-option *ngIf="user.roles.includes('INVESTIGATOR')"
+                                            <mat-option *ngIf="user?.roles?.includes(UserRolesEnum.INVESTIGATOR)"
                                                     [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
                                         </span>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="col-sm-2">
+                            <div [ngClass]="loginUserIsCompanyAdmin ? 'col-sm-3' : 'col-sm-2'">
                                 <mat-form-field>
                                     <input type="text"
                                            placeholder="Search"
@@ -69,10 +69,10 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="wide">Name</th>
-                                    <th scope="col">Tasks</th>
-                                    <th scope="col">Last Modified</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="wide">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_COLUMN_NAME']}}</th>
+                                    <th scope="col">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_COLUMN_TASKS']}}</th>
+                                    <th scope="col">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_COLUMN_LAST_MODIFIED']}}</th>
+                                    <th scope="col">{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_COLUMN_ACTION']}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -92,13 +92,13 @@
                                             <div *ngIf="clicked[i]">
                                                 <div class="popup-container bg-white animated fadeIn">
                                                         <span class="mb-1 ml-3"><i
-                                                                class="fa fa-edit mr-3"></i>Rename</span>
+                                                                class="fa fa-edit mr-3"></i>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_ACTION_RENAME']}}</span>
                                                     <span class="mb-1 ml-3"><i
-                                                            class="fa fa-user mr-3"></i> User Roles</span>
+                                                            class="fa fa-user mr-3"></i>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_ACTION_USER_ROLES']}}</span>
                                                     <span class="mb-1 ml-3"
                                                           (click)="downloadStudy(study.id, study.nickname)"><i
-                                                            class="fa fa-download mr-3"></i>Download</span>
-                                                    <span class="mb-1 ml-3"><i class="fa fa-check mr-3"></i>Close Study</span>
+                                                            class="fa fa-download mr-3"></i>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_ACTION_DOWNLOAD']}}</span>
+                                                    <span class="mb-1 ml-3"><i class="fa fa-check mr-3"></i>{{labelService.locale['DASHBOARD_STUDY_REGULATORY_BINDERS_TABLE_ACTION_CLOSE_STUDY']}}</span>
                                                 </div>
                                             </div>
                                         </a>
