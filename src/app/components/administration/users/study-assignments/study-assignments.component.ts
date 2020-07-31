@@ -8,6 +8,7 @@ import { StudyService } from 'src/app/services/http/study.service';
 import { InitDashboardDto } from 'src/app/models/InitDashboardDto';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRoleDialogComponent } from './add-role-dialog/add-role-dialog.component';
+import { LabelService } from 'src/app/services/label.service';
 
 declare var $: any;
 @Component({
@@ -22,7 +23,8 @@ export class StudyAssignmentsComponent implements OnInit {
   constructor(private userService: UserService,
               private dialog: MatDialog,
               private studyService: StudyService,
-              private companyService: CompanyService) { }
+              private companyService: CompanyService,
+              public labelService: LabelService) { }
 
   ngOnInit(): void {
     const users = this.userService.getAll();

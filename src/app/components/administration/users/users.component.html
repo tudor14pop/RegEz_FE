@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content animated fadeIn">
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
-        <h2 class="text-muted"> Users Administration</h2>
+        <h2 class="text-muted"> {{labelService.locale['ADMINISTRATION_USERS_TITLE']}}</h2>
         <div class="icon-container bg-primary float-right">
             <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
@@ -9,28 +9,28 @@
         <div class="d-flex justify-content-between w-100 mb-3">
             <div class="float-left d-flex">
                 <input type="text" class="form-control form-control-sm m-b-xs mr-1" style="height: 2.5rem;" id="filter"
-                       placeholder="Search">
+                       placeholder="{{labelService.locale['ADMINISTRATION_USERS_SEARCH_INPUT']}}">
                 <select type="text" class="form-control">
-                    <option value="" disabled selected>Company Name</option>
+                    <option value="" disabled selected>{{labelService.locale['ADMINISTRATION_USERS_DROPDOWN']}}</option>
                     <option *ngFor="let companyDetails of companyDetailsDtos"
                             [value]="companyDetails?.company?.name">{{companyDetails?.company?.name}}</option>
                 </select>
             </div>
             <div class="float-right">
                 <button class="btn btn-primary mr-1" [routerLink]="['/administration/users/study-assignments']"
-                        routerLinkActive="router-link-active">Study Assignments
+                        routerLinkActive="router-link-active">{{labelService.locale['ADMINISTRATION_USERS_STUDY_ASSIGNMENTS_BUTTON']}}
                 </button>
-                <button class="btn btn-primary" (click)='openInviteUserDialog()'>Invite User</button>
+                <button class="btn btn-primary" (click)='openInviteUserDialog()'>{{labelService.locale['ADMINISTRATION_USERS_INVITE_BUTTON']}}</button>
             </div>
         </div>
         <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
             <thead>
             <tr>
-                <th>User Name</th>
-                <th>Company</th>
-                <th>Account status</th>
-                <th>Last seen</th>
-                <th>Action</th>
+                <th>{{labelService.locale['ADMINISTRATION_USERS_TABLE_COLUMN_NAME']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_USERS_TABLE_COLUMN_COMPANY']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_USERS_TABLE_COLUMN_STATUS']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_USERS_TABLE_COLUMN_SEEN']}}</th>
+                <th>{{labelService.locale['ADMINISTRATION_USERS_TABLE_COLUMN_ACTION']}}</th>
             </tr>
             </thead>
             <tbody>
@@ -40,7 +40,7 @@
                 <td class="center">{{user.accountStatus | titlecase }}</td>
                 <td class="center">{{user.modified |  date: 'MMM dd, yyyy '}}</td>
                 <td class="center">
-                    <button class="btn btn-white" [routerLink]="['/administration/users', user.id]">Manage</button>
+                    <button class="btn btn-white" [routerLink]="['/administration/users', user.id]">{{labelService.locale['ADMINISTRATION_USERS_TABLE_ACTION']}}</button>
                 </td>
             </tr>
             </tbody>

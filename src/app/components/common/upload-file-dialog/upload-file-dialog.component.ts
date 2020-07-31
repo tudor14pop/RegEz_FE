@@ -6,6 +6,7 @@ import { FileService } from 'src/app/services/file.service.js';
 import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { InfoPopupComponent } from '../info-popup.component.js';
+import { LabelService } from 'src/app/services/label.service.js';
 declare var $: any;
 
 @Component({
@@ -21,6 +22,7 @@ export class UploadFileDialogComponent implements OnInit {
   fileName = '';
   constructor(public matDialog: MatDialog,
               private fileService: FileService,
+              public labelService: LabelService,
               private dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 

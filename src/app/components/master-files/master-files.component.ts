@@ -10,7 +10,7 @@ declare var $: any;
 })
 export class MasterFilesComponent implements OnInit {
 numbers;
-url = '../../assets/example.pdf';
+url = null;
 pdfDoc = null;
 pageNum = 1;
 pageRendering = false;
@@ -75,8 +75,6 @@ pageCount = document.getElementById('page_count');
                 selfRef.queueRenderPage(pageNumber, this.scale);
             }
         });
-        this.renderPage(this.pageNum, this.scale);
-
     });
   }
 
