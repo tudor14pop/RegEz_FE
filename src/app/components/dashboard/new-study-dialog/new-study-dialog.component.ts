@@ -73,7 +73,6 @@ export class NewStudyDialogComponent implements OnInit {
                     if (res.responseStatus != "SUCCESS") {
                         this.studyService.showError(res.responseMessage);
                     } else {
-                        console.log(res);
                         this.studySuccessfullyCreated.emit();
                         this.dialog.closeAll();
                         this.studyService.showSuccess()

@@ -24,7 +24,6 @@ export class LabelService {
     }, err => {
       console.log(err);
     });
-    console.log(this.localeList);
   }
 
   update(data) {

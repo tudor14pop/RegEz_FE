@@ -77,7 +77,7 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let study of initDashboardDto?.studies; let i = index">
-                                    <td [routerLink]="['/study', study.id]"
+                                    <td [routerLink]="['/study', study.id]" [state]="{ data: study}"
                                         style="cursor: pointer">{{study.sponsor.name}} {{study.protocol}} {{study.nickname ? '"' + study.nickname + '"' : ''}}
                                         <p>{{study.site.company.name}}
                                             - {{study.site.company.address1}}

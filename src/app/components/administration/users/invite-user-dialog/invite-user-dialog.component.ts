@@ -52,7 +52,6 @@ export class InviteUserDialogComponent implements OnInit {
 
     submit() {
         if (this.form.valid) {
-            console.log(this.form.value);
             this.userService.create(this.form.value).subscribe(
                 res => {
                     if (res.responseStatus != "SUCCESS") {

@@ -21,14 +21,13 @@ export class EditStudyFileDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.editFileForm =  new FormGroup({
-    uploadedFile: new FormControl(''),
-    fileName: new FormControl(''),
-    validPeriod: new FormControl(''),
+    fileName: new FormControl(this.data.fileName),
+    validPeriod: new FormControl(false),
     dateFrom: new FormControl(new Date()),
     dateTo: new FormControl(null),
     description: new FormControl(''),
     path: new FormControl(''),
-    versionable: new FormControl(''),
+    versionable: new FormControl(false),
     });
   }
 
@@ -37,6 +36,6 @@ export class EditStudyFileDialogComponent implements OnInit {
   }
 
   edit(form) {
-    console.log(form);
+    console.log(form.value);
   }
 }

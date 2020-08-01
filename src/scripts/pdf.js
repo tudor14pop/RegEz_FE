@@ -1828,7 +1828,7 @@ var useRequireEnsure = false;
   fakeWorkerFilesLoader = useRequireEnsure ? function (callback) {
     require.ensure([], function () {
       var worker;
-      worker = require('./pdf.worker.js');
+      worker = require('../assets/pdf.worker.js');
       callback(worker.WorkerMessageHandler);
     });
   } : dynamicLoaderSupported ? function (callback) {
@@ -2488,7 +2488,7 @@ var PDFWorker = function PDFWorkerClosure() {
     if ((0, _dom_utils.getDefaultSetting)('workerSrc')) {
       return (0, _dom_utils.getDefaultSetting)('workerSrc');
     }
-    pdfjsFilePath = "./scripts-pdf-worker-js.js";
+    pdfjsFilePath = "../assets/pdf.worker.js";
     if (pdfjsFilePath) {
     return pdfjsFilePath;
     }

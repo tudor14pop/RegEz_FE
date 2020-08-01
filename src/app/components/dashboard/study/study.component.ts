@@ -6,10 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { FileService } from 'src/app/services/file.service.js';
 import { FolderStructure } from 'src/app/models/folder-structure.model.js';
 import { saveAs } from 'file-saver';
-import { delay } from 'rxjs/operators';
-import print from 'print-js';
 import { StudyService } from 'src/app/services/http/study.service.js';
 import printJS from 'print-js';
+import * as pdfjs from '../../../../scripts/pdf.js';
 import { EditStudyFileDialogComponent } from '../../common/edit-study-file-dialog/edit-study-file-dialog.component.js';
 import { LabelService } from 'src/app/services/label.service.js';
 declare var $: any;
@@ -19,7 +18,6 @@ declare var $: any;
   selector: 'app-study',
   templateUrl: './study.component.html',
   styleUrls: ['./study.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StudyComponent implements OnInit {
   numbers;
@@ -34,11 +32,14 @@ export class StudyComponent implements OnInit {
   pageNumPending = null;
   totalPageNumber = null;
   scale = 1;
+  studyName = '';
   zoomRange = 0.25;
   canvas = null;
   ctx = null;
   studyID = '';
-
+  treeStructure = [];
+  actualFileName;
+  actualFileID;
     constructor(private dialog: MatDialog,
                 private route: ActivatedRoute,
                 private fileService: FileService,
@@ -48,6 +49,12 @@ export class StudyComponent implements OnInit {
                 }
 
      ngOnInit() {
+      if (history.state.data !== undefined) {
+        localStorage.setItem('study', JSON.stringify(history.state.data));
+      }
+      let parsedStudy = JSON.parse(localStorage.getItem('study'));
+      this.studyName = parsedStudy.sponsor.name + " " + parsedStudy.protocol + " " + (parsedStudy.nickname ? '"' + parsedStudy.nickname + '"' : ''); 
+      this.treeStructure.push({id: 1, parent: '#', text: parsedStudy.sponsor.name + " " + parsedStudy.protocol , icon: 'fa fa-folder', state: {opened: true}});
       this.route.params.subscribe(params => { this.studyID = params.id; });
       this.fileService.retrieveFolderStructure(this.studyID).subscribe(res => {
           Object.keys(res.filePathsByPath).map(key => {
@@ -56,46 +63,50 @@ export class StudyComponent implements OnInit {
                 if (element.fileType === 'FOLDER') {
                     this.justFolders.push(element);
                 }
+                if (element.parent === null) {
+                    if(element.fileType === 'FOLDER') {
+                        this.treeStructure.push({id: element.id, parent: 1, text: element.name, icon: 'fa fa-folder'});
+                    } else {
+                        this.treeStructure.push({id: element.id, parent: 1, text: element.name, icon:'fa fa-file'});
+                    }
+                } else {
+                    if(element.fileType === 'FOLDER') {
+                        this.treeStructure.push({id: element.id, parent: element.parent.id, text: element.name, icon:'fa fa-folder'})
+                    } else {
+                        this.treeStructure.push({id: element.id, parent: element.parent.id, text: element.name, icon:'fa fa-file'});
+                    }
+                }
              });
         });
-          this.ref.detectChanges();
       }, err => {
           console.log(err);
       });
-      console.log(this.folders)
+     
       this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
       this.ctx = this.canvas.getContext('2d');
       this.numbers = Array(50).fill(0).map((x, i) => i);
       $('.footable').footable();
       $('.footable2').footable();
       setTimeout(() => {
-        $('#jstree1').jstree({
-            core : {
-                check_callback : true,
-            },
+        $('#jstree1').jstree({ core : {
+            check_callback: true,
+            data: this.treeStructure
+        },
             plugins : [ 'search', 'themes', 'types', 'dnd' ],
-            types: {
-                pdf: {
-                    icon: 'fa fa-file'
-                },
-                default: {
-                    icon: 'fa fa-folder'
-                },
-           },
       });
         this.initDone = true;
     }, 0);
       $('#jstree1').on('select_node.jstree', (e, data) => {
+        this.actualFileName = data.node.text;
+        this.actualFileID = data.node.id;
         if ( data.node.icon !== 'fa fa-folder') {
             this.retrieveFile(data.node.id);
         }
         });
     }
 
-    async previewFile(url) {
-        const pdfjs = await import('../../../../scripts/pdf.js');
-        const pdfjsWorker = await import('../../../../scripts/pdf.worker.js');
-        pdfjs.workerSrc = pdfjsWorker;
+     previewFile(url) {
+        pdfjs.workerSrc =  '../../assets/pdf.worker.js';
 
         pdfjs.getDocument(url).then((pdfDoc) => {
             if (this.pdfDoc) {
@@ -131,6 +142,10 @@ export class StudyComponent implements OnInit {
         const dialogRef = this.dialog.open(EditStudyFileDialogComponent, {
             height: '28rem',
             width: '30rem',
+            data: {
+                fileID: this.actualFileID,
+                fileName: this.actualFileName
+            }
         });
     }
 
@@ -247,10 +262,6 @@ export class StudyComponent implements OnInit {
         });
     }
 
-    ab2str(buf) {
-        return String.fromCharCode.apply(null, new Uint16Array(buf));
-    }
-
     printFile() {
         if (this.url === null) {
             this.studyService.showError('Please select a PDF first.');
@@ -261,7 +272,7 @@ export class StudyComponent implements OnInit {
     }
     downloadFile() {
         const blob = new Blob([this.actualFile], { type: 'application/pdf' });
-        saveAs(blob, this.pdfDoc.pdfInfo.fingerprint);
+        saveAs(blob, this.actualFileName);
     }
 }
 

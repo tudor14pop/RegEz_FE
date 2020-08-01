@@ -1,4 +1,13 @@
 {
+    
+    "v1.0.2": {
+        "file-structure": "File structure fix.",
+        "UI-bugfixes": "Forms and dialogs heights formatted + bugfixes.",
+        "translations": "Administration and Translations pages have editable labels.",
+        "print": "Print study functionality implemented",
+        "download": "Download study has the file name instead of database ID.",
+        "files": "Binder template duplicate files removed."
+    },
     "v1.0.1": {
         "version": "Versioning added in footer.",
         "study-assignments": "Study assignments implemented on Frontend.",
@@ -6,7 +15,6 @@
         "404": "404 Not Found page implemented.",
         "bug-fixes": "Font size corrected, and minor bug-fixes."
     },
-
     "v1.0.0": {
         "task-manager-master-files": "Task Manager and Master files pages created without communication to the server.",
         "new-study": "Create new study functionality implemented with filter.",
