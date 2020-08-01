@@ -53,7 +53,7 @@
                     formControlName="path">
                 <option value="" disabled selected>Select Folder Location</option>
                 <option *ngFor="let folder of data.folders"
-                        [value]="folder.path">{{folder.name}}</option>
+                        [value]="folder.path + '/' + folder.name + '#' + folder.id">{{folder.name}}</option>
             </select>
         </div>
         <div class="d-flex justify-content-between">

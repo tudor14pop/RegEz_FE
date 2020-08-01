@@ -26,15 +26,17 @@ export class NewFolderDialogComponent implements OnInit {
   }
 
   upload(form) {
+    let x = form.value.folderLocation.split("#");
     const data = {
       fileType: form.value.fileType,
       name: form.value.folderName,
-      path: form.value.folderLocation,
+      parent: {id: x[1]},
+      path: x[0],
       id: this.data.studyID
       };
       console.log(data)
     this.fileService.createNewFolder(data).subscribe(res => {
-      // window.location.reload();
+      window.location.reload();
     }, err => {
       this.showError(err.errorMessage);
     });

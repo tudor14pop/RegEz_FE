@@ -46,6 +46,7 @@ export class UploadFileDialogComponent implements OnInit {
 
   upload(form) {
     this.matDialog.closeAll();
+    let x = form.value.path.split("#");
     const data = {
       file: this.fileToUpload,
       filePath: {
@@ -53,13 +54,16 @@ export class UploadFileDialogComponent implements OnInit {
         validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'),
         fileType: 'FILE',
         id: this.data.studyID,
+        parent:  {
+          id: x[1]
+        },
         name: this.fileName,
         versionable: form.value.validPeriod ? true : false,
-        path: form.value.path,
+        path: x[0],
         validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
       }
     };
-
+    console.log(data)
     this.fileService.uploadFile(data).subscribe(res => {
       window.location.reload();
     }, err => {

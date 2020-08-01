@@ -1,9 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, ValidatorFn, ValidationErrors} from '@angular/forms';
 import {AuthenticationService} from '../services/auth/AuthenticationService';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/http/user.service";
 import {UserInviteToken} from "../models/user/UserInviteToken";
+
+const checkPasswords: ValidatorFn = (form: FormGroup): ValidationErrors | null => {
+    let pass = form.get('password').value;
+    let confirmPass = form.get('confirmPassword').value;
+    
+    return pass === confirmPass ? null : { notSame: true }     
+}
 
 @Component({
     selector: 'app-user-invite',
@@ -25,7 +32,7 @@ import {UserInviteToken} from "../models/user/UserInviteToken";
                                 Required
                             </mat-error>
                         </mat-form-field>
-                        <mat-form-field>
+                        <mat-form-field class="mb-2">
                             <input matInput placeholder="Password" formControlName="password"
                                    [type]="hide ? 'password' : 'text'">
                             <mat-icon matSuffix
@@ -36,10 +43,23 @@ import {UserInviteToken} from "../models/user/UserInviteToken";
                             </mat-error>
                             <mat-error
                                     *ngIf="form.get('password').touched && form.get('password').hasError('pattern')">
-                                Should have at least 8 characters, one lowercase, one uppercase and a number
+                                Should be 8 characters long also contain a lowercase, an uppercase letter and a number.
                             </mat-error>
-                        </mat-form-field>
-
+                        </mat-form-field >
+                        <mat-form-field>
+                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword"
+                               [type]="hide ? 'password' : 'text'">
+                        <mat-icon matSuffix
+                                  (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-error
+                                *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').hasError('required')">
+                            Required
+                        </mat-error>
+                        <mat-error *ngIf="form.errors?.notSame && (form.get('confirmPassword').touched || form.get('confirmPassword').dirty)">
+                             Password mismatch
+                             </mat-error>
+   
+                    </mat-form-field>
                         <button type="submit" class="btn btn-w-m btn-info block full-width mt-3">Register</button>
                     </form>
 
@@ -70,7 +90,7 @@ export class UserInviteComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.userService.confirmUserInviteToken(params.userInviteToken).subscribe(res => {
                     if (res.responseStatus !== "SUCCESS") {
-                        this.userService.showError(res.responseStatus + ' ' + res.responseMessage);
+                        this.userService.showSuccess();
                     } else {
                         console.log(res);
                         this.userInviteToken = res;
@@ -88,15 +108,18 @@ export class UserInviteComponent implements OnInit {
             password: ['', [
                 Validators.required,
                 Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{8,}')
-            ]]
-        });
+            ]],
+            confirmPassword: ['', Validators.required]
+        }, {validator: checkPasswords });
     }
+
+    
 
     submit() {
         if (this.form.valid) {
             this.userService.registerUser(this.form.value).subscribe(res => {
                     if (res.responseStatus != "SUCCESS") {
-                        this.userService.showError(res.responseStatus + ' ' + res.responseMessage);
+                        this.userService.showSuccess();
                     } else {
                         console.log(res);
                         this.userService.showSuccess();
@@ -109,6 +132,7 @@ export class UserInviteComponent implements OnInit {
             );
         } else {
             this.form.markAllAsTouched();
+            this.userService.showError('There are some errors. Please try again.');
         }
     }
 

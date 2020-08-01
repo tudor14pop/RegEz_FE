@@ -52,6 +52,7 @@ import {AddRoleDialogComponent} from './components/administration/users/study-as
 import {MatIconModule} from "@angular/material/icon";
 import { EditStudyFileDialogComponent } from './components/common/edit-study-file-dialog/edit-study-file-dialog.component';
 import {MatCardModule} from "@angular/material/card";
+import { BnNgIdleService } from 'bn-ng-idle'; 
 
 @NgModule({
     declarations: [
@@ -109,6 +110,7 @@ import {MatCardModule} from "@angular/material/card";
         MatCardModule
     ],
     providers: [
+        BnNgIdleService,
         {provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
         {
             provide: HTTP_INTERCEPTORS,

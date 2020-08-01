@@ -57,7 +57,7 @@ pageCount = document.getElementById('page_count');
       }
 });
     const pdfjs = await import('../../../scripts/pdf.js');
-    const pdfjsWorker = await import('../../../scripts/pdf.worker.js');
+    const pdfjsWorker = await import('../../../assets/pdf.worker.js');
     pdfjs.workerSrc = pdfjsWorker;
 
     pdfjs.getDocument(this.url).then((pdfDoc_) => {
