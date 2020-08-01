@@ -20,7 +20,6 @@ export class EditStudyFileDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     this.editFileForm =  new FormGroup({
     fileName: new FormControl(this.data.fileName),
     validPeriod: new FormControl(false),

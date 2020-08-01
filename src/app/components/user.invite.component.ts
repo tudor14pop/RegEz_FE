@@ -92,7 +92,6 @@ export class UserInviteComponent implements OnInit {
                     if (res.responseStatus !== "SUCCESS") {
                         this.userService.showSuccess();
                     } else {
-                        console.log(res);
                         this.userInviteToken = res;
                         this.form.controls.userId.setValue(res.user.id);
                     }
@@ -121,7 +120,6 @@ export class UserInviteComponent implements OnInit {
                     if (res.responseStatus != "SUCCESS") {
                         this.userService.showSuccess();
                     } else {
-                        console.log(res);
                         this.userService.showSuccess();
                         this.router.navigate(['login']);
                     }

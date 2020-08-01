@@ -63,7 +63,6 @@ export class UploadFileDialogComponent implements OnInit {
         validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
       }
     };
-    console.log(data)
     this.fileService.uploadFile(data).subscribe(res => {
       window.location.reload();
     }, err => {

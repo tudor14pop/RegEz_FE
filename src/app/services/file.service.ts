@@ -14,13 +14,11 @@ export class FileService {
   uploadFile(data) {
     const formData: FormData  = new FormData();
     formData.append('file', data.file);
-    console.log(JSON.stringify(data.filePath));
     return this.http.post(environment.serverUrl + '/file-management/study/' + data.filePath.id +  '/new-file', formData ,
      {params: {filePath: JSON.stringify(data.filePath)}} );
   }
 
   createNewFolder(data) {
-    console.log(JSON.stringify(data))
     return this.http.post(environment.serverUrl + '/file-management/study/' + data.id + '/new-folder', data );
   }
 
