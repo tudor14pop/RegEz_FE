@@ -12,6 +12,8 @@ import * as pdfjs from '../../../../scripts/pdf.js';
 import { EditStudyFileDialogComponent } from '../../common/edit-study-file-dialog/edit-study-file-dialog.component.js';
 import { LabelService } from 'src/app/services/label.service.js';
 import { ThrowStmt } from '@angular/compiler';
+import { forkJoin } from 'rxjs';
+import { UpdateFileDialogComponent } from '../../common/update-file-dialog/update-file-dialog.component.js';
 declare var $: any;
 
 
@@ -23,8 +25,9 @@ declare var $: any;
 export class StudyComponent implements OnInit {
   numbers;
   justFolders: FolderStructure[] = [];
-  actualFile;
+  actualFile = null;
   initDone = false;
+  actualFileDetails = null;
   folders: FolderStructure[] = [];
   url = null;
   pdfDoc = null;
@@ -82,7 +85,7 @@ export class StudyComponent implements OnInit {
       }, err => {
           console.log(err);
       });
-     
+     console.log(this.folders)
       this.canvas = ( document.getElementById('the-canvas') as HTMLCanvasElement);
       this.ctx = this.canvas.getContext('2d');
       this.numbers = Array(50).fill(0).map((x, i) => i);
@@ -130,7 +133,7 @@ export class StudyComponent implements OnInit {
 
     openFileDialog() {
         const dialogRef = this.dialog.open(UploadFileDialogComponent , {
-            height: '40rem',
+            height: '37rem',
             width: '30rem',
             data: {
                 studyID: this.studyID,
@@ -139,16 +142,34 @@ export class StudyComponent implements OnInit {
         });
     }
 
-    openEditFileDialog() {
-        const dialogRef = this.dialog.open(EditStudyFileDialogComponent, {
+
+    openUpdateFileDialog() {
+        const dialogRef = this.dialog.open(UpdateFileDialogComponent, {
             height: '28rem',
             width: '30rem',
             data: {
                 studyID: this.studyID,
                 fileID: this.actualFileID,
-                fileName: this.actualFileName
+                details: this.actualFileDetails
             }
         });
+    
+    }
+
+    openEditFileDialog() {
+        if (this.actualFileDetails === null) {
+           this.studyService.showError('Please select a PDF first.')
+        } else {
+            const dialogRef = this.dialog.open(EditStudyFileDialogComponent, {
+                height: '28rem',
+                width: '30rem',
+                data: {
+                    studyID: this.studyID,
+                    fileID: this.actualFileID,
+                    details: this.actualFileDetails
+                }
+            });
+        }
     }
 
     openFolderDialog() {
@@ -252,16 +273,18 @@ export class StudyComponent implements OnInit {
     retrieveFile(id) {
         this.pageNum = 1;
         const data = {
+            fileID: id,
             studyID: this.studyID,
-            fileID: id
         };
-        this.fileService.retrieveFile(data).subscribe(res => {
-            this.url = res;
-            console.log(res)
-            this.previewFile(res);
-            this.actualFile = res;
+        const file = this.fileService.retrieveFile(data);
+        const fileDetails = this.fileService.retrieveFileDetails(data);
+        forkJoin([file, fileDetails]).subscribe(res => {
+            this.url = res[0];
+            this.previewFile(res[0]);
+            this.actualFile = res[0]
+            this.actualFileDetails = res[1]
         }, err => {
-            console.log(err);
+        console.log(err);
         });
     }
 
@@ -278,8 +301,12 @@ export class StudyComponent implements OnInit {
         }
     }
     downloadFile() {
-        const blob = new Blob([this.actualFile], { type: 'application/pdf' });
-        saveAs(blob, this.actualFileName);
+        if (this.actualFile === null) {
+            this.studyService.showError('Please select a PDF first.')
+        } else {
+            const blob = new Blob([this.actualFile], { type: 'application/pdf' });
+            saveAs(blob, this.actualFileName);
+        }
     }
 }
 

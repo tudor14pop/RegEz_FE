@@ -19,7 +19,7 @@
                     </div>
                 </div>
          </div>
-         <div class="d-flex justify-content-between date-container" *ngIf="show">
+         <div class="d-flex justify-content-between date-container" *ngIf="data.details.validityPeriodEnabled !== null">
             <div class="form-group mt-2">
                 <input matInput class="date-picker form-control" placeholder="Date From"
                 formControlName="dateFrom"
@@ -32,7 +32,6 @@
                 <input matInput class="date-picker form-control" placeholder="Date To"
                 formControlName="dateTo"
                 [readonly] = "true"
-                [attr.disabled]= "show"
                 [matDatepicker]="dateTo">
                 <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
                 <mat-datepicker #dateTo></mat-datepicker>

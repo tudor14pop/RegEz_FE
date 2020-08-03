@@ -35,8 +35,8 @@ export class DashboardComponent implements OnInit {
 
     openNewStudyDialog() {
         const dialogRef = this.dialog.open(NewStudyDialogComponent, {
-            height: '50rem',
-            width: '30rem',
+            height: '30rem',
+            width: '45rem',
             data: this.initDashboardDto
         });
         const sub = dialogRef.componentInstance.studySuccessfullyCreated.subscribe(() => {

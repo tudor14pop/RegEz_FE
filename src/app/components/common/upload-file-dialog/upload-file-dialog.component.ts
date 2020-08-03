@@ -58,8 +58,9 @@ export class UploadFileDialogComponent implements OnInit {
           id: x[1]
         },
         name: this.fileName,
-        versionable: form.value.validPeriod ? true : false,
+        versionable: form.value.versionable ? true : false,
         path: x[0],
+        validityPeriodEnabled: form.value.validPeriod ? true : false,
         validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
       }
     };

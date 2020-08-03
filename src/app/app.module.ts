@@ -53,7 +53,8 @@ import {MatIconModule} from "@angular/material/icon";
 import { EditStudyFileDialogComponent } from './components/common/edit-study-file-dialog/edit-study-file-dialog.component';
 import {MatCardModule} from "@angular/material/card";
 import { BnNgIdleService } from 'bn-ng-idle';
-import { ForgotPasswordComponent } from './components/common/forgot-password/forgot-password.component'; 
+import { ForgotPasswordComponent } from './components/common/forgot-password/forgot-password.component';
+import { UpdateFileDialogComponent } from './components/common/update-file-dialog/update-file-dialog.component'; 
 
 @NgModule({
     declarations: [
@@ -91,6 +92,7 @@ import { ForgotPasswordComponent } from './components/common/forgot-password/for
         AddRoleDialogComponent,
         EditStudyFileDialogComponent,
         ForgotPasswordComponent,
+        UpdateFileDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -129,7 +131,7 @@ import { ForgotPasswordComponent } from './components/common/forgot-password/for
     bootstrap: [AppComponent,],
     entryComponents: [NewStudyDialogComponent, ESignDialogComponent, InternalDialogComponent,
         UploadFileDialogComponent, NewFolderDialogComponent, InviteUserDialogComponent,
-        CreateCompanyDialogComponent, AddRoleDialogComponent, EditStudyFileDialogComponent]
+        CreateCompanyDialogComponent, AddRoleDialogComponent, EditStudyFileDialogComponent, UpdateFileDialogComponent]
 })
 export class AppModule {
 }

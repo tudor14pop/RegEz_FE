@@ -23,13 +23,14 @@ export class EditStudyFileDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    console.log(this.data)
     this.editFileForm =  new FormGroup({
-    fileName: new FormControl(this.data.fileName),
-    validPeriod: new FormControl(false),
-    dateFrom: new FormControl(new Date()),
-    dateTo: new FormControl(null),
-    description: new FormControl(''),
-    versionable: new FormControl(false),
+    fileName: new FormControl(this.data.details.name),
+    validPeriod: new FormControl(this.data.details.validityPeriodEnabled),
+    dateFrom: new FormControl(this.data.details.validityFrom),
+    dateTo: new FormControl(this.data.details.validityTo),
+    description: new FormControl(this.data.details.description),
+    versionable: new FormControl(this.data.details.versionable),
     });
   }
 
@@ -39,15 +40,20 @@ export class EditStudyFileDialogComponent implements OnInit {
 
   edit(form) {
     const data = {
-        description: form.value.description,
-        validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'),
+        description: form.value.description === '' ? this.data.details.description : form.value.description ,
+        validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US') ? formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'): this.data.details.validityTo,
         id: this.data.fileID,
+        path: this.data.details.path,
+        parent: this.data.details.parent,
+        fileType: this.data.details.fileType,
         name: form.value.fileName,
         versionable: form.value.validPeriod ? true : false,
         validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
     }
+    console.log(data)
     this.fileService.editFile(data, this.data.studyID).subscribe(res => {
         this.matDialog.closeAll();
+        window.location.reload();
         this.studyService.showSuccess()
     }, err => {
       console.log(err);
