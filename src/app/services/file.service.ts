@@ -23,10 +23,17 @@ export class FileService {
   }
 
   retrieveFile(data) {
-    return this.http.get(environment.serverUrl + '/file-management/study/' + data.studyID + '/file/' + data.fileID, {responseType: 'arraybuffer'});
+    return this.http.get(environment.serverUrl + '/file-management/study/' + data.studyID + '/download/file/' + data.fileID, {responseType: 'arraybuffer'});
 
   }
+  retrieveFileDetails(data) {
+    return this.http.get(environment.serverUrl + '/file-management/study/' + data.studyID + '/file/' + data.fileID);
 
+  }
+  editFile(data, studyID) {
+    return this.http.put(environment.serverUrl + '/file-management/study/' + studyID , data);
+
+  }
   retrieveFolderStructure(data): Observable<FolderStructure> {
     return this.http.get<FolderStructure> (environment.serverUrl + '/file-management/study/' + data + '/retrieve');
 

@@ -16,11 +16,13 @@ import {CreateLabelComponent} from './components/administration/translations/cre
 import {EditLabelComponent} from './components/administration/translations/edit-label/edit-label.component';
 import {VersionsComponent} from './components/common/versions/versions.component';
 import {UserInviteComponent} from "./components/user.invite.component";
+import { ForgotPasswordComponent } from './components/common/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, pathMatch: 'full'},
+    {path: 'forgot-password', component: ForgotPasswordComponent},
     {path: 'confirmUserInvite/:userInviteToken', component: UserInviteComponent , pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'task-manager', component: TaskManagerComponent},

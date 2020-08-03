@@ -1,0 +1,38 @@
+<div class="middle-box text-center animated fadeInDown">
+    <div>
+        <h4 *ngIf="labelService.locale">Update Document</h4>
+        <div class="mt-5 d-flex justify-content-between">
+        <button (click)="fileInput.click();$event.preventDefault()" class="btn btn-secondary w-25">Select</button>
+        <div class="w-75">{{fileName}}</div>
+        </div>
+        <form class="m-t" role="form" enctype="multipart/form-data" [formGroup]="updateFileForm" (ngSubmit)="update(updateFileForm)">
+         <div class="form-group">
+             <input #fileInput type="file" name="file" id="file" formControlName="uploadedFile" (change)="changeFileName($event)" hidden>
+         </div>
+         <div class="d-flex justify-content-between date-container">
+            <div class="form-group mt-2">
+                <input matInput class="date-picker form-control" placeholder="Date From"
+                formControlName="dateFrom"
+                [readonly] = "true"
+                [matDatepicker]="dateFrom">
+                <mat-datepicker-toggle matSuffix [for]="dateFrom"></mat-datepicker-toggle>
+                <mat-datepicker #dateFrom></mat-datepicker>
+            </div>
+            <div class="form-group ml-3 mt-2">
+                <input matInput class="date-picker form-control" placeholder="Date To"
+                formControlName="dateTo"
+                [readonly] = "true"
+                [attr.disabled]= "show"
+                [matDatepicker]="dateTo">
+                <mat-datepicker-toggle matSuffix [for]="dateTo"></mat-datepicker-toggle>
+                <mat-datepicker #dateTo></mat-datepicker>
+            </div>
+        </div>
+        <div class="form-group w-100">
+            <textarea class="form-control" placeholder="Description"
+                   formControlName="description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
+        </form>
+    </div>
+</div>

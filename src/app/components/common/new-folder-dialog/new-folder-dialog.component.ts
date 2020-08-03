@@ -30,7 +30,7 @@ export class NewFolderDialogComponent implements OnInit {
     const data = {
       fileType: form.value.fileType,
       name: form.value.folderName,
-      parent: {id: x[1]},
+      parent: x[1] === undefined ? null : {id: x[1]},
       path: x[0],
       id: this.data.studyID
       };

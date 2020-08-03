@@ -2,121 +2,128 @@
     <div>
         <h4>Create New Study</h4>
         <form class="m-t" role="form" [formGroup]="newStudyForm" (ngSubmit)="submit()">
-            <div formGroupName="sponsor">
-                <mat-form-field>
-                    <input type="text"
-                           placeholder="Sponsor"
-                           matInput
-                           formControlName="name"
-                           [matAutocomplete]="auto">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let sponsor of filteredSponsors | async" [value]="sponsor.name">
-                            {{sponsor.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                    <mat-error *ngIf="newStudyForm.get('sponsor.name').touched &&
-                         newStudyForm.get('sponsor.name').hasError('required')"> Required
-                    </mat-error>
-                </mat-form-field>
+            <div class="d-flex">
+                <div class="w-50">
+                    <div formGroupName="sponsor">
+                        <mat-form-field>
+                            <input type="text"
+                                placeholder="Sponsor"
+                                matInput
+                                formControlName="name"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                <mat-option *ngFor="let sponsor of filteredSponsors | async" [value]="sponsor.name">
+                                    {{sponsor.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-error *ngIf="newStudyForm.get('sponsor.name').touched &&
+                                newStudyForm.get('sponsor.name').hasError('required')"> Required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field>
+                        <input type="text"
+                            placeholder="Protocol #"
+                            matInput
+                            formControlName="protocol">
+                        <mat-error *ngIf="newStudyForm.get('protocol').touched &&
+                                newStudyForm.get('protocol').hasError('required')"> Required
+                        </mat-error>
+                    </mat-form-field>
+                    <div formGroupName="cro">
+                        <mat-form-field>
+                            <input type="text"
+                                placeholder="CRO Name"
+                                matInput
+                                formControlName="name"
+                                [matAutocomplete]="auto2">
+                            <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                                <mat-option *ngFor="let cro of filteredCros | async" [value]="cro.name">
+                                    {{cro.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field>
+                        <input type="text"
+                            placeholder="Nickname"
+                            matInput
+                            formControlName="nickname">
+                        <mat-error *ngIf="newStudyForm.get('nickname').touched &&
+                                newStudyForm.get('nickname').hasError('required')"> Required
+                        </mat-error>
+                    </mat-form-field>
+                    
+                    <mat-form-field>
+                        <input type="text"
+                            placeholder="IND #"
+                            matInput
+                            formControlName="indNumber">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Pricipal Investigator</mat-label>
+                        <mat-select formControlName="principalInvestigator">
+                            <mat-option *ngFor="let user of initDashboardDto?.users"
+                                        [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="newStudyForm.get('principalInvestigator').touched &&
+                                newStudyForm.get('principalInvestigator').hasError('required')"> Required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="ml-4 w-50">
+                    <mat-form-field>
+                        <mat-label>Sub Investigator</mat-label>
+                        <mat-select formControlName="principalInvestigator">
+                            <mat-option *ngFor="let user of initDashboardDto?.users"
+                                        [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Site</mat-label>
+                        <mat-select formControlName="site">
+                            <mat-option *ngFor="let site of initDashboardDto?.sites"
+                                        [value]="site">{{site.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="newStudyForm.get('site').touched &&
+                                newStudyForm.get('site').hasError('required')"> Required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text"
+                            placeholder="Site #"
+                            matInput
+                            formControlName="siteNumber">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Lead CRC</mat-label>
+                        <mat-select formControlName="leadCrc">
+                            <mat-option *ngFor="let user of initDashboardDto?.users"
+                                        [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="newStudyForm.get('leadCrc').touched &&
+                                newStudyForm.get('leadCrc').hasError('required')"> Required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Backup CRC</mat-label>
+                        <mat-select formControlName="backupCrc">
+                            <mat-option *ngFor="let user of initDashboardDto?.users"
+                                        [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Binder Template</mat-label>
+                        <mat-select formControlName="structure">
+                            <mat-option *ngFor="let binderTemplate of initDashboardDto?.binderTemplates"
+                                        [value]="binderTemplate.structure">{{binderTemplate.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="newStudyForm.get('structure').touched &&
+                                newStudyForm.get('structure').hasError('required')"> Required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
-            <mat-form-field>
-                <input type="text"
-                       placeholder="Protocol #"
-                       matInput
-                       formControlName="protocol">
-                <mat-error *ngIf="newStudyForm.get('protocol').touched &&
-                         newStudyForm.get('protocol').hasError('required')"> Required
-                </mat-error>
-            </mat-form-field>
-            <div formGroupName="cro">
-                <mat-form-field>
-                    <input type="text"
-                           placeholder="CRO Name"
-                           matInput
-                           formControlName="name"
-                           [matAutocomplete]="auto2">
-                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
-                        <mat-option *ngFor="let cro of filteredCros | async" [value]="cro.name">
-                            {{cro.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-            </div>
-            <mat-form-field>
-                <input type="text"
-                       placeholder="Nickname"
-                       matInput
-                       formControlName="nickname">
-                <mat-error *ngIf="newStudyForm.get('nickname').touched &&
-                         newStudyForm.get('nickname').hasError('required')"> Required
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input type="text"
-                       placeholder="IND #"
-                       matInput
-                       formControlName="indNumber">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Pricipal Investigator</mat-label>
-                <mat-select formControlName="principalInvestigator">
-                    <mat-option *ngFor="let user of initDashboardDto?.users"
-                                [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="newStudyForm.get('principalInvestigator').touched &&
-                         newStudyForm.get('principalInvestigator').hasError('required')"> Required
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Sub Investigator</mat-label>
-                <mat-select formControlName="principalInvestigator">
-                    <mat-option *ngFor="let user of initDashboardDto?.users"
-                                [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Site</mat-label>
-                <mat-select formControlName="site">
-                    <mat-option *ngFor="let site of initDashboardDto?.sites"
-                                [value]="site">{{site.name}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="newStudyForm.get('site').touched &&
-                         newStudyForm.get('site').hasError('required')"> Required
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <input type="text"
-                       placeholder="Site #"
-                       matInput
-                       formControlName="siteNumber">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Lead CRC</mat-label>
-                <mat-select formControlName="leadCrc">
-                    <mat-option *ngFor="let user of initDashboardDto?.users"
-                                [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="newStudyForm.get('leadCrc').touched &&
-                         newStudyForm.get('leadCrc').hasError('required')"> Required
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Backup CRC</mat-label>
-                <mat-select formControlName="backupCrc">
-                    <mat-option *ngFor="let user of initDashboardDto?.users"
-                                [value]="user">{{user.firstName}} {{user.lastName}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Binder Template</mat-label>
-                <mat-select formControlName="structure">
-                    <mat-option *ngFor="let binderTemplate of initDashboardDto?.binderTemplates"
-                                [value]="binderTemplate.structure">{{binderTemplate.name}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="newStudyForm.get('structure').touched &&
-                         newStudyForm.get('structure').hasError('required')"> Required
-                </mat-error>
-            </mat-form-field>
             <button type="submit" class="btn btn-w-m btn-info block full-width">Create</button>
         </form>
     </div>
