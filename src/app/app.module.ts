@@ -115,7 +115,6 @@ import { UpdateFileDialogComponent } from './components/common/update-file-dialo
     ],
     providers: [
         BnNgIdleService,
-        {provide: APP_INITIALIZER, multi: true, deps: [LabelService], useFactory: init},
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpRequestInterceptor,
@@ -138,8 +137,4 @@ export class AppModule {
 
 export function init_app(appLoadService: AppLoadService) {
     return () => appLoadService.initializeApp();
-}
-
-export function init(label: LabelService) {
-    return () => label.load();
 }

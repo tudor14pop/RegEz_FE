@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.labelService.load();
         this.studyFilterForm = this.formBuilder.group({
             companyId: "",
             siteId: "",
