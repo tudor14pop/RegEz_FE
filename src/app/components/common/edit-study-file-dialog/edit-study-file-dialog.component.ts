@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileService } from 'src/app/services/file.service';
+import { formatDate } from '@angular/common';
+import { StudyService } from 'src/app/services/http/study.service';
 
 @Component({
   selector: 'app-edit-study-file-dialog',
@@ -17,6 +19,7 @@ export class EditStudyFileDialogComponent implements OnInit {
   constructor(public matDialog: MatDialog,
               private fileService: FileService,
               private dialog: MatDialog,
+              private studyService: StudyService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
@@ -26,7 +29,6 @@ export class EditStudyFileDialogComponent implements OnInit {
     dateFrom: new FormControl(new Date()),
     dateTo: new FormControl(null),
     description: new FormControl(''),
-    path: new FormControl(''),
     versionable: new FormControl(false),
     });
   }
@@ -36,6 +38,21 @@ export class EditStudyFileDialogComponent implements OnInit {
   }
 
   edit(form) {
-    console.log(form.value);
+    const data = {
+        description: form.value.description,
+        validityTo: formatDate(form.value.dateTo, 'yyyy-MM-dd', 'en-US'),
+        id: this.data.fileID,
+        name: form.value.fileName,
+        versionable: form.value.validPeriod ? true : false,
+        validityFrom: form.value.dateFrom ? formatDate(form.value.dateFrom, 'yyyy-MM-dd', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd', 'en-US'),
+    }
+    this.fileService.editFile(data, this.data.studyID).subscribe(res => {
+        this.matDialog.closeAll();
+        this.studyService.showSuccess()
+    }, err => {
+      console.log(err);
+      this.matDialog.closeAll();
+      this.studyService.showError('Something went wrong. Please try again.')
+    })
   }
 }

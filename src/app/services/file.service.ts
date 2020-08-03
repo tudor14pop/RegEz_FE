@@ -27,6 +27,10 @@ export class FileService {
 
   }
 
+  editFile(data, studyID) {
+    return this.http.put(environment.serverUrl + '/file-management/study/' + studyID , data);
+
+  }
   retrieveFolderStructure(data): Observable<FolderStructure> {
     return this.http.get<FolderStructure> (environment.serverUrl + '/file-management/study/' + data + '/retrieve');
 

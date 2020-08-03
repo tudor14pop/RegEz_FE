@@ -27,7 +27,7 @@ import {AuthenticationResponse, AuthenticationService} from '../services/auth/Au
                         </div>
                         <button type="submit" class="btn btn-w-m btn-info block full-width">Login</button>
 
-                        <a><small>Forgot password?</small></a>
+                        <a  [routerLink]="[ '/forgot-password']"><small>Forgot password?</small></a>
                     </form>
                     <p class="m-t"><small>eRegulatory System Copyright &copy; 2020</small></p>
                 </div>

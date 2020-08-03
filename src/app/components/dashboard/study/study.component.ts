@@ -7,10 +7,11 @@ import { FileService } from 'src/app/services/file.service.js';
 import { FolderStructure } from 'src/app/models/folder-structure.model.js';
 import { saveAs } from 'file-saver';
 import { StudyService } from 'src/app/services/http/study.service.js';
-import printJS from 'print-js';
+import * as  printJS from 'print-js';
 import * as pdfjs from '../../../../scripts/pdf.js';
 import { EditStudyFileDialogComponent } from '../../common/edit-study-file-dialog/edit-study-file-dialog.component.js';
 import { LabelService } from 'src/app/services/label.service.js';
+import { ThrowStmt } from '@angular/compiler';
 declare var $: any;
 
 
@@ -143,6 +144,7 @@ export class StudyComponent implements OnInit {
             height: '28rem',
             width: '30rem',
             data: {
+                studyID: this.studyID,
                 fileID: this.actualFileID,
                 fileName: this.actualFileName
             }
@@ -255,6 +257,7 @@ export class StudyComponent implements OnInit {
         };
         this.fileService.retrieveFile(data).subscribe(res => {
             this.url = res;
+            console.log(res)
             this.previewFile(res);
             this.actualFile = res;
         }, err => {
@@ -266,8 +269,12 @@ export class StudyComponent implements OnInit {
         if (this.url === null) {
             this.studyService.showError('Please select a PDF first.');
         } else {
-            const base64String = btoa(String.fromCharCode(...new Uint8Array(this.url)));
-            printJS({printable: base64String, type: 'pdf', showModal: false,  base64: true});
+            var base64 = btoa(
+                new Uint8Array(this.url)
+                  .reduce((data, byte) => data + String.fromCharCode(byte), '')
+              );            
+              
+            printJS({printable: base64, type: 'pdf', showModal: false,  base64: true});
         }
     }
     downloadFile() {
