@@ -1,6 +1,6 @@
-<div class="wrapper wrapper-content animated fadeIn"  >
+<div class="wrapper wrapper-content animated fadeIn" >
     <div class="col-lg-12 d-inline-block mb-5 border-bottom white-bg page-heading">
-        <h2 class="text-muted"><th scope="col">Master Files</h2>
+        <h2 class="text-muted">Master Files</h2>
         <div class="icon-container bg-primary float-right"> 
            <i class="ml-2 fa fa-cogs fa-lg fa-2x"></i>
         </div>
@@ -9,117 +9,59 @@
         <div class="row w-100">
             <div class="col-lg-4">
                 <div class="ibox">
-                    <div class="ibox-content">
+                    <div class="ibox-content" >
                         <div class="ibox-title border-bottom mb-3">
-                            <button class="btn btn-muted border mr-3"><i class="fa fa-file mr-2"></i> Upload New File</button>
-                            <button class="btn btn-muted border"><i class="fa fa-folder mr-2"></i>New Folder</button>
+                            <button class="btn btn-muted border mr-3" disabled (click)="openFileDialog()"><i class="fa fa-file mr-2"></i>Upload New File</button>
+                            <button class="btn btn-muted border" disabled (click)="openFolderDialog()"><i class="fa fa-folder mr-2"></i>New Folder</button>
                         </div>
-                        <div id="jstree1">
-                            <ul>
-                                <li class="jstree-open">Admin theme
-                                    <ul>
-                                        <li>css
-                                            <ul>
-                                                <li data-jstree='"type":"css"}'>animate.css</li>
-                                                <li data-jstree='"type":"css"}'>bootstrap.css</li>
-                                                <li data-jstree='"type":"css"}'>style.css</li>
-                                            </ul>
-                                        </li>
-                                        <li>email-templates
-                                            <ul>
-                                                <li data-jstree='"type":"html"}'>action.html</li>
-                                                <li data-jstree='"type":"html"}'>alert.html</li>
-                                                <li data-jstree='"type":"html"}'>billing.html</li>
-                                            </ul>
-                                        </li>
-                                        <li>fonts
-                                            <ul>
-                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.eot</li>
-                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.svg</li>
-                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.ttf</li>
-                                                <li data-jstree='"type":"svg"}'>glyphicons-halflings-regular.woff</li>
-                                            </ul>
-                                        </li>
-                                        <li class="jstree-open">img
-                                            <ul>
-                                                <li data-jstree='"type":"img"}'>profile_small.jpg</li>
-                                                <li data-jstree='"type":"img"}'>angular_logo.png</li>
-                                            </ul>
-                                        </li>
-                                        <li class="jstree-open">js
-                                            <ul>
-                                                <li data-jstree='"type":"js"}'>inspinia.js</li>
-                                                <li data-jstree='"type":"js"}'>bootstrap.js</li>
-                                                <li data-jstree='"type":"js"}'>jquery-2.1.1.js</li>
-                                                <li data-jstree='"type":"js"}'>jquery-ui.custom.min.js</li>
-                                                <li data-jstree='"type":"js"}'>jquery-ui-1.10.4.min.js</li>
-                                            </ul>
-                                        </li>
-                                        <li data-jstree='"type":"html"}'> affix.html</li>
-                                        <li data-jstree='"type":"html"}'> dashboard.html</li>
-                                        <li data-jstree='"type":"html"}'> buttons.html</li>
-                                        <li data-jstree='"type":"html"}'> calendar.html</li>
-                                        <li data-jstree='"type":"html"}'> contacts.html</li>
-                                        <li data-jstree='"type":"html"}'> css_animation.html</li>
-                                        <li  data-jstree='"type":"html"}'> flot_chart.html</li>
-                                        <li   data-jstree='"type":"html"}'> google_maps.html</li>
-                                        <li data-jstree='"type":"html"}'> icons.html</li>
-                                        <li data-jstree='"type":"html"}'> invoice.html</li>
-                                        <li data-jstree='"type":"html"}'> login.html</li>
-                                        <li data-jstree='"type":"html"}'> mailbox.html</li>
-                                        <li data-jstree='"type":"html"}'> profile.html</li>
-                                        <li  data-jstree='"type":"html"}'> register.html</li>
-                                        <li data-jstree='"type":"html"}'> timeline.html</li>
-                                        <li data-jstree='"type":"html"}'> video.html</li>
-                                        <li data-jstree='"type":"html"}'> widgets.html</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                            <div id="jstree1">
+                            </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-8">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li><a class="nav-link active" data-toggle="tab" href="#tab-1">Preview</a></li>
+                        <li><a class="nav-link active" data-toggle="tab" href="#tab-1"> Preview</a></li>
                         <li><a class="nav-link" data-toggle="tab" href="#tab-2">Linked Studies</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#tab-3">Previous versions</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#tab-3">Previous Versions</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#tab-4">Validation / Audit Trail</a></li>
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" id="tab-1" class="tab-pane active">
                             <div class="panel-body">
-                                <button class="btn btn-muted border mb-4"><i class="fa fa-upload mr-2"></i>Update Document</button>
+                                <button class="btn btn-muted border mb-4" *ngIf="actualFileDetails?.versionable !== null && actualFileDetails?.versionable !== false" (click)="openUpdateFileDialog()"><i class="fa fa-upload mr-2"></i>Update  Document</button>
+                                    
                                 <div class="ibox">
                                     <div class="ibox-content">
                                         <div class="ibox-title border-bottom mb-3">
                                             <div class="float-right">
-                                                <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-download"></i></button>
-                                                <button class="btn btn-muted border mr-3"><i class="fa fa-1x fa-print"></i></button>
-                                                <button class="btn btn-lg btn-muted border"><i class="fa fa-1x fa-cog"></i></button>
+                                                <button class="btn btn-muted border mr-3" (click)="downloadFile()"><i class="fa fa-1x fa-download"></i></button>
+                                                <button class="btn btn-muted border mr-3" (click)="printFile()"><i class="fa fa-1x fa-print"></i></button>
+                                                <button class="btn btn-lg btn-muted border" (click)="openEditFileDialog()"><i class="fa fa-1x fa-cog"></i></button>
                                             </div>
                                             
                                         </div>
                                         <div class="text-center pdf-toolbar mt-3">
                                             <div class="btn-group">
                                                 <button id="prev" (click)="onPrevPage()" class="btn btn-white">
-                                                    <i class="fa fa-long-arrow-left"></i> <span class="d-none d-sm-inline">{{labelService.locale['MASTER_FILES_PREVIOUS']}}</span>
+                                                    <i class="fa fa-long-arrow-left mr-2"></i> <span class="d-none d-sm-inline">Previous</span>
                                                 </button>
                                                 <button id="next" (click)="onNextPage()" class="btn btn-white">
-                                                    <i class="fa fa-long-arrow-right"></i> <span class="d-none d-sm-inline">{{labelService.locale['MASTER_FILES_NEXT']}}</span>
+                                                    <i class="fa fa-long-arrow-right mr-2"></i> <span class="d-none d-sm-inline">Next</span>
                                                 </button>
                                                 <button id="zoomin" (click)="onZoomIn()" class="btn btn-white">
-                                                    <i class="fa fa-search-minus"></i> <span class="d-none d-sm-inline">{{labelService.locale['MASTER_FILES_ZOOM_IN']}}</span>
+                                                    <i class="fa fa-search-minus mr-2"></i> <span class="d-none d-sm-inline">Zoom In</span>
                                                 </button>
                                                 <button id="zoomout" (click)="onZoomOut()" class="btn btn-white">
-                                                    <i class="fa fa-search-plus"></i> <span class="d-none d-sm-inline">{{labelService.locale['MASTER_FILES_ZOOM_OUT']}}</span>
+                                                    <i class="fa fa-search-plus mr-2"></i> <span class="d-none d-sm-inline">Zoom Out</span>
                                                 </button>
                                                 <button id="zoomfit" (click)="onZoomFit()" class="btn btn-white"> 100%</button>
                                                 <span class="btn btn-white hidden-xs">Page: </span>
                                                 <div class="input-group">
                                                     <input type="text" [(value)]="pageNum" (change)="renderPage(pageNum, scale)" class="form-control" id="page_num">
                                                     <div class="input-group-append">
-                                                        <button type="button" class="btn btn-white" id="page_count">/ {{pageCount}}</button>
+                                                        <button type="button" class="btn btn-white" id="page_count"></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,34 +104,64 @@
                         </div>
                         <div role="tabpanel" id="tab-3" class="tab-pane">
                             <div class="panel-body">
-                                <div class="ibox ">
+                                <div class="ibox">
                                     <div class="ibox-content">
-                                        <input type="text" class="form-control form-control-sm m-b-xs" id="filter"
-                                               placeholder="Search in table">
-            
-                                        <table class="footable table table-stripped" data-page-size="8" data-filter=#filter>
+                                        <input type="text" class="form-control form-control-sm m-b-xs" id="filter-prev" placeholder="Search in table">
+                                        <table class="footable table table-stripped" data-page-size="8" data-filter=#filter-prev data-page-navigation="#pag-prev">
                                             <thead>
                                             <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th data-hide="phone,tablet">Platform(s)</th>
-                                                <th data-hide="phone,tablet">Engine version</th>
-                                                <th data-hide="phone,tablet">CSS grade</th>
+                                                <th>Name</th>
+                                                <th>Valid From</th>
+                                                <th>Date Updated</th>
+                                                <th>Changed By</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="gradeU" *ngFor="let item of numbers">
-                                                <td>Other browsers</td>
-                                                <td>All others</td>
-                                                <td>-</td>
-                                                <td class="center">-</td>
-                                                <td class="center">U</td>
+                                            <tr class="gradeU" *ngFor="let item of numbers; let i = index">
+                                                <td>{{i}}</td>
+                                                <td>{{i}}</td>
+                                                <td>{{i}}</td>
+                                                <td class="center">{{i}}</td>
                                             </tr>
                                             </tbody>
                                             <tfoot>
                                             <tr>
                                                 <td colspan="5">
-                                                    <ul class="pagination float-right"></ul>
+                                                    <ul id="pag-prev" class="pagination float-right"></ul>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" id="tab-4" class="tab-pane">
+                            <div class="panel-body">
+                                <div class="ibox ">
+                                    <div class="ibox-content">
+                                        <input type="text" class="form-control form-control-sm m-b-xs" id="filter-audit" placeholder="Search in table">
+                                        <table class="footable2 table table-stripped" data-page-size="8" data-filter=#filter-audit data-page-navigation="#pag-audit">
+                                            <thead>
+                                            <tr>
+                                                <th>Time Stamp</th>
+                                                <th>Username</th>
+                                                <th>Action</th>
+                                                <th>IP Address</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="gradeU" *ngFor="let item of numbers; let i = index">
+                                                <td>{{i}}</td>
+                                                <td>{{i}}</td>
+                                                <td>{{i}}</td>
+                                                <td class="center">{{i}}</td>
+                                            </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <ul id="pag-audit" class="pagination float-right"></ul>
                                                 </td>
                                             </tr>
                                             </tfoot>
@@ -199,11 +171,9 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
+            
         </div>
     </div>
 </div>
