@@ -11,7 +11,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle">
                             <span class="block m-t-xs font-bold">
                                 {{authenticationService.loginUserValue?.firstName + ' ' + authenticationService.loginUserValue?.lastName}}</span>
-                            <span class="text-muted text-xs block">{{authenticationService.loginUserValue?.accountType | i18nSelect: accounTypeMap}}
+                            <span class="text-muted text-xs block">{{authenticationService.loginUserValue?.accountType}}
                                 <b class="caret"></b>
                             </span>
                         </a>
@@ -30,17 +30,17 @@
                 <li>
                     <a [routerLink]="['/dashboard']" routerLinkActive="active">
                         <i class="fa fa-th-large"></i>
-                        <span class="nav-label">Binders</span>
+                        <span class="nav-label">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a  routerLinkActive="active">
+                    <a routerLinkActive="active">
                         <i class="fa fa-tasks"></i>
                         <span class="nav-label">Task Manager</span>
                     </a>
                 </li>
                 <li>
-                    <a routerLinkActive="active">
+                    <a [routerLink]="['/master-files']" routerLinkActive="active">
                         <i class="fa fa-archive"></i>
                         <span class="nav-label">Master Files</span>
                     </a>
